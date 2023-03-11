@@ -1,0 +1,88 @@
+.tag {
+    display: inline-block;
+}
+.empty-cart-imge{
+    width: 40%;
+    width: 40%;
+}
+.add-item-text{
+    color: rgb(0, 255, 170) !important;
+}
+.add-item-btn{
+    background-color: rgb(0, 255, 170) !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    /* .container .navbar-brand{
+
+    } */
+
+}
+.webkit-right{
+    text-align: -webkit-right;
+}
+.product-list .product-img{
+    height: 100px;
+    width: 100px;
+}	span {cursor:pointer; }
+.number{
+    margin:100px;
+}
+.minus, .plus{
+    vertical-align: middle;
+    /* margin-left: -15%; */
+    font-size: 26px;
+}
+/* .minus, .plus{
+    width:20px;
+    height:20px;
+    background:#f2f2f2;
+    border-radius:4px;
+    padding:8px 5px 8px 5px;
+    border:1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+} */
+.product-list input{
+    height:34px;
+    width: 100px;
+    text-align: center;
+    font-size: 26px;
+    border:1px solid #ddd;
+    border-radius:28px 28px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* body {
+	overflow-x: hidden;
+	font-family: Verdana, sans-serif;
+} */
+.product-list {
+	height: 60vh;
+	overflow-y: scroll;
+}
+
+.blockquote-footer-label{
+    display: block;
+    font-size: 80%;
+    color: #6c757d;
+}
+.blockquote-footer-label-thrid{
+    display: block;
+    font-size: 80%;
+    font-weight: 500;
+    /* color: #6c757d; */
+}
+.share-img{
+    width: 50px;
+    height: 50px;
+}
+
+.user-product-img{
+    width: 100px;
+    height: 100px;
+}
