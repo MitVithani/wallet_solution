@@ -32,7 +32,7 @@ Route::resource('products', 'ProductController');
 Route::post('change_quantity', 'ProductController@changeQuantity')->name('register.post');
 
 Route::get('usersProducts/{id}', 'UsersProductController@usersProducts');
-Route::get('usersProducts/payout/{id}', 'UsersProductController@usersProducts');
+Route::get('usersProducts/payout/{id}', 'UsersProductController@usersProductspayout');
 
 // Auth::routes();
 
