@@ -25,14 +25,23 @@ Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middle
 Route::post('post-login', 'Auth\LoginController@postLogin')->name('login.post');
 Route::post('post-registration', 'Auth\RegisterController@postRegistration')->name('register.post');
 
+Route::get('forget-password', 'Auth\ForgotPasswordController@showForgetPasswordForm')->name('forget.password.get');
+Route::post('forget-password', 'Auth\ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post'); 
+Route::get('reset-password/{token}', 'Auth\ForgotPasswordController@showResetPasswordForm')->name('reset.password.get');
+Route::post('reset-password', 'Auth\ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
+
 Route::prefix('admin')->group(function() {
     Route::resource('users', 'Admin\UserController');
 });
 Route::resource('products', 'ProductController');
 Route::post('change_quantity', 'ProductController@changeQuantity')->name('register.post');
 
+Route::post('send_otp', 'Auth\ForgotPasswordController@sendOtp')->name('send_otp');
+Route::post('verify_otp', 'Auth\ForgotPasswordController@verifyOtp')->name('verify_otp');
+
 Route::get('usersProducts/{id}', 'UsersProductController@usersProducts');
 Route::get('usersProducts/payout/{id}', 'UsersProductController@usersProductspayout');
+Route::get('usersProducts/check_out/{id}', 'UsersProductController@usersProductspayout');
 
 // Auth::routes();
 

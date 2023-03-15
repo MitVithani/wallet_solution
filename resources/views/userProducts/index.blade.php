@@ -71,7 +71,7 @@
         </div>
 
     </div>
-    <div class="card p0 m0 ">
+    <div class="card p0 m0">
         <div class="col-12 row pt-2">
             <div class="col-6">
                 Subtotal ({{ count($productDtl) }} items)
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="col-12 row pt-2 d-flex justify-content-center">
-            <a href="{{ route('usersProducts.check_out') }}" class="btn add-item-btn mt-5">
+            <a href="{{ url('usersProducts/check_out'). '/' . $userDtl->id}}" class="btn add-item-btn mt-5">
                 Checkout Now
             </a>
         </div>

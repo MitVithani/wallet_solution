@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Laravel - ItSolutionStuff.com</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <style type="text/css">
@@ -44,6 +48,8 @@
             margin-right: 0;
         }
     </style>
+    <script src="{{ asset('public/js/jquery.min.js') }}"></script>
+
 </head>
 <body>
     
@@ -76,5 +82,7 @@
   
 @yield('content')
      
+@yield('page_scripts')
+
 </body>
 </html>
