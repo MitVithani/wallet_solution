@@ -26,7 +26,9 @@
 .product-list .product-img{
     height: 100px;
     width: 100px;
-}	span {cursor:pointer; }
+    font-size: 10px !important;
+}
+span {cursor:pointer; }
 .number{
     margin:100px;
 }
@@ -63,7 +65,7 @@
 } */
 .product-list {
 	height: 60vh;
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 }
 
 .blockquote-footer-label{
@@ -85,4 +87,44 @@
 .user-product-img{
     width: 100px;
     height: 100px;
+}
+
+.share-icon-div{
+    display: grid;
+    background: #dfdfdf;
+    padding: 10px;
+}
+.product-table td, .product-table th {
+    text-align: center;
+    vertical-align: middle !important;
+}
+/* If the screen size is 600px or less, set the font-size of <div> to 30px */
+@media only screen and (max-width: 600px) {
+
+    .product-list input {
+        height: 22px;
+        width: 60px;
+        text-align: center;
+        font-size: 10px;
+        border: 1px solid #ddd;
+        border-radius: 28px 28px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .product-list {
+        font-size: 10px;
+    }
+    .product-list .product-img{
+        height: 50px;
+        width: 50px;
+    }
+    .minus, .plus{
+        font-size: 18px;
+    }
+    .card {
+        font-size: 10px;
+    }
+    .add-item-text{
+        font-size: 15px !important;
+    }
 }
