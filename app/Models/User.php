@@ -29,6 +29,7 @@ class User extends Authenticatable
         'address',
         'city_name',
         'bank_iban',
+        'otp',
     ];
 
     /**

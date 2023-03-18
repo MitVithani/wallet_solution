@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('navbar_header')
-    <div class="container">
+    {{-- <div class="container"> --}}
         <span class="navbar-brand add-item-text">
             Add item
         </span>
-    </div>
+    {{-- </div> --}}
 @endsection
 
 @section('content')

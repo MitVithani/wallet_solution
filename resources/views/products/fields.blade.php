@@ -51,8 +51,8 @@
     {{-- <span> You have an endless stock available.</span> --}}
 </div>
 
-<div class="form-check form-check-inline mt-4 col-md-12 row">
-    <div class="col-md-6">
+<div class="form-check form-check-inline mt-4 col-12 row">
+    <div class="col-9">
         <label for="is_delivery" class="form-check-label">Delivery</label>
         <br>
         {{-- <label class="toggle-second-line">Application for physical product</label> --}}
@@ -60,7 +60,7 @@
         <label class="blockquote-footer-label-thrid">Delivery address and delivery opetions will be required for customers to complete purchase</label>
 
     </div>
-    <div class="col-md-6 webkit-right">
+    <div class="col-3 webkit-right">
         <input id="is_delivery" name="is_delivery" class="form-check-input" type="checkbox" data-toggle="toggle" data-style="ios" data-onstyle="success" data-offstyle="danger">
     </div>
 
@@ -70,12 +70,12 @@
     {{-- <label class="form-label">Delivery address and delivery opetions will be required for customers to complete purchase</label> --}}
 </div>
 
-<div class="form-check form-check-inline mt-4 col-md-12 row">
-    <div class="col-md-6">
+<div class="form-check form-check-inline mt-4 col-12 row">
+    <div class="col-9">
         <label class="form-check-label">Visible on my store</label>
         <label class="blockquote-footer-label">Show this items to anyone who visites</label>
     </div>
-    <div class="col-md-6 webkit-right">
+    <div class="col-3 webkit-right">
         <input name="is_visible" class="form-check-input" type="checkbox" data-toggle="toggle" data-style="ios" data-onstyle="success" data-offstyle="danger">
     </div>
 

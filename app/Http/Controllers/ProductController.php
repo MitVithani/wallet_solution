@@ -30,6 +30,9 @@ class ProductController extends AppBaseController
     {
         $userId = auth()->user()->id;
         $products = Product::with('productImage')->where('user_id' , $userId)->get();
+        if(count($products) <= 0){
+            return redirect(route('home'));
+        }
         return view('products.index')->with(['products' => $products, 'user_id' => $userId]);
     }
 

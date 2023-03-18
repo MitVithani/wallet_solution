@@ -4,9 +4,9 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('public/css/image-uploader.min.css') }}" rel="stylesheet">
     <style>
-        body {
+        /* body {
             overflow-y: hidden;
-        }
+        } */
         .borderless td, .borderless tr {
             border-top: none
         }
@@ -14,10 +14,10 @@
 @endsection
 @section('navbar_header')
     <div class="d-block">
-        <div class="float-left">
-            <img style="width: 100px; height: 100px;" src="{{ asset('public/logo') . '/' . $userDtl->logo }}"/>
+        <div class="float-left pt-3 pr-2">
+            <img class="user-shop-img" src="{{ asset('public/logo') . '/' . $userDtl->logo }}"/>
         </div>
-        <div class="float-right pt-4">
+        <div class="float-right pt-4 shop-info">
             <b>{{$userDtl->name}}</b>
             <p class="">
                 Secure Checkout
@@ -34,10 +34,10 @@
 
         <div class="d-block">
             <h2 class="d-inline">YOUR CART</h2>
-            <h3 class="d-inline">(2 items)</h3>
+            <h4 class="d-inline">(2 items)</h4>
         </div>
         <div class="table-responsive">
-            <table class="table borderless" cellspacing="0" cellpadding="0">
+            <table class="table borderless user-product-table" cellspacing="0" cellpadding="0">
                 <tbody>
                     @foreach ($productDtl as $product)
                         <tr>
@@ -52,13 +52,13 @@
 
                         </tr>
                         <tr>
-                            <td>
-                                <p>Qty {{$product->quantity}}</p>
+                            <td class="pb-0 user-product-quantity">
+                                <p class="mb-0">Qty {{$product->quantity}}</p>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                USD <span>{{$product->price}}</span>
+                            <td class="pt-0 user-product-price">
+                                <p class="mb-0"> USD <span>{{$product->price}}</span></p>
                             </td>
 
                         </tr>
@@ -71,20 +71,20 @@
         </div>
 
     </div>
-    <div class="card p0 m0">
+    <div class="">
         <div class="col-12 row pt-2">
-            <div class="col-6">
+            <div class="col-8">
                 Subtotal ({{ count($productDtl) }} items)
             </div>
-            <div class="col-6 webkit-right">
+            <div class="col-4 webkit-right user-product-total">
                 <b>USD <span id="subtotal">{{$subTotal}}</span></b>
             </div>
         </div>
         <div class="col-12 row pt-2">
-            <div class="col-6">
+            <div class="col-8">
                 Total <span>(inclusive of VAT)</span>
             </div>
-            <div class="col-6 webkit-right">
+            <div class="col-4 webkit-right user-product-total">
                 <b>USD <span id="sendorder">{{$subTotal}}</span></b>
             </div>
         </div>

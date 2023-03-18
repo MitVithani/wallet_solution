@@ -64,7 +64,7 @@ span {cursor:pointer; }
 	font-family: Verdana, sans-serif;
 } */
 .product-list {
-	height: 60vh;
+	height: 70vh;
 	/* overflow-y: scroll; */
 }
 
@@ -98,6 +98,10 @@ span {cursor:pointer; }
     text-align: center;
     vertical-align: middle !important;
 }
+.user-shop-img{
+    width: 100px;
+    height: 100px;
+}
 /* If the screen size is 600px or less, set the font-size of <div> to 30px */
 @media only screen and (max-width: 600px) {
 
@@ -126,5 +130,25 @@ span {cursor:pointer; }
     }
     .add-item-text{
         font-size: 15px !important;
+    }
+    .share-img {
+        width: 30px;
+        height: 30px;
+    }
+    .user-product-quantity p{
+        font-size: 10px !important;
+    }
+    .user-product-price p{
+        font-size: 10px !important;
+    }
+    .shop-info{
+        font-size: 10px !important;
+    }
+    .user-product-total{
+        font-size: 13px !important;
+    }
+    .user-shop-img{
+        width: 70px;
+        height: 70px;
     }
 }

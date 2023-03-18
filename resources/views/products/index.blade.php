@@ -10,11 +10,11 @@
     </style>
 @endsection
 @section('navbar_header')
-<div class="container">
+{{-- <div class="container"> --}}
     <span class="navbar-brand add-item-text">
         Client {{count($products)}} order
     </span>
-</div>
+{{-- </div> --}}
 @endsection
 
 @section('content')
@@ -66,28 +66,28 @@
 
     </div>
     <div class="card p0 m0 ">
-        <div class="col-12 row pt-2">
-            <div class="col-6">
+        <div class="col-12 row pt-2 pr-0">
+            <div class="col-9">
                 Cart Locked<br>
                 Item quatity not editable by customer.
             </div>
-            <div class="col-6 webkit-right">
+            <div class="col-3 webkit-right pr-0">
                 <input type="checkbox" />
             </div>
         </div>
-        <div class="col-12 row pt-2">
-            <div class="col-6">
+        <div class="col-12 row pt-2 pr-0">
+            <div class="col-9">
                 Subtotal
             </div>
-            <div class="col-6 webkit-right">
+            <div class="col-3 webkit-right pr-0">
                 <b>USD <span id="subtotal">0</span></b>
             </div>
         </div>
-        <div class="col-12 row pt-2">
-            <div class="col-6">
+        <div class="col-12 row pt-2 pr-0 ">
+            <div class="col-9">
                 Send Order
             </div>
-            <div class="col-6 webkit-right">
+            <div class="col-3 webkit-right pr-0">
                 <b>USD <span id="sendorder">0</span></b>
             </div>
         </div>
@@ -120,8 +120,6 @@
             </table>
         </div>
     </div>
-
-
 @endsection
 
 @section('page_scripts')
@@ -165,4 +163,3 @@
         }
     </script>
 @endsection
-

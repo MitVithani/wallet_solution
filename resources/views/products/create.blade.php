@@ -12,12 +12,12 @@
 @endsection
 
 @section('navbar_header')
-<div class="container">
+{{-- <div class="container"> --}}
 
     <span class="navbar-brand add-item-text">
         Add item
     </span>
-</div>
+{{-- </div> --}}
 @endsection
 
 @section('content')
@@ -36,20 +36,16 @@
         <div class="card">
 
             {!! Form::open(['route' => 'products.store', 'files' => true]) !!}
-
             <div class="card-body">
-
                 {{-- <div class="row"> --}}
                     @include('products.fields')
                 {{-- </div> --}}
-
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
             </div>
-
             {!! Form::close() !!}
 
         </div>

@@ -92,40 +92,57 @@ class ForgotPasswordController extends Controller
 
     public function sendOtp(Request $request)
     {
-
+        $checkUser = User::where(['phone_number' => $request['phone']])->count();
+        if($checkUser < 1 ){
+            return 2;
+        }
+        $otp = rand(1,99) . rand(1,99);
         // dd($request->phone());
-        // $id = "SANDBOX_ACC_ID";
-        // $token = "SANDBOX_TOKEN";
-        // $url = "https://api.twilio.com/2010-04-01/Accounts/$id/SMS/Messages";
-        // $from = "+MAGICNUMBER";
-        // $to = "+XXXXXXXXXX"; // twilio trial verified number
-        // $body = "using twilio rest api from Fedrick";
-        // $data = array (
-        //     'From' => $from,
-        //     'To' => $to,
-        //     'Body' => $body,
-        // );
-        // $post = http_build_query($data);
-        // $x = curl_init($url );
-        // curl_setopt($x, CURLOPT_POST, true);
-        // curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
-        // curl_setopt($x, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        // curl_setopt($x, CURLOPT_USERPWD, "$id:$token");
-        // curl_setopt($x, CURLOPT_POSTFIELDS, $post);
-        // $y = curl_exec($x);
-        // curl_close($x);
+        $id = env('TWILIO_ID');
+        $token = env('TWILIO_TOKEN');
+        $url = "https://api.twilio.com/2010-04-01/Accounts/$id/SMS/Messages.json";
+        $from = env('FROM_NUMBER');
+        $to = "+" . $request['phoneCode'] . $request['phone']; // twilio trial verified number
+        $body = env('APP_NAME') . " forgot password otp is :" . $otp;
+        $data = array (
+            'From' => $from,
+            'To' => $to,
+            'Body' => $body,
+        );
+        $post = http_build_query($data);
+        $x = curl_init($url );
+        curl_setopt($x, CURLOPT_POST, true);
+        curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($x, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($x, CURLOPT_USERPWD, "$id:$token");
+        curl_setopt($x, CURLOPT_POSTFIELDS, $post);
+        $y = curl_exec($x);
+        curl_close($x);
         // var_dump($post);
         // var_dump($y);
-
-        //
-
+        // dd($otp);
+        $user = User::where(['phone_number' => $request['phone']])->update(['otp' => $otp]);
         return 1;
 
     }
 
     public function verifyOtp(Request $request)
     {
+        $user = User::where(['phone_number' => $request['phone'], 'otp' => $request['otp']])->first();
+        if(!empty($user)){
+            return 1;
+        }
+        return 0;
+    }
 
+    public function changePassword(Request $request)
+    {
+        // dd(Hash::make($request['password']));
+        $user = User::where(['phone_number' => $request['phone']])->update(['password' => Hash::make($request['password'])]);
+        if(!empty($user)){
+            return 1;
+        }
+        return 0;
     }
 }
