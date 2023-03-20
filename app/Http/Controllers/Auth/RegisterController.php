@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
 
 class RegisterController extends Controller
 {
@@ -69,5 +71,33 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function postRegistration(Request $request)
+    {
+        $this->validate($request,[
+            'email'=>'unique:users',
+            'phone_number'=>'unique:users',
+        ]);
+        $data['name'] = $request->name;
+        $data['shop_name'] = $request->shop_name;
+        $data['phone_number'] = $request->phone_number;
+        $data['email'] = $request->email;
+        $data['password'] = Hash::make($request->password);
+        $data['company_name'] = $request->company_name;
+        $data['tax_number'] = $request->tax_number;
+        $data['address'] = $request->address;
+        $data['city_name'] = $request->city_name;
+        $data['bank_iban'] = $request->bank_iban;
+
+        if(!empty($request->logo)){
+            $image_name = time().uniqId().$request->logo->getClientOriginalName();
+            $request->logo->move("public/logo", $image_name);
+            $data['logo'] = $image_name;
+        }
+        User::create($data);
+
+
+        return redirect(route('login'));
     }
 }
