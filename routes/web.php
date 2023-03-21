@@ -38,7 +38,7 @@ Route::post('change_quantity', 'ProductController@changeQuantity');
 
 Route::post('send_otp', 'Auth\ForgotPasswordController@sendOtp')->name('send_otp');
 Route::post('verify_otp', 'Auth\ForgotPasswordController@verifyOtp')->name('verify_otp');
-Route::post('change_password', 'Auth\ForgotPasswordController@changePassword')->name('verify_otp');
+Route::post('change_password', 'Auth\ForgotPasswordController@changePassword')->name('change_password');
 
 Route::get('usersProducts/{id}', 'UsersProductController@usersProducts');
 Route::get('usersProducts/payout/{id}', 'UsersProductController@usersProductspayout');
