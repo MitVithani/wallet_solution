@@ -125,6 +125,9 @@
 @section('page_scripts')
     <script>
         $(document).ready(function() {
+            priceCount();    
+		});
+        function priceCount(){
             var subtotal= 0;
             var sendorder= 0;
             $('input[name^="product_ids"]').each(function(){
@@ -138,7 +141,7 @@
             });
             $('#subtotal').text(subtotal);
             $('#sendorder').text(sendorder);
-		});
+        }
         function ChangeQuantity(p_type, product_id){
             var $input = $('#qun_' + product_id);
             if(p_type == "minus"){
@@ -157,7 +160,8 @@
                     $input.change();
                     var product_price = $('#product_price_' + product_id).text();
                     product_price_total_val = product_price * count;
-                    product_price = $('#product_price_total_' + product_id).text(product_price_total_val);
+                    $('#product_price_total_' + product_id).text(product_price_total_val);
+                    priceCount();
                 }
             });
         }
