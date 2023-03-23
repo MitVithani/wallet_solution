@@ -30,6 +30,7 @@ class User extends Authenticatable
         'city_name',
         'bank_iban',
         'otp',
+        'status',
     ];
 
     /**

@@ -32,6 +32,7 @@ Route::post('reset-password', 'Auth\ForgotPasswordController@submitResetPassword
 
 Route::prefix('admin')->group(function() {
     Route::resource('users', 'Admin\UserController');
+    Route::post('change_status', 'Admin\UserController@changeStatus');
 });
 Route::resource('products', 'ProductController');
 Route::post('change_quantity', 'ProductController@changeQuantity');

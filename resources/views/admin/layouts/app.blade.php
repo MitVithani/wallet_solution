@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ config('app.name') }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -96,7 +97,7 @@
 
     <!-- Main Footer -->
     <!-- <footer class="main-footer">
-        
+
     </footer> -->
 </div>
 
@@ -132,7 +133,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous"></script>
-        
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.3/bootstrapSwitch.min.js"
         integrity="sha512-DAc/LqVY2liDbikmJwUS1MSE3pIH0DFprKHZKPcJC7e3TtAOzT55gEMTleegwyuIWgCfOPOM8eLbbvFaG9F/cA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -145,6 +146,28 @@
     $("input[data-bootstrap-switch]").each(function () {
         $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
+
+    function changeStatus(status, id){
+        if (confirm('Are you sure you want to change status?')) {
+            $.ajax({
+                url: "{{ url('admin/change_status') }}",
+                type: 'POST',
+                data: {_token:  $('meta[name="csrf-token"]').attr('content'), status: status, id: id},
+                dataType: 'text',
+                success: function (res) {
+                    if(res == 'padding'){
+
+                    }else
+                    if(res == 'padding'){
+
+                    }
+                    var statusChange = '<button class="btn btn-" onclick="changeStatus('+res+', '+id+')">'+res+'</button>';
+                    $('#status_'+id).html(statusChange);
+                    // alert(statusChange);
+                }
+            });
+        }
+    }
 </script>
 
 @stack('third_party_scripts')

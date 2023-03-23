@@ -7,12 +7,13 @@
             <th>Phone Number</th>
             <th>Email</th>
             <th>Logo</th>
+            <th>Status</th>
             <th>Company Name</th>
             <th>Tax Number</th>
             <th>Address</th>
             <th>City Name</th>
             <th>Bank IBAN</th>
-            
+
             <th colspan="3">Action</th>
         </tr>
         </thead>
@@ -25,6 +26,15 @@
                 <td>{{ $user->email }}</td>
                 <td><img src="{{ asset('public/logo') .'/'. $user->logo}}"width="50" height="50"></td>
                 <td>{{ $user->company_name }}</td>
+                <td id='status_{{ $user->id }}'>
+                    @if($user->status == 'active')
+                        <button class="btn btn-success" onclick="changeStatus('{{ $user->status }}', '{{ $user->id }}')">{{ $user->status }}</button>
+                    @elseif($user->status == 'deactive')
+                        <button class="btn btn-danger" onclick="changeStatus('{{ $user->status }}', '{{ $user->id }}')">{{ $user->status }}</button>
+                    @else
+                        <button class="btn btn-warning" onclick="changeStatus('{{ $user->status }}', '{{ $user->id }}')">{{ $user->status }}</button>
+                    @endif
+                </td>
                 <td>{{ $user->tax_number }}</td>
                 <td>{{ $user->address }}</td>
                 <td>{{ $user->city_name }}</td>
