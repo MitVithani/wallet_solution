@@ -155,13 +155,15 @@
                 data: {_token:  $('meta[name="csrf-token"]').attr('content'), status: status, id: id},
                 dataType: 'text',
                 success: function (res) {
+                    var btnCss = '';
                     if(res == 'padding'){
-
-                    }else
-                    if(res == 'padding'){
-
+                        btnCss = 'warning';
+                    }else if(res == 'deactive'){
+                        btnCss = 'danger';
+                    }else if(res == 'active'){
+                        btnCss = 'success';
                     }
-                    var statusChange = '<button class="btn btn-" onclick="changeStatus('+res+', '+id+')">'+res+'</button>';
+                    var statusChange = '<button class="btn btn-'+ btnCss +'" onclick="changeStatus(`'+res+'`, `'+id+'`)">'+res+'</button>';
                     $('#status_'+id).html(statusChange);
                     // alert(statusChange);
                 }
