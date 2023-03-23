@@ -30,7 +30,7 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->all();
+        $users = User::where('is_admin', '!=', '1')->get();
 
         return view('admin.users.index')
             ->with('users', $users);
@@ -102,6 +102,21 @@ class UserController extends AppBaseController
         }
 
         return view('admin.users.edit')->with('user', $user);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        // dd($request->status);
+        if($request->status == 'padding' || $request->status == 'deactive'){
+            $status = "active";
+        }else if($request->status == 'active'){
+            $status = "deactive";
+        }else{
+            $status = "deactive";
+        }
+        User::where(['id' => $request->id])->update(['status' => $status]);
+
+        return $status;
     }
 
     public function update($id, Request $request)
