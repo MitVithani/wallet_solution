@@ -40,7 +40,11 @@
                             </div>
                         </td>
                         <td>
-                            <div class="align-self-center text-center">
+                            <div class="align-self-center text-center p-2">
+                                <b>{{$product->name}}</b>
+                            </div>
+
+                            <div class="align-self-center text-center counter-number">
                                 <span class="minus" onclick='ChangeQuantity("minus", {{$product->id}})'>-</span>
                                 <input id="qun_{{$product->id}}" name="quantity" type="text" disabled value="{{$product->quantity}}"/>
                                 <span class="plus" onclick='ChangeQuantity("plus", {{$product->id}})'>+</span>
@@ -51,9 +55,12 @@
                                 <b>USD <span id="product_price_{{$product->id}}">{{$product->price}}</span></b>
                             </div>
                         </td>
-                        <td>
+                        <td class="position-relative">
                             <div class="align-self-center text-center">
                                 <b>USD <span name="product_price_total" id="product_price_total_{{$product->id}}" >0</span></b>
+                            </div>
+                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom">
+                                Apply discount
                             </div>
                         </td>
                     </tr>
@@ -95,15 +102,18 @@
             <table class="">
                 <tr>
                     <td>
-                        <a href="{{ url('usersProducts'). '/' . $user_id}}">
+                        <a href="whatsapp://send?text={{ url('usersProducts'). '/' . $user_id}}">
                             <img class="share-img" src="{{asset('public/img/whatsapp.png')}}">
                         </a>
                     </td>
                     <td>
-                        <img class="share-img" src="{{asset('public/img/qr-code-scan.png')}}">
+                        <button type="button" class="btn " data-toggle="modal" data-target="#myModal">
+                            {{-- Open modal --}}
+                            <img class="share-img" src="{{asset('public/img/qr-code-scan.png')}}">
+                          </button>
                     </td>
                     <td>
-                        <img class="share-img" src="{{asset('public/img/link.png')}}">
+                        <img class="share-img" onclick="copyToClipboard()" src="{{asset('public/img/link.png')}}">
                     </td>
                 </tr>
                 <tr>
@@ -120,12 +130,37 @@
             </table>
         </div>
     </div>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+            <h4 class="modal-title">QR Code</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={{ url('usersProducts'). '/' . $user_id}}&amp;size=470x470" alt=""  width="100%" height="auto" />
+            </div>
+
+            {{-- <!-- Modal footer -->
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div> --}}
+
+        </div>
+        </div>
+    </div>
 @endsection
 
 @section('page_scripts')
     <script>
         $(document).ready(function() {
-            priceCount();    
+            priceCount();
 		});
         function priceCount(){
             var subtotal= 0;
@@ -165,5 +200,14 @@
                 }
             });
         }
+
+        function copyToClipboard() {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val("{{ url('usersProducts'). '/' . $user_id}}").select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+
     </script>
 @endsection
