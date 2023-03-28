@@ -55,15 +55,16 @@ span {cursor:pointer; }
     text-align: center;
 } */
 .product-list input{
-    height:34px;
+    height: 34px;
     width: 100px;
     text-align: center;
-    font-size: 26px;
-    border:1px solid #ddd;
-    border-radius:28px 28px;
-    display: inline-block;
+    /* font-size: 26px; */
+    border: none;
+    /* border-radius: 28px 28px; */
+    /* display: inline-block; */
     vertical-align: middle;
 }
+
 
 /* body {
 	overflow-x: hidden;

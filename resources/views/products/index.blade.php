@@ -59,7 +59,7 @@
                             <div class="align-self-center text-center">
                                 <b>USD <span name="product_price_total" id="product_price_total_{{$product->id}}" >0</span></b>
                             </div>
-                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom">
+                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom" data-toggle="modal" data-target="#discount">
                                 Apply discount
                             </div>
                         </td>
@@ -107,13 +107,16 @@
                         </a>
                     </td>
                     <td>
-                        <button type="button" class="btn " data-toggle="modal" data-target="#myModal">
+                        <button type="button" class="btn " data-toggle="modal" data-target="#qr-code">
                             {{-- Open modal --}}
                             <img class="share-img" src="{{asset('public/img/qr-code-scan.png')}}">
                           </button>
                     </td>
                     <td>
                         <img class="share-img" onclick="copyToClipboard()" src="{{asset('public/img/link.png')}}">
+                    </td>
+                    <td>
+                        <img class="share-img" src="{{asset('public/img/more.png')}}" style="cursor: pointer">
                     </td>
                 </tr>
                 <tr>
@@ -126,33 +129,69 @@
                     <td>
                         Copy Link
                     </td>
+                    <td>
+                        More
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
 
     <!-- The Modal -->
-    <div class="modal fade" id="myModal">
+    <div class="modal fade" id="qr-code">
         <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+            <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-            <h4 class="modal-title">QR Code</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">QR Code</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={{ url('usersProducts'). '/' . $user_id}}&amp;size=470x470" alt=""  width="100%" height="auto" />
+                </div>
+
+                {{-- <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div> --}}
+
             </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={{ url('usersProducts'). '/' . $user_id}}&amp;size=470x470" alt=""  width="100%" height="auto" />
-            </div>
-
-            {{-- <!-- Modal footer -->
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div> --}}
-
         </div>
+    </div>
+    <div class="modal fade" id="discount">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                {!! Form::open(['route' => 'products.store', 'files' => true]) !!}
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">QR Code</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="describe_item">Describe this item</label>
+                            <input type="text" name="describe_item" id="describe_item" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="footer">
+                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 @endsection
