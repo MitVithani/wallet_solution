@@ -58,6 +58,7 @@ class ProductController extends AppBaseController
     {
         $data['name'] = $request->name;
         $data['price'] = $request->price;
+        $data['discount_price'] = $request->price;
         $data['additional_details'] = $request->additional_details;
         $data['describe_item'] = $request->describe_item;
         $data['quantity'] = $request->quantity;
@@ -178,6 +179,19 @@ class ProductController extends AppBaseController
     public function changeQuantity(Request $request)
     {
         Product::where(['id' => $request->product_id])->update(['quantity' => $request->count]);
+        return true;
+    }
+
+    public function changeDiscount(Request $request)
+    {
+        $checkProduct = Product::where(['id' => $request->product_id])->first();
+        $price = $checkProduct->price;
+        if($request->discountType == 'flat'){
+            $discount_price = $price - $request->discountAmt;
+        }elseif ($request->discountType == 'percentage') {
+            $discount_price = $price - (($price * $request->discountAmt) / 100);
+        }
+        Product::where(['id' => $request->product_id])->update(['discount' => $request->discountAmt, 'discount_type' => $request->discountType, 'discount_price' => $discount_price]);
         return true;
     }
 }

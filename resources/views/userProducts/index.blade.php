@@ -89,9 +89,13 @@
             </div>
         </div>
         <div class="col-12 row pt-2 d-flex justify-content-center">
-            <a href="{{ url('usersProducts/check_out'). '/' . $userDtl->id}}" class="btn add-item-btn mt-5">
+            {{-- <a href="{{ url('usersProducts/check_out'). '/' . $userDtl->id}}" class="btn add-item-btn mt-5">
                 Checkout Now
-            </a>
+            </a> --}}
+
+            <div class="btn add-item-btn mt-5" onclick="checkoutNow()">
+                Checkout Now
+            </div>
         </div>
     </div>
 
@@ -100,7 +104,12 @@
 
 @section('page_scripts')
     <script>
-
+        function checkoutNow() {
+            var userData = localStorage.getItem('userData');
+            if(userData){
+                alert('hy');
+            }
+        }
     </script>
 @endsection
 

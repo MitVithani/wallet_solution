@@ -20,9 +20,6 @@
 @section('content')
 
     <div class="content px-3 product-list">
-        <span>
-        Heater
-        </span>
         <span class="float-right">
         <a class="btn btn-success" href="{{ route('products.create') }}" >+</a>
         </span>
@@ -59,7 +56,7 @@
                             <div class="align-self-center text-center">
                                 <b>USD <span name="product_price_total" id="product_price_total_{{$product->id}}" >0</span></b>
                             </div>
-                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom" data-toggle="modal" data-target="#discount">
+                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom" data-toggle="modal" data-target="#discount" data-whatever="{{$product->id}}">
                                 Apply discount
                             </div>
                         </td>
@@ -108,7 +105,6 @@
                     </td>
                     <td>
                         <button type="button" class="btn " data-toggle="modal" data-target="#qr-code">
-                            {{-- Open modal --}}
                             <img class="share-img" src="{{asset('public/img/qr-code-scan.png')}}">
                           </button>
                     </td>
@@ -164,20 +160,31 @@
     <div class="modal fade" id="discount">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                {!! Form::open(['route' => 'products.store', 'files' => true]) !!}
-
                 <!-- Modal Header -->
                 <div class="modal-header">
-                <h4 class="modal-title">QR Code</h4>
+                <h4 class="modal-title">Discounts</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="card-body">
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="describe_item">Describe this item</label>
-                            <input type="text" name="describe_item" id="describe_item" class="form-control" required>
+                    <div class="card-body mb-12">
+                        <div class="form-check">
+                                <input type="hidden" id="productId">
+                                <input class="form-check-input" type="radio" name="discountRB" id="discount1" value="flat" checked>
+                                <label class="form-check-label" for="discount1">
+                                    Flat
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="discountRB" id="discount2" value="percentage">
+                                <label class="form-check-label" for="discount2">
+                                    % Discount
+                                </label>
+                        </div>
+
+                        <div class="form-outline">
+                            <input type="text" name="discountAmt" id="discountAmt" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -185,12 +192,12 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <div class="footer">
-                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                        {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
+                        <button type="button" class="btn btn-primary discountForm" data-dismiss="modal" >Submit</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
-                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -199,8 +206,32 @@
 @section('page_scripts')
     <script>
         $(document).ready(function() {
+            $(".discountForm").click(function(){
+                var discountAmt = $('#discountAmt').val();
+                var productId = $('#productId').val();
+                var discountType = $("input[name='discountRB']:checked").val();
+                $.ajax({
+                    url: "{{ url('change_discount') }}",
+                    type: 'POST',
+                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), discountAmt: discountAmt, product_id: productId, discountType: discountType},
+                    dataType: 'JSON',
+                    success: function (res) {
+                        // alert('nacho ');
+                    }
+                });
+            })
+
+            $('#discount').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('whatever') // Extract info from data-* attributes
+                var modal = $(this)
+                modal.find('#productId').val(recipient)
+            })
+
             priceCount();
 		});
+
+
         function priceCount(){
             var subtotal= 0;
             var sendorder= 0;

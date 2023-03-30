@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function() {
 });
 Route::resource('products', 'ProductController');
 Route::post('change_quantity', 'ProductController@changeQuantity');
+Route::post('change_discount', 'ProductController@changeDiscount');
 
 Route::post('send_otp', 'Auth\ForgotPasswordController@sendOtp')->name('send_otp');
 Route::post('verify_otp', 'Auth\ForgotPasswordController@verifyOtp')->name('verify_otp');

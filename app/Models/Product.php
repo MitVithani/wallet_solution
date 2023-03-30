@@ -33,6 +33,9 @@ class Product extends Model
         'is_delivery',
         'is_visible',
         'user_id',
+        'discount_type',
+        'discount_price',
+        'discount',
     ];
 
     /**
