@@ -45,6 +45,7 @@ Route::post('change_password', 'Auth\ForgotPasswordController@changePassword')->
 Route::get('usersProducts/{id}', 'UsersProductController@usersProducts');
 Route::get('usersProducts/payout/{id}', 'UsersProductController@usersProductspayout');
 Route::get('usersProducts/check_out/{id}', 'UsersProductController@usersProductspayout');
+Route::get('checkoutNow/{id}', 'UsersProductController@usersProductspayout');
 
 // Auth::routes();
 

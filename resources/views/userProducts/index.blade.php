@@ -34,7 +34,7 @@
 
         <div class="d-block">
             <h2 class="d-inline">YOUR CART</h2>
-            <h4 class="d-inline">(2 items)</h4>
+            <h4 class="d-inline">({{count($productDtl)}} items)</h4>
         </div>
         <div class="table-responsive">
             <table class="table borderless user-product-table" cellspacing="0" cellpadding="0">
@@ -93,8 +93,48 @@
                 Checkout Now
             </a> --}}
 
-            <div class="btn add-item-btn mt-5" onclick="checkoutNow()">
+            <div class="btn add-item-btn mt-5" onclick="checkoutnow()">
                 Checkout Now
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="userForm">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Information</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card-body mb-12">
+                        <div class="form-outline mb-4">
+                            <input type="text" name="fullName" id="fullName" class="form-control" placeholder="Full Name">
+                        </div>
+                        <div class="form-outline mb-4">
+                            <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-outline mb-4">
+                            <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Phone Number">
+                        </div>
+                        {{-- <div class="form-outline">
+                            <input type="text" name="discountAmt" id="discountAmt" class="form-control" placeholder="">
+                        </div> --}}
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="footer">
+                        {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
+                        <button type="button" class="btn btn-primary userForm" data-dismiss="modal" >Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -104,12 +144,44 @@
 
 @section('page_scripts')
     <script>
-        function checkoutNow() {
+        $(document).ready(function() {
+            $(".discountForm").click(function(){
+                var fullName = $('#fullName').val();
+                var email = $('#email').val();
+                var phone_number = $("#phone_number").val();
+                if(fullName == ""){
+                    alert("Please enter full name");
+                    return false;
+                }else if(email == ""){
+                    alert("Please enter email");
+                    return false;
+                }else if(phone_number == ""){
+                    alert("Please enter phone number");
+                    return false;
+                }
+                $.ajax({
+                    url: "{{ url('change_discount') }}",
+                    type: 'POST',
+                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), fullName: fullName, email: email, phone_number: phone_number},
+                    dataType: 'JSON',
+                    success: function (res) {
+
+                    }
+                });
+            });
+		});
+
+        function checkoutnow()
+        {
             var userData = localStorage.getItem('userData');
             if(userData){
                 alert('hy');
+            }else{
+                $('#userForm').modal('show');
+                // var userData = localStorage.setItem('userData', 'userData');
             }
         }
+
     </script>
 @endsection
 
