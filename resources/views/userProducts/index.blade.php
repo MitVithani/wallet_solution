@@ -112,7 +112,7 @@
                 <div class="modal-body">
                     <div class="card-body mb-12">
                         <div class="form-outline mb-4">
-                            <input type="text" name="fullName" id="fullName" class="form-control" placeholder="Full Name">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Full Name">
                         </div>
                         <div class="form-outline mb-4">
                             <input type="text" name="email" id="email" class="form-control" placeholder="Email">
@@ -130,7 +130,56 @@
                 <div class="modal-footer">
                     <div class="footer">
                         {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
-                        <button type="button" class="btn btn-primary userForm" data-dismiss="modal" >Submit</button>
+                        <button type="button" class="btn btn-primary saveCustomerData" data-dismiss="modal" >Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="paymentModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Payment Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card mx-auto">
+                        <form class="card-details ">
+                            <div class="form-group mb-0">
+                                    <p class="text-warning mb-0">Card Number</p>
+                                        <input type="text" name="card-num" placeholder="1234 5678 9012 3457" size="17" id="cno" minlength="19" maxlength="19">
+                                    <img src="https://img.icons8.com/color/48/000000/visa.png" width="64px" height="60px" />
+                            </div>
+
+                            <div class="form-group">
+                                <p class="text-warning mb-0">Cardholder's Name</p> <input type="text" name="card_holder_name" placeholder="Name" size="17">
+                            </div>
+                            <div class="form-group pt-2">
+                                <div class="row d-flex">
+                                    <div class="col-sm-4">
+                                        <p class="text-warning mb-0">Expiration</p>
+                                        <input type="text" name="exp" placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="text-warning mb-0">CVV</p>
+                                        <input type="password" name="cvv" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3">
+                                    </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="footer">
+                        {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
+                        <button type="button" class="btn btn-primary sendPayment" data-dismiss="modal" >Submit</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -145,11 +194,11 @@
 @section('page_scripts')
     <script>
         $(document).ready(function() {
-            $(".discountForm").click(function(){
-                var fullName = $('#fullName').val();
+            $(".saveCustomerData").click(function(){
+                var name = $('#name').val();
                 var email = $('#email').val();
                 var phone_number = $("#phone_number").val();
-                if(fullName == ""){
+                if(name == ""){
                     alert("Please enter full name");
                     return false;
                 }else if(email == ""){
@@ -160,22 +209,74 @@
                     return false;
                 }
                 $.ajax({
-                    url: "{{ url('change_discount') }}",
+                    url: "{{ url('save_customer') }}",
                     type: 'POST',
-                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), fullName: fullName, email: email, phone_number: phone_number},
+                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), name: name, email: email, phone_number: phone_number},
                     dataType: 'JSON',
                     success: function (res) {
+                        console.log(res);
+                        if(res.status == 1){ // new customer
+                            localStorage.setItem('userData', JSON.stringify(res.request));
+                        }else if(res.status == 2){ // old customer
+                            localStorage.setItem('userData', JSON.stringify(res.request));
+                        }
+                    }
+                });
+            });
 
+            $(".sendPayment").click(function(){
+                var card_num = $('#card-num').val();
+                var card_holder_name = $('#card_holder_name').val();
+                var exp = $("#exp").val();
+                var cvv = $("#cvv").val();
+                if(card_num == ""){
+                    alert("Please enter Card Number");
+                    return false;
+                }else if(card_holder_name == ""){
+                    alert("Please enter Card Holder Name");
+                    return false;
+                }else if(cvv == ""){
+                    alert("Please enter Expiration");
+                    return false;
+                }else if(cvv == ""){
+                    alert("Please enter CVV");
+                    return false;
+                }
+                $.ajax({
+                    url: "{{ url('send_payment') }}",
+                    type: 'POST',
+                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), card_num: card_num, card_holder_name: card_holder_name, exp: exp, cvv: cvv},
+                    dataType: 'JSON',
+                    success: function (res) {
+                        console.log(res);
+                        if(res.status == 1){ // new customer
+                            localStorage.setItem('userData', JSON.stringify(res.request));
+                        }else if(res.status == 2){ // old customer
+                            localStorage.setItem('userData', JSON.stringify(res.request));
+                        }
                     }
                 });
             });
 		});
 
+        // function saveCustomerData() {
+
+        //     $.ajax({
+        //             url: "{{ url('save_customer') }}",
+        //             type: 'POST',
+        //             data: {_token:  $('meta[name="csrf-token"]').attr('content'), name: name, email: email, phone_number: phone_number},
+        //             dataType: 'JSON',
+        //             success: function (res) {
+
+        //             }
+        //         });
+        // }
+
         function checkoutnow()
         {
             var userData = localStorage.getItem('userData');
             if(userData){
-                alert('hy');
+                $('#paymentModal').modal('show');
             }else{
                 $('#userForm').modal('show');
                 // var userData = localStorage.setItem('userData', 'userData');

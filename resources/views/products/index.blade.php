@@ -99,12 +99,14 @@
             <table class="">
                 <tr>
                     <td>
-                        <a href="whatsapp://send?text={{ url('usersProducts'). '/' . $user_id}}">
-                            <img class="share-img" src="{{asset('public/img/whatsapp.png')}}">
+                        <a class="d-none whatsapp a" href="whatsapp://send?text={{ url('usersProducts'). '/' . $user_id}}">
                         </a>
+                        <div onclick="whatsapp()" href="whatsapp://send?text={{ url('usersProducts'). '/' . $user_id}}">
+                            <img class="share-img" src="{{asset('public/img/whatsapp.png')}}">
+                        </div>
                     </td>
                     <td>
-                        <button type="button" class="btn " data-toggle="modal" data-target="#qr-code">
+                        <button onclick="qrCodeScan()" type="button" class="btn " data-toggle="modal" data-target="#qr-code">
                             <img class="share-img" src="{{asset('public/img/qr-code-scan.png')}}">
                           </button>
                     </td>
@@ -112,7 +114,7 @@
                         <img class="share-img" onclick="copyToClipboard()" src="{{asset('public/img/link.png')}}">
                     </td>
                     <td>
-                        <img class="share-img" src="{{asset('public/img/more.png')}}" style="cursor: pointer">
+                        <img class="share-img" onclick="more()" src="{{asset('public/img/more.png')}}" style="cursor: pointer">
                     </td>
                 </tr>
                 <tr>
@@ -231,6 +233,17 @@
             priceCount();
 		});
 
+        function whatsapp() {
+
+        }
+
+        function qrCodeScan() {
+
+        }
+
+        function more() {
+
+        }
 
         function priceCount(){
             var subtotal= 0;
@@ -247,6 +260,7 @@
             $('#subtotal').text(subtotal);
             $('#sendorder').text(sendorder);
         }
+
         function ChangeQuantity(p_type, product_id){
             var $input = $('#qun_' + product_id);
             if(p_type == "minus"){

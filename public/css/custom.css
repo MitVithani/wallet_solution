@@ -109,6 +109,55 @@ span {cursor:pointer; }
     width: 100px;
     height: 100px;
 }
+
+
+#paymentModal .card{
+	border: none;
+	padding: 15px;
+	padding-bottom: 20px!important;
+}
+#paymentModal.heading{
+	color: #C1C1C1;
+	font-size: 14px;
+	font-weight: 500;
+}
+#paymentModal img{
+	transform: translate(160px,-10px);
+}
+#paymentModal img:hover{
+    cursor: pointer;
+}
+#paymentModal .text-warning{
+	font-size: 12px;
+	font-weight: 500;
+	color: rgb(0, 255, 170)!important;
+}
+#paymentModal #cno{
+	transform: translateY(-10px);
+}
+#paymentModal input{
+	border-bottom: 1.5px solid #E8E5D2!important;
+	font-weight: bold;
+	border-radius: 0;
+	border: 0;
+
+}
+#paymentModal .form-group input:focus{
+	border: 0;
+	outline: 0;
+}
+#paymentModal .col-sm-5{
+	padding-left: 90px;
+}
+#paymentModal .btn{
+	background: rgb(0, 255, 170)!important;
+	border: none;
+	border-radius: 30px;
+}
+#paymentModal .btn:focus{
+    box-shadow: none;
+}
+
 /* If the screen size is 600px or less, set the font-size of <div> to 30px */
 @media only screen and (max-width: 600px) {
 

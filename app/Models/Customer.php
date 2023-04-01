@@ -13,21 +13,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property $table->integer('field_name' $emp_id
  */
-class employee_master extends Model
+class Customer extends Model
 {
-    use SoftDeletes;
-
     use HasFactory;
 
-    public $table = 'employee_masters';
-    
-
-    protected $dates = ['deleted_at'];
-
-
+    public $table = 'customers';
 
     public $fillable = [
-        'emp_id'
+        'name',
+        'email',
+        'phone_number',
     ];
 
     /**
@@ -36,7 +31,7 @@ class employee_master extends Model
      * @var array
      */
     protected $casts = [
-        
+
     ];
 
     /**
@@ -45,8 +40,8 @@ class employee_master extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

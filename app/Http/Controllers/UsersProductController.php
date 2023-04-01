@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Product_Image;
 use App\Models\User;
+use App\Models\Customer;
 // use Flash;
 use Response;
 
@@ -31,5 +32,26 @@ class UsersProductController extends AppBaseController
         $userDtl = User::where('id', $id)->first();
         $productDtl = Product::where('user_id', $id)->get();
         return view('userProducts.checkOut')->with(['userDtl' => $userDtl, 'productDtl' => $productDtl]);
+    }
+
+    public function saveCustomer(Request $request)
+    {
+        $request->request->remove('_token');
+        $checkCust = Customer::where(['email' => $request['email'], 'phone_number' => $request['phone_number']])->first();
+        if(empty($checkCust)){
+            Customer::create(['name' => $request['name'], 'email' => $request['email'], 'phone_number' => $request['phone_number']]);
+            // return 1;
+            $data['status'] = 1;
+        }else{
+            // return 2;
+            $data['status'] = 2;
+        }
+        $data['request'] = $request->all();
+        return $data;
+    }
+
+    public function sendPayment(Request $request)
+    {
+
     }
 }
