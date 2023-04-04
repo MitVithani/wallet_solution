@@ -16,10 +16,10 @@ class UserController extends AppBaseController
     /** @var UserRepository $userRepository*/
     private $userRepository;
 
-    public function __construct(UserRepository $userRepo)
-    {
-        $this->userRepository = $userRepo;
-    }
+    // public function __construct(UserRepository $userRepo)
+    // {
+    //     $this->userRepository = $userRepo;
+    // }
 
     /**
      * Display a listing of the User.

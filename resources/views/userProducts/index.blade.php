@@ -220,6 +220,7 @@
                         }else if(res.status == 2){ // old customer
                             localStorage.setItem('userData', JSON.stringify(res.request));
                         }
+                        alert('Register successfully');
                     }
                 });
             });
