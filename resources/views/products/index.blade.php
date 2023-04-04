@@ -4,9 +4,7 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('public/css/image-uploader.min.css') }}" rel="stylesheet">
     <style>
-        /* body {
-            overflow-y: hidden;
-        } */
+
     </style>
 @endsection
 @section('navbar_header')
@@ -19,7 +17,7 @@
 
 @section('content')
 
-    <div class="content px-3 product-list">
+    <div class="content px-3 product-list product-listscroll">
         <span class="float-right">
         <a class="btn btn-success" href="{{ route('products.create') }}" >+</a>
         </span>
@@ -69,7 +67,7 @@
         <hr>
 
     </div>
-    <div class="card p0 m0 ">
+    <div class="card p0 m0 bottomNavbar">
         <div class="col-12 row pt-2 pr-0">
             <div class="col-9">
                 Cart Locked<br>
@@ -218,7 +216,7 @@
                     data: {_token:  $('meta[name="csrf-token"]').attr('content'), discountAmt: discountAmt, product_id: productId, discountType: discountType},
                     dataType: 'JSON',
                     success: function (res) {
-                        // alert('nacho ');
+
                     }
                 });
             })

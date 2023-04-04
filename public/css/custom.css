@@ -71,10 +71,19 @@ span {cursor:pointer; }
 	font-family: Verdana, sans-serif;
 } */
 .product-list {
-	height: 70vh;
+	/* height: 70vh; */
 	/* overflow-y: scroll; */
+    bottom: 0;
+}
+.product-listscroll {
+    margin-bottom: 223px !important;
 }
 
+.bottomNavbar{
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
+}
 .blockquote-footer-label{
     display: block;
     font-size: 80%;
@@ -181,6 +190,9 @@ span {cursor:pointer; }
     .product-list .product-img{
         height: 50px;
         width: 50px;
+    }
+    .product-listscroll {
+        margin-bottom: 170px !important;
     }
     .minus, .plus{
         font-size: 18px;
