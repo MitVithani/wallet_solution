@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Product_Image;
+use App\Models\ShareLink;
 // use Flash;
 use Response;
 
@@ -33,7 +34,8 @@ class ProductController extends AppBaseController
         if(count($products) <= 0){
             return redirect(route('home'));
         }
-        return view('products.index')->with(['products' => $products, 'user_id' => $userId]);
+        $link = base64_encode($userId . '/' . rand(1, 99) . rand(1, 99));
+        return view('products.index')->with(['products' => $products, 'user_id' => $userId, 'link' => $link]);
     }
 
     /**
@@ -182,6 +184,13 @@ class ProductController extends AppBaseController
         return true;
     }
 
+    public function clearQuantity(Request $request)
+    {
+        $userId = auth()->user()->id;
+        // Product::where(['user_id' => $userId])->update(['quantity' => 0]);
+        return true;
+    }
+
     public function changeDiscount(Request $request)
     {
         $checkProduct = Product::where(['id' => $request->product_id])->first();
@@ -192,6 +201,15 @@ class ProductController extends AppBaseController
             $discount_price = $price - (($price * $request->discountAmt) / 100);
         }
         Product::where(['id' => $request->product_id])->update(['discount' => $request->discountAmt, 'discount_type' => $request->discountType, 'discount_price' => $discount_price]);
-        return true;
+        return $discount_price;
+    }
+
+    public function saveLink(Request $request)
+    {
+        $userId = auth()->user()->id;
+        $checkLink = ShareLink::where(['user_id' => $userId])->first();
+        if(!empty($checkLink)){
+            ShareLink::create(["user_id" => $userId]);
+        }
     }
 }

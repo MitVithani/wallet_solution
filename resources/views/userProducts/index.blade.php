@@ -130,7 +130,7 @@
                 <div class="modal-footer">
                     <div class="footer">
                         {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
-                        <button type="button" class="btn btn-primary saveCustomerData" data-dismiss="modal" >Submit</button>
+                        <button type="button" class="btn btn-primary saveCustomerData theamBtnColor" data-dismiss="modal" >Submit</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -220,7 +220,8 @@
                         }else if(res.status == 2){ // old customer
                             localStorage.setItem('userData', JSON.stringify(res.request));
                         }
-                        alert('Register successfully');
+                        alert('Registration Successfully');
+                        checkoutnow();   
                     }
                 });
             });

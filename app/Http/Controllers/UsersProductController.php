@@ -54,4 +54,5 @@ class UsersProductController extends AppBaseController
     {
 
     }
+
 }

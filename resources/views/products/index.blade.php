@@ -18,17 +18,24 @@
 @section('content')
 
     <div class="content px-3 product-list product-listscroll">
+        
+        <span class="float-left">
+            <div class="btn btn-outline-dark" onclick="clearAllqty()" >Clear All</div>
+        </span>
         <span class="float-right">
-        <a class="btn btn-success" href="{{ route('products.create') }}" >+</a>
+            <a class="btn btn-outline-dark" href="{{ route('products.create') }}" >+</a>
         </span>
 
         <table class="table product-table">
             <tbody>
                 @foreach ($products as $product)
-                    <tr>
+                    <tr id="product_tr_{{$product->id}}" class={{($product->quantity == 0) ? "emptyQtyTableTab" : ""  }} >
                         <td>
-                            <div class="">
+                            <div>
                                 <input name="product_ids" type="hidden" value="{{$product->id}}"/>
+                                <input id="discount_type_{{$product->id}}" type="hidden" value="{{$product->discount_type}}"/>
+                                <input id="discount_{{$product->id}}" type="hidden" value="{{$product->discount}}"/>
+                                <input id="discount_price_{{$product->id}}" type="hidden" value="{{$product->discount_price}}"/>
                                 {{-- <img class="product-img" src="{{asset('public/img/empty_cart.png')}}" /> --}}
                                 <img class="product-img" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
 
@@ -54,7 +61,7 @@
                             <div class="align-self-center text-center">
                                 <b>USD <span name="product_price_total" id="product_price_total_{{$product->id}}" >0</span></b>
                             </div>
-                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom" data-toggle="modal" data-target="#discount" data-whatever="{{$product->id}}">
+                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom p-1" data-toggle="modal" data-target="#discount" data-whatever="{{$product->id}}">
                                 Apply discount
                             </div>
                         </td>
@@ -74,7 +81,7 @@
                 Item quatity not editable by customer.
             </div>
             <div class="col-3 webkit-right pr-0">
-                <input type="checkbox" />
+                <input type="checkbox" id="cart_lock"/>
             </div>
         </div>
         <div class="col-12 row pt-2 pr-0">
@@ -83,6 +90,14 @@
             </div>
             <div class="col-3 webkit-right pr-0">
                 <b>USD <span id="subtotal">0</span></b>
+            </div>
+        </div>
+        <div class="col-12 row pt-2 pr-0">
+            <div class="col-9">
+                Discount Total
+            </div>
+            <div class="col-3 webkit-right pr-0">
+                <b>USD <span id="discountTotal">0</span></b>
             </div>
         </div>
         <div class="col-12 row pt-2 pr-0 ">
@@ -193,7 +208,7 @@
                 <div class="modal-footer">
                     <div class="footer">
                         {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
-                        <button type="button" class="btn btn-primary discountForm" data-dismiss="modal" >Submit</button>
+                        <button type="button" class="btn btn-primary discountForm theamBtnColor" data-dismiss="modal" >Submit</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -206,6 +221,16 @@
 @section('page_scripts')
     <script>
         $(document).ready(function() {
+
+            $('#cart_lock').click(function() {
+                if(!$(this).is(':checked')){
+                    $('.product-list').removeClass('product_list_disable');
+                }   
+                else
+                {
+                    $('.product-list').addClass('product_list_disable');
+                }
+            });
             $(".discountForm").click(function(){
                 var discountAmt = $('#discountAmt').val();
                 var productId = $('#productId').val();
@@ -216,7 +241,8 @@
                     data: {_token:  $('meta[name="csrf-token"]').attr('content'), discountAmt: discountAmt, product_id: productId, discountType: discountType},
                     dataType: 'JSON',
                     success: function (res) {
-
+                        var discount_price = $('#discount_price_' + productId).val(res);
+                        priceCount();
                     }
                 });
             })
@@ -232,30 +258,62 @@
 		});
 
         function whatsapp() {
-
+            if (confirm('Are you sure you went to create new link ?')) {
+                saveLink();
+            }
         }
-
+        
         function qrCodeScan() {
-
+            if (confirm('Are you sure you went to create new link ?')) {
+                saveLink();
+            }
         }
-
+        
         function more() {
-
+            if (confirm('Are you sure you went to create new link ?')) {
+                saveLink();
+            }
         }
 
+        function saveLink(){
+            var link = "{{ $link }}";
+            $.ajax({
+                url: "{{ url('save_link') }}",
+                type: 'POST',
+                data: {_token:  $('meta[name="csrf-token"]').attr('content'), link: link},
+                dataType: 'JSON',
+                success: function (res) {
+
+                }
+            });
+        }
         function priceCount(){
             var subtotal= 0;
             var sendorder= 0;
+            var discountTotal= 0;
             $('input[name^="product_ids"]').each(function(){
                 var product_id = $(this).val();
                 var product_price = $('#product_price_' + product_id).text();
                 var product_quantity = $('#qun_' + product_id).val();
+                var discount_type = $('#discount_type_' + product_id).val();
+                var discount = $('#discount_' + product_id).val();
+                var discount_price = $('#discount_price_' + product_id).val();
+                // console.log(discount_type + ' - ' + discount + ' - ' + discount_price);
+                if(product_quantity == 0){
+                    $('#product_tr_' + product_id).addClass('emptyQtyTableTab');
+                }else{
+                    $('#product_tr_' + product_id).removeClass('emptyQtyTableTab');
+                }
                 product_price_total_val = product_price * product_quantity;
                 $('#product_price_total_' + product_id).text(product_price_total_val);
                 sendorder += product_price_total_val;
+                if(discount_type != '' && discount != ''){
+                    discountTotal +=  product_price - discount_price;
+                }
                 subtotal += product_price_total_val;
             });
             $('#subtotal').text(subtotal);
+            $('#discountTotal').text((Math.round(discountTotal * 100) / 100).toFixed(2));
             $('#sendorder').text(sendorder);
         }
 
@@ -289,6 +347,23 @@
             $temp.val("{{ url('usersProducts'). '/' . $user_id}}").select();
             document.execCommand("copy");
             $temp.remove();
+        }
+
+        function clearAllqty() {
+            if (confirm('Are you sure you went to clear all product quantity?')) {
+                $.ajax({
+                    url: "{{ url('clear_quantity') }}",
+                    type: 'POST',
+                    data: {_token:  $('meta[name="csrf-token"]').attr('content')},
+                    dataType: 'JSON',
+                    success: function (res) {
+                        $('input[name^="quantity"]').each(function(){
+                            $(this).val(0);
+                        });
+                        priceCount();
+                    }
+                });
+            }
         }
 
     </script>
