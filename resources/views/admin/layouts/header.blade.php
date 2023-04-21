@@ -40,7 +40,7 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">{{ __('messages.common.login') }}
                     / {{ __('messages.common.register') }}</div>
-                <a href="{{ route('login') }}" class="dropdown-item has-icon">
+                <a href="{{ route('login-user') }}" class="dropdown-item has-icon">
                     <i class="fas fa-sign-in-alt"></i> {{ __('messages.common.login') }}
                 </a>
                 <div class="dropdown-divider"></div>

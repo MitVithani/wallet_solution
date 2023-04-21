@@ -98,7 +98,7 @@
             </form>
 
             <p class="mt-3 mb-1">
-                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('login-user') }}">Login</a>
             </p>
         </div>
         <!-- /.reset-card-body -->
