@@ -112,9 +112,9 @@
             <table class="">
                 <tr>
                     <td>
-                        <a class="d-none whatsapp a" href="whatsapp://send?text={{ url('usersProducts'). '/' . $user_id}}">
+                        <a class="d-none whatsapp a" href="whatsapp://send?text={{ url('usersProducts'). '/' . $link}}">
                         </a>
-                        <div onclick="whatsapp()" href="whatsapp://send?text={{ url('usersProducts'). '/' . $user_id}}">
+                        <div onclick="whatsapp()" href="whatsapp://send?text={{ url('usersProducts'). '/' . $link}}">
                             <img class="share-img" src="{{asset('public/img/whatsapp.png')}}">
                         </div>
                     </td>
@@ -161,7 +161,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={{ url('usersProducts'). '/' . $user_id}}&amp;size=470x470" alt=""  width="100%" height="auto" />
+                    <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={{ url('usersProducts'). '/' . $link}}&amp;size=470x470" alt=""  width="100%" height="auto" />
                 </div>
 
                 {{-- <!-- Modal footer -->
@@ -344,7 +344,7 @@
         function copyToClipboard() {
             var $temp = $("<input>");
             $("body").append($temp);
-            $temp.val("{{ url('usersProducts'). '/' . $user_id}}").select();
+            $temp.val("{{ url('usersProducts'). '/' . $link}}").select();
             document.execCommand("copy");
             $temp.remove();
         }

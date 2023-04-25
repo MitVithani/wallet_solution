@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Product_Image;
 use App\Models\ShareLink;
+use App\Models\ShareUrlProduct;
 // use Flash;
 use Response;
 
@@ -206,10 +207,33 @@ class ProductController extends AppBaseController
 
     public function saveLink(Request $request)
     {
+        // dd($request->all());
         $userId = auth()->user()->id;
-        $checkLink = ShareLink::where(['user_id' => $userId])->first();
-        if(!empty($checkLink)){
-            ShareLink::create(["user_id" => $userId]);
+        $checkLink = ShareLink::where(['user_id' => $userId, "rand_link" => $request->link])->first();
+        // dd($checkLink);
+        if(empty($checkLink)){
+            $checkLink = ShareLink::create(["user_id" => $userId, "rand_link" => $request->link]);
         }
+        $getProducts = Product::where(['user_id' => $userId])->get();
+        if(!empty($getProducts)){
+            foreach ($getProducts as $key => $getProduct) {
+                if($getProduct->quantity != 0)
+                {
+                    $dataIn = [
+                        'user_id' => $userId,
+                        'share_link_id' => $checkLink->id,
+                        'product_id' => $getProduct->id,
+                        'price' => $getProduct->price,
+                        'describe_item' => $getProduct->describe_item,
+                        'discount_type' => $getProduct->discount_type,
+                        'discount' => $getProduct->discount,
+                        'discount_price' => $getProduct->discount_price,
+                        'quantity' => $getProduct->quantity,
+                    ];
+                    ShareUrlProduct::create($dataIn);
+                }
+            }
+        }
+        return 1;
     }
 }

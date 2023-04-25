@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class ShareLink extends Authenticatable
+class ShareUrlProduct extends Authenticatable
 {
 
     /**
@@ -18,11 +18,18 @@ class ShareLink extends Authenticatable
      */
     protected $fillable = [
         'user_id',
-        'rand_link',
+        'share_link_id',
+        'product_id',
+        'price',
+        'describe_item',
+        'discount_type',
+        'discount',
+        'discount_price',
+        'quantity',
     ];
-
-    public function shareUrlProduct()
+    
+    public function product()
     {
-        return $this->hasMany(ShareUrlProduct::class, 'share_link_id', 'id');
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 }

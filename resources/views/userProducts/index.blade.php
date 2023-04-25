@@ -92,10 +92,15 @@
             {{-- <a href="{{ url('usersProducts/check_out'). '/' . $userDtl->id}}" class="btn add-item-btn mt-5">
                 Checkout Now
             </a> --}}
-
-            <div class="btn add-item-btn mt-5" onclick="checkoutnow()">
-                Checkout Now
-            </div>
+            <form action="{{ url('send_payment') }}" method="POST">
+                @csrf
+                <input type="hidden" name="amount" value="{{$subTotal}}"/>
+                <input type="hidden" name="user_id" value="{{$userDtl->id}}"/>
+                <input type="hidden" name="link_product_dtl" value="{{$linkProductDtl->id}}"/>
+                <button type="button" class="btn add-item-btn mt-5" id="checkoutbtn" onclick="checkoutnow()">
+                    Checkout Now
+                </button>
+            </form>
         </div>
     </div>
 
@@ -278,7 +283,10 @@
         {
             var userData = localStorage.getItem('userData');
             if(userData){
-                $('#paymentModal').modal('show');
+                // $('#paymentModal').modal('show');
+                $('#checkoutbtn').removeAttr("type").attr("type", "submit");
+
+
             }else{
                 $('#userForm').modal('show');
                 // var userData = localStorage.setItem('userData', 'userData');

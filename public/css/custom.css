@@ -20,12 +20,24 @@
     width: 160px;
     display: inline-block;
 }
-@media (max-width: 768px) {
-    /* .container .navbar-brand{
 
-    } */
-
+.auth-class-input{
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+     border-radius: 20px;
+     border: 1px solid #2d9fd9;
+     color: #a0d18c;
+     width: 250px;
+     height: 30px;
+     padding-left: 10px;
+    }
+    
+.auth-class-input:focus {
+     outline: none;
+     border: 2px solid #000000;
+     color: #000000;
 }
+
 .webkit-right{
     text-align: -webkit-right;
 }

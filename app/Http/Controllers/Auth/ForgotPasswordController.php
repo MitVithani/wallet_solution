@@ -110,7 +110,7 @@ class ForgotPasswordController extends Controller
             'Body' => $body,
         );
         $post = http_build_query($data);
-        $x = curl_init($url );
+        $x = curl_init($url);
         curl_setopt($x, CURLOPT_POST, true);
         curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
