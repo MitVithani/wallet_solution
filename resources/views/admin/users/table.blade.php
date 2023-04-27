@@ -1,20 +1,18 @@
 <div class="table-responsive">
-    <table class="table" id="users-table">
+    <table class="table " id="users-table" width="100%">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Shop Name</th>
-            <th>Phone Number</th>
+            <th>Shop</th>
+            <th>Phone</th>
             <th>Email</th>
             <th>Logo</th>
             <th>Status</th>
-            <th>Company Name</th>
-            <th>Tax Number</th>
+            <th>Company</th>
+            <th>Tax</th>
             <th>Address</th>
-            <th>City Name</th>
-            <th>Bank IBAN</th>
-
-            <th colspan="3">Action</th>
+            <th>City</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +36,6 @@
                 <td>{{ $user->tax_number }}</td>
                 <td>{{ $user->address }}</td>
                 <td>{{ $user->city_name }}</td>
-                <td>{{ $user->bank_iban }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

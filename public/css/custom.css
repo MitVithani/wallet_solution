@@ -31,7 +31,7 @@
      height: 30px;
      padding-left: 10px;
     }
-    
+
 .auth-class-input:focus {
      outline: none;
      border: 2px solid #000000;
@@ -193,7 +193,7 @@ span {cursor:pointer; }
 }
 .product_list_disable{
     pointer-events: none;
-    opacity: 0.4;    
+    opacity: 0.4;
 }
 /* If the screen size is 600px or less, set the font-size of <div> to 30px */
 @media only screen and (max-width: 600px) {

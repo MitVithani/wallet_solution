@@ -1,0 +1,115 @@
+
+.dataTables_wrapper.form-inline .row{
+	flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+}
+.dataTables_wrapper.form-inline .row table{
+    box-sizing: border-box;
+}
+.dataTables_wrapper input, .dataTables_wrapper select{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.dataTables_length select{
+	margin: 0 5px;
+}
+
+.btn-light  {
+    background-color: #e2e6ea !important;
+}
+.toggle-handle {
+    background-color: #c2c4c7 !important;
+}
+.stati.bg-wet_asphalt{
+    background: #343a40;
+    color: white;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box-dashboard a div{
+    width: auto!important;
+}
+.stati{
+    padding: 1em;
+    box-shadow: 0px 0.2em 0.4em rgb(0 0 0 / 80%);
+    transition: margin 0.5s ease,box-shadow 0.5s ease;
+}
+.row.dash-row{
+    margin-left: 0;
+    margin-right: 0;
+}
+.stati div span{
+    width: 100%;
+    color: #fff !important;
+    display: block;
+}
+.box-dashboard a div span{
+    font-size: 1.5em!important;
+}
+.toggle.ios, .toggle-on.ios, .toggle-off.ios , .toggle .toggle-on, .toggle .toggle-off , .toggle{
+    border-radius: 20rem !important;
+}
+.btn-primary .toggle-handle{
+    right: 7px;
+    border-radius: 50% !important;
+}
+.btn-light.off .toggle-handle{
+    left: 7px;
+    border-radius: 50% !important;
+}
+.sidebar li.active {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-radius: 0.5rem !important;
+}
+ .sidebar li a {
+    padding: 12px 5px 12px 15px;
+    display: block;
+}
+.sidebar li{
+    margin-bottom: 5px;
+}
+
+
+
+.btn-primary .toggle-handle{
+    right: 10px;
+    border-radius: 50% !important;
+    width: 36px;
+}
+.btn-light.off .toggle-handle{
+    left: 10px;
+    border-radius: 50% !important;
+    width: 36px;
+}
+
+.btn-primary .toggle-group label{
+    margin-right: 20px !important;
+}
+.btn-light .toggle-group label{
+    margin-left: 10px;
+}
+.center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.width_30 {
+    width: 30%;
+}
+
+.box-dashboard a div div i{
+    width: 2px;
+}
+.multiselect-container>li>a>label{
+    padding-left: 20px !important;
+
+}
+.multiselect-container{
+    padding: 10px;
+    width: 250px;
+}

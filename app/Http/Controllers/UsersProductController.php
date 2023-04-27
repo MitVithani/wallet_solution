@@ -24,7 +24,7 @@ class UsersProductController extends AppBaseController
     public function __construct()
     {
         // $this->middleware('auth');
-    }   
+    }
 
     public function usersProducts($url_link)
     {
@@ -59,20 +59,21 @@ class UsersProductController extends AppBaseController
         $request->request->remove('_token');
         $checkCust = Customer::where(['email' => $request['email'], 'phone_number' => $request['phone_number']])->first();
         if(empty($checkCust)){
-            Customer::create(['name' => $request['name'], 'email' => $request['email'], 'phone_number' => $request['phone_number']]);
+            $checkCust = Customer::create(['name' => $request['name'], 'email' => $request['email'], 'phone_number' => $request['phone_number']]);
             // return 1;
             $data['status'] = 1;
         }else{
             // return 2;
             $data['status'] = 2;
         }
+        $data['cust_id'] = $checkCust->id;
         $data['request'] = $request->all();
         return $data;
     }
 
     public function sendPayment(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $order_number = 'order-'. rand(1, 99) . rand(1, 99) . rand(1, 99) . rand(1, 99);
         $order_amount = number_format((float)$request->amount, 2, '.', '');
         $order_currency = 'USD';
@@ -99,18 +100,22 @@ class UsersProductController extends AppBaseController
         // $response = Http::post('https://checkout.montypay.com/api/v1/session', [
         //     'body' => json_decode(json_encode($reqData))
         // ]);
-        $response = Http::withBody(
-            json_encode($reqData), 'application/json'
-        )->post('https://checkout.montypay.com/api/v1/session');
-        $jsonData = json_decode(json_encode($response->json()));
+        try {
+            $response = Http::withBody(
+                json_encode($reqData), 'application/json'
+            )->post('https://checkout.montypay.com/api/v1/session');
+            $jsonData = json_decode(json_encode($response->json()));
+            // dd($jsonData);
+            return Redirect::to($jsonData->redirect_url);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
         // dd($jsonData->redirect_url ?? 'hy');
-        return Redirect::to($jsonData->redirect_url);
     }
 
     public function successPayment($id)
     {
         $shareLink = ShareLink::where(['rand_link' => $id])->update(['status' => 1]);
-
         return view('userProducts.success_payment');
     }
 

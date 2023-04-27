@@ -25,4 +25,8 @@ class ShareLink extends Authenticatable
     {
         return $this->hasMany(ShareUrlProduct::class, 'share_link_id', 'id');
     }
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

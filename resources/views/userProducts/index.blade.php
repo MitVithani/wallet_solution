@@ -199,6 +199,7 @@
 @section('page_scripts')
     <script>
         $(document).ready(function() {
+            $(".navbar-nav").hide();
             $(".saveCustomerData").click(function(){
                 var name = $('#name').val();
                 var email = $('#email').val();
@@ -226,7 +227,7 @@
                             localStorage.setItem('userData', JSON.stringify(res.request));
                         }
                         alert('Registration Successfully');
-                        checkoutnow();   
+                        checkoutnow();
                     }
                 });
             });
