@@ -97,6 +97,7 @@
                 <input type="hidden" name="amount" value="{{$subTotal}}"/>
                 <input type="hidden" name="user_id" value="{{$userDtl->id}}"/>
                 <input type="hidden" name="link_product_dtl" value="{{$linkProductDtl->id}}"/>
+                <input type="hidden" class="cust_id" name="cust_id" value=""/>
                 <button type="button" class="btn add-item-btn mt-5" id="checkoutbtn" onclick="checkoutnow()">
                     Checkout Now
                 </button>
@@ -200,6 +201,12 @@
     <script>
         $(document).ready(function() {
             $(".navbar-nav").hide();
+            var userData = localStorage.getItem('userData');
+            if(userData){
+                // console.log(userData);
+                $('.cust_id').val(jQuery.parseJSON(userData).cust_id);
+                $('#checkoutbtn').removeAttr("type").attr("type", "submit");
+            }
             $(".saveCustomerData").click(function(){
                 var name = $('#name').val();
                 var email = $('#email').val();
@@ -220,7 +227,7 @@
                     data: {_token:  $('meta[name="csrf-token"]').attr('content'), name: name, email: email, phone_number: phone_number},
                     dataType: 'JSON',
                     success: function (res) {
-                        console.log(res);
+                        $('.cust_id').val(res.request.cust_id);
                         if(res.status == 1){ // new customer
                             localStorage.setItem('userData', JSON.stringify(res.request));
                         }else if(res.status == 2){ // old customer
@@ -285,6 +292,8 @@
             var userData = localStorage.getItem('userData');
             if(userData){
                 // $('#paymentModal').modal('show');
+                console.log(userData);
+                $('.cust_id').val();
                 $('#checkoutbtn').removeAttr("type").attr("type", "submit");
 
 

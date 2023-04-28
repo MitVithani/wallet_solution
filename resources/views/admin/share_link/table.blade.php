@@ -5,6 +5,7 @@
             <th>Name</th>
             <th>Shop</th>
             <th>Link</th>
+            <th>Customer</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -16,6 +17,7 @@
                 <td>{{ $shareLink->user->name ?? '' }}</td>
                 <td>{{ $shareLink->user->shop_name ?? '' }}</td>
                 <td>{{ $shareLink->rand_link ?? '' }}</td>
+                <td><a href="#">{{ !empty($shareLink->customer->name) ? $shareLink->customer->name : '' }}</a></td>
                 <td>{{ ($shareLink->status == 1) ? 'Confirm' : '' }}</td>
                 <td width="120">
 

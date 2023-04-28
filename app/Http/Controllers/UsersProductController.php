@@ -66,14 +66,14 @@ class UsersProductController extends AppBaseController
             // return 2;
             $data['status'] = 2;
         }
-        $data['cust_id'] = $checkCust->id;
+        $request['cust_id'] = $checkCust->id;
         $data['request'] = $request->all();
         return $data;
     }
 
     public function sendPayment(Request $request)
     {
-        dd($request->all());
+
         $order_number = 'order-'. rand(1, 99) . rand(1, 99) . rand(1, 99) . rand(1, 99);
         $order_amount = number_format((float)$request->amount, 2, '.', '');
         $order_currency = 'USD';
@@ -92,34 +92,29 @@ class UsersProductController extends AppBaseController
             "currency" => $order_currency,
             "description" => $order_description,
         ];
-        $reqData['cancel_url'] = env('APP_URL'). 'cancelPayment/' . $request->link_product_dtl;
-        $reqData['success_url'] = env('APP_URL'). 'successPayment/' . $request->link_product_dtl;
+        $reqData['cancel_url'] = env('APP_URL'). 'cancelPayment/' . $request->link_product_dtl . '/' . $request->cust_id;
+        $reqData['success_url'] = env('APP_URL'). 'successPayment/' . $request->link_product_dtl . '/' . $request->cust_id;
         $reqData['recurring_init'] = true;
         $reqData['hash'] = $hash;
         // dd($reqData);
-        // $response = Http::post('https://checkout.montypay.com/api/v1/session', [
-        //     'body' => json_decode(json_encode($reqData))
-        // ]);
         try {
             $response = Http::withBody(
                 json_encode($reqData), 'application/json'
             )->post('https://checkout.montypay.com/api/v1/session');
             $jsonData = json_decode(json_encode($response->json()));
-            // dd($jsonData);
             return Redirect::to($jsonData->redirect_url);
         } catch (\Throwable $th) {
             throw $th;
         }
-        // dd($jsonData->redirect_url ?? 'hy');
     }
 
-    public function successPayment($id)
+    public function successPayment($id, $cust_id)
     {
-        $shareLink = ShareLink::where(['rand_link' => $id])->update(['status' => 1]);
+        $shareLink = ShareLink::where(['id' => $id])->update(['status' => 1, 'cust_id' => $cust_id]);
         return view('userProducts.success_payment');
     }
 
-    public function cancelPayment($id)
+    public function cancelPayment($id, $cust_id)
     {
         // dd($id);
         return view('userProducts.cancel_payment');

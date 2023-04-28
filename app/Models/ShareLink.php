@@ -19,6 +19,7 @@ class ShareLink extends Authenticatable
     protected $fillable = [
         'user_id',
         'rand_link',
+        'cust_id',
     ];
 
     public function shareUrlProduct()
@@ -28,5 +29,9 @@ class ShareLink extends Authenticatable
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'cust_id');
     }
 }
