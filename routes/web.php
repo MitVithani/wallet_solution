@@ -53,8 +53,8 @@ Route::get('checkoutNow/{id}', 'UsersProductController@usersProductspayout');
 
 Route::post('save_customer', 'UsersProductController@saveCustomer');
 Route::post('send_payment', 'UsersProductController@sendPayment');
-Route::get('successPayment/{id}/{cust_id}', 'UsersProductController@successPayment');
-Route::get('cancelPayment/{id}/{cust_id}', 'UsersProductController@cancelPayment');
+Route::get('successPayment/{id}/{cust_id}/{amount}', 'UsersProductController@successPayment');
+Route::get('cancelPayment/{id}/{cust_id}/{amount}', 'UsersProductController@cancelPayment');
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('optimize:clear');

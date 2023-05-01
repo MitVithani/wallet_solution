@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
+use App\Models\ShareLink;
 
 class HomeController extends Controller
 {
@@ -41,6 +43,8 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('admin.home');
+        $totalUsers = User::count();
+        $totalPayment = ShareLink::where(['status' => 1])->sum('amount');
+        return view('admin.home')->with(['totalUsers' => $totalUsers, 'totalPayment' => $totalPayment]);
     }
 }

@@ -92,8 +92,8 @@ class UsersProductController extends AppBaseController
             "currency" => $order_currency,
             "description" => $order_description,
         ];
-        $reqData['cancel_url'] = env('APP_URL'). 'cancelPayment/' . $request->link_product_dtl . '/' . $request->cust_id;
-        $reqData['success_url'] = env('APP_URL'). 'successPayment/' . $request->link_product_dtl . '/' . $request->cust_id;
+        $reqData['cancel_url'] = env('APP_URL'). 'cancelPayment/' . $request->link_product_dtl . '/' . $request->cust_id . '/' . $order_amount;
+        $reqData['success_url'] = env('APP_URL'). 'successPayment/' . $request->link_product_dtl . '/' . $request->cust_id . '/' . $order_amount;
         $reqData['recurring_init'] = true;
         $reqData['hash'] = $hash;
         // dd($reqData);
@@ -108,13 +108,13 @@ class UsersProductController extends AppBaseController
         }
     }
 
-    public function successPayment($id, $cust_id)
+    public function successPayment($id, $cust_id, $amount)
     {
-        $shareLink = ShareLink::where(['id' => $id])->update(['status' => 1, 'cust_id' => $cust_id]);
+        $shareLink = ShareLink::where(['id' => $id])->update(['status' => 1, 'cust_id' => $cust_id, 'amount' => $amount]);
         return view('userProducts.success_payment');
     }
 
-    public function cancelPayment($id, $cust_id)
+    public function cancelPayment($id, $cust_id, $amount)
     {
         // dd($id);
         return view('userProducts.cancel_payment');
