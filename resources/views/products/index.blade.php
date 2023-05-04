@@ -18,7 +18,7 @@
 @section('content')
 
     <div class="content px-3 product-list product-listscroll">
-        
+
         <span class="float-left">
             <div class="btn btn-outline-dark" onclick="clearAllqty()" >Clear All</div>
         </span>
@@ -225,7 +225,7 @@
             $('#cart_lock').click(function() {
                 if(!$(this).is(':checked')){
                     $('.product-list').removeClass('product_list_disable');
-                }   
+                }
                 else
                 {
                     $('.product-list').addClass('product_list_disable');
@@ -259,16 +259,32 @@
 
         function whatsapp() {
             if (confirm('Are you sure you went to create new link ?')) {
+                var sUrl = `{{ url('usersProducts'). '/' . $link}}`;
+                console.log(sUrl);
+                var sMsg = encodeURIComponent(sUrl);
+                var whatsapp_url = "whatsapp://send?text=" + sMsg;
+                window.location.href = whatsapp_url;
                 saveLink();
             }
         }
-        
+
+        function copyToClipboard() {
+            if (confirm('Are you sure you went to create new link ?')) {
+                saveLink();
+                var $temp = $("<input>");
+                $("body").append($temp);
+                $temp.val("{{ url('usersProducts'). '/' . $link}}").select();
+                document.execCommand("copy");
+                $temp.remove();
+            }
+        }
+
         function qrCodeScan() {
             if (confirm('Are you sure you went to create new link ?')) {
                 saveLink();
             }
         }
-        
+
         function more() {
             if (confirm('Are you sure you went to create new link ?')) {
                 saveLink();
@@ -339,14 +355,6 @@
                     priceCount();
                 }
             });
-        }
-
-        function copyToClipboard() {
-            var $temp = $("<input>");
-            $("body").append($temp);
-            $temp.val("{{ url('usersProducts'). '/' . $link}}").select();
-            document.execCommand("copy");
-            $temp.remove();
         }
 
         function clearAllqty() {
