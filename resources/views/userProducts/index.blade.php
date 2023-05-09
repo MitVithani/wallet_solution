@@ -30,7 +30,7 @@
     <?php
         $subTotal = 0;
     ?>
-    <div class="content px-3">
+    <div class="px-3">
 
         <div class="d-block">
             <h2 class="d-inline">YOUR CART</h2>

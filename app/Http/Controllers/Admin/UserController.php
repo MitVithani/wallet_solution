@@ -30,7 +30,7 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = User::where('is_admin', '!=', '1')->get();
+        $users = User::where('is_admin', '!=', '1')->orderBy('id', 'desc')->get();
 
         return view('admin.users.index')
             ->with('users', $users);

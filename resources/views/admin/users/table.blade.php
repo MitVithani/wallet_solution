@@ -2,6 +2,7 @@
     <table class="table " id="users-table" width="100%">
         <thead>
         <tr>
+            <th>id</th>
             <th>Name</th>
             <th>Shop</th>
             <th>Phone</th>
@@ -16,8 +17,11 @@
         </tr>
         </thead>
         <tbody>
+            <?php $i=0; ?>
         @foreach($users as $user)
             <tr>
+                <?php $i++ ?>
+                <td>{{ $i }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->shop_name }}</td>
                 <td>{{ $user->phone_number }}</td>

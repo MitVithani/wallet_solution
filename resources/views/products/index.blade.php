@@ -20,10 +20,10 @@
     <div class="content px-3 product-list product-listscroll">
 
         <span class="float-left">
-            <div class="btn btn-outline-dark" onclick="clearAllqty()" >Clear All</div>
+            <div class="btn cust-product-btns" onclick="clearAllqty()" >Clear All</div>
         </span>
         <span class="float-right">
-            <a class="btn btn-outline-dark" href="{{ route('products.create') }}" >+</a>
+            <a class="btn cust-product-btns" style="font-size: 20px" href="{{ route('products.create') }}" >+</a>
         </span>
 
         <table class="table product-table">
@@ -74,7 +74,7 @@
         <hr>
 
     </div>
-    <div class="card p0 m0 bottomNavbar">
+    <div class="container card p0 m0 bottomNavbar">
         <div class="col-12 row pt-2 pr-0">
             <div class="col-9">
                 Cart Locked<br>

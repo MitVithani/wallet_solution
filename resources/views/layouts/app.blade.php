@@ -81,7 +81,7 @@
             </div>
         </nav>
 
-        <main class="pt-4">
+        <main class="container pt-4">
             @yield('content')
         </main>
     </div>
