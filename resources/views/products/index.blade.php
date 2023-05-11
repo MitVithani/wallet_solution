@@ -29,7 +29,7 @@
         <table class="table product-table">
             <tbody>
                 @foreach ($products as $product)
-                    <tr id="product_tr_{{$product->id}}" class={{($product->quantity == 0) ? "emptyQtyTableTab" : ""  }} >
+                    <tr id="product_tr_{{$product->id}}" data-toggle="modal" data-target="#product_tr_{{$product->id}}" class={{($product->quantity == 0) ? "emptyQtyTableTab" : ""  }} >
                         <td>
                             <div>
                                 <input name="product_ids" type="hidden" value="{{$product->id}}"/>
@@ -66,8 +66,48 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach
 
+                    <div class="modal fade" id="product_tr_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="product_tr_Label" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="card p-3">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="container-fliud">
+                                            <div class="wrapper row">
+                                                <div class="preview col-md-6">
+
+                                                    <div class="preview-pic tab-content">
+                                                      <div class="tab-pane active"><img id="main_product_image{{$product->id}}" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" /></div>
+
+                                                    </div>
+                                                    <ul class="preview-thumbnail nav nav-tabs">
+                                                        @if(!empty($product->productImage))
+                                                        @foreach ($product->productImage as $productImage)
+                                                            <li><img onclick="changeImage(this, '{{$product->id}}')" src="{{$productImage->image}}" /></li>
+                                                        @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                                <div class="details col-md-6">
+                                                    <h3 class="product-title">{{$product->name}}</h3>
+                                                    <p class="product-description">{{$product->additional_details}}</p>
+                                                    <p>Describe Item:
+                                                        <span class="product-description">{{$product->describe_item}}</span>
+                                                    </p>
+                                                    <h5 class="quantity">quantity: <span>${{$product->quantity}}</span></h5>
+                                                    <h5 class="">Current Price: <span>${{$product->price}}</span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </tbody>
         </table>
 
@@ -303,6 +343,11 @@
                 }
             });
         }
+        function changeImage(element, product_id) {
+            var main_prodcut_image = document.getElementById('main_product_image' + product_id);
+            main_prodcut_image.src = element.src;
+        }
+
         function priceCount(){
             var subtotal= 0;
             var sendorder= 0;
