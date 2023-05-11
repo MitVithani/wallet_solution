@@ -57,9 +57,9 @@ class UsersProductController extends AppBaseController
     public function saveCustomer(Request $request)
     {
         $request->request->remove('_token');
-        $checkCust = Customer::where(['email' => $request['email'], 'phone_number' => $request['phone_number']])->first();
+        $checkCust = Customer::where(['email' => $request['email'], 'phone_number' => $request['phone_number'], 'address' => $request['address']])->first();
         if(empty($checkCust)){
-            $checkCust = Customer::create(['name' => $request['name'], 'email' => $request['email'], 'phone_number' => $request['phone_number']]);
+            $checkCust = Customer::create(['name' => $request['name'], 'email' => $request['email'], 'phone_number' => $request['phone_number'], 'address' => $request['address']]);
             // return 1;
             $data['status'] = 1;
         }else{

@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="align-self-center text-center">
-                                                <b>USD <span name="product_price_total" id="product_price_total_{{$shareUrlProduct->product->id}}" > {{$shareUrlProduct->quantity * $shareUrlProduct->discount_price}} </span></b>
+                                                <b>USD <span name="product_price_total" id="product_price_total_{{$shareUrlProduct->product->id}}" > {{(int) $shareUrlProduct->quantity * (int)$shareUrlProduct->discount_price}} </span></b>
                                             </div>
                                         </div>
                                     @endforeach

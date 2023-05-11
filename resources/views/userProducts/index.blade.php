@@ -126,6 +126,9 @@
                         <div class="form-outline mb-4">
                             <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Phone Number">
                         </div>
+                        <div class="form-outline mb-4">
+                            <input type="text" name="address" id="address" class="form-control" placeholder="Address">
+                        </div>
                         {{-- <div class="form-outline">
                             <input type="text" name="discountAmt" id="discountAmt" class="form-control" placeholder="">
                         </div> --}}
@@ -211,6 +214,7 @@
                 var name = $('#name').val();
                 var email = $('#email').val();
                 var phone_number = $("#phone_number").val();
+                var address = $("#address").val();
                 if(name == ""){
                     alert("Please enter full name");
                     return false;
@@ -220,11 +224,14 @@
                 }else if(phone_number == ""){
                     alert("Please enter phone number");
                     return false;
+                }else if(address == ""){
+                    alert("Please enter address");
+                    return false;
                 }
                 $.ajax({
                     url: "{{ url('save_customer') }}",
                     type: 'POST',
-                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), name: name, email: email, phone_number: phone_number},
+                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), name: name, email: email, phone_number: phone_number, address: address},
                     dataType: 'JSON',
                     success: function (res) {
                         $('.cust_id').val(res.request.cust_id);
