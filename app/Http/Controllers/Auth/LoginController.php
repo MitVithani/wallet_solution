@@ -49,7 +49,9 @@ class LoginController extends Controller
 
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            if(auth()->user()->status == "pending"){
+            if (auth()->user()->is_admin == 1) {
+                return redirect()->route('admin.home');
+            }else if(auth()->user()->status == "pending"){
                 auth()->logout();
                 return redirect()->back()
                 ->withInput()
@@ -63,8 +65,6 @@ class LoginController extends Controller
                 ->withErrors([
                     'password' => 'Your account suspended by admin.'
                 ]);
-            }else if (auth()->user()->is_admin == 1) {
-                return redirect()->route('admin.home');
             }else if(auth()->user()->status == "active"){
                 return redirect()->route('home');
             }else{
