@@ -1,5 +1,5 @@
 @extends('layout')
-  
+
 @section('nav_bar_content')
     <a class="nav-link d-inline float-right" href="{{ route('register') }}">Register</a>
 @endsection
@@ -24,6 +24,11 @@
             </div>
 
         </div>
+        @if ($errors->has('email'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+        @endif
         <button type="submit" class="user-details-login-button">
             Login
         </button>

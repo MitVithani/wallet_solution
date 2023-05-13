@@ -49,14 +49,39 @@ class LoginController extends Controller
 
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            if (auth()->user()->is_admin == 1) {
+            if(auth()->user()->status == "pending"){
+                auth()->logout();
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Your Verification pending form admin side.'
+                ]);
+            }else if(auth()->user()->status == "deactive"){
+                auth()->logout();
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Your account suspended by admin.'
+                ]);
+            }else if (auth()->user()->is_admin == 1) {
                 return redirect()->route('admin.home');
-            }else{
+            }else if(auth()->user()->status == "active"){
                 return redirect()->route('home');
+            }else{
+                auth()->logout();
+
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Some thing is worg please try again.'
+                ]);
             }
         }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+            return redirect()->back()
+            ->withInput()
+            ->withErrors([
+                'password' => 'Your email and password do not match.'
+            ]);
         }
 
     }
