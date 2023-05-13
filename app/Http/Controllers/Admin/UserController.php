@@ -107,7 +107,7 @@ class UserController extends AppBaseController
     public function changeStatus(Request $request)
     {
         // dd($request->status);
-        if($request->status == 'padding' || $request->status == 'deactive'){
+        if($request->status == 'pending' || $request->status == 'deactive'){
             $status = "active";
         }else if($request->status == 'active'){
             $status = "deactive";
