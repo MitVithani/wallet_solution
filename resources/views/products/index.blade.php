@@ -29,7 +29,7 @@
         <table class="table product-table">
             <tbody>
                 @foreach ($products as $product)
-                    <tr id="product_tr_{{$product->id}}" data-toggle="modal" data-target="#product_tr_{{$product->id}}" class={{($product->quantity == 0) ? "emptyQtyTableTab" : ""  }} >
+                    <tr class={{($product->quantity == 0) ? "emptyQtyTableTab" : ""  }} >
                         <td>
                             <div>
                                 <input name="product_ids" type="hidden" value="{{$product->id}}"/>
@@ -37,7 +37,7 @@
                                 <input id="discount_{{$product->id}}" type="hidden" value="{{$product->discount}}"/>
                                 <input id="discount_price_{{$product->id}}" type="hidden" value="{{$product->discount_price}}"/>
                                 {{-- <img class="product-img" src="{{asset('public/img/empty_cart.png')}}" /> --}}
-                                <img class="product-img" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
+                                <img id="product_tr_{{$product->id}}" data-toggle="modal" data-target="#product_tr_{{$product->id}}"  class="product-img" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
 
                             </div>
                         </td>
@@ -70,11 +70,13 @@
                     <div class="modal fade" id="product_tr_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="product_tr_Label" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Product Detils</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
                                 <div class="modal-body">
                                     <div class="card p-3">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+
                                         <div class="container-fliud">
                                             <div class="wrapper row">
                                                 <div class="preview col-md-6">
