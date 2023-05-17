@@ -217,7 +217,7 @@ class ProductController extends AppBaseController
         $getProducts = Product::where(['user_id' => $userId])->get();
         if(!empty($getProducts)){
             foreach ($getProducts as $key => $getProduct) {
-                if($getProduct->quantity != 0)
+                if($getProduct->quantity > 0)
                 {
                     $dataIn = [
                         'user_id' => $userId,
