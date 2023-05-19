@@ -157,33 +157,31 @@
                         <a class="d-none whatsapp a" href="whatsapp://send?text={{ url('usersProducts'). '/' . $link}}">
                         </a>
                         <div onclick="whatsapp()" href="whatsapp://send?text={{ url('usersProducts'). '/' . $link}}">
-                            <img class="share-img" src="{{asset('public/img/whatsapp.png')}}">
+                            <img class="share-img" style="margin-left: 10px;" src="{{asset('public/img/whatsapp.png')}}">
+                        </div>
+                        <div>
+                            WhatsApp
                         </div>
                     </td>
                     <td>
-                        <button onclick="qrCodeScan()" type="button" class="btn " data-toggle="modal" data-target="#qr-code">
-                            <img class="share-img" src="{{asset('public/img/qr-code-scan.png')}}">
-                          </button>
+                        <span onclick="qrCodeScan()" data-toggle="modal" data-target="#qr-code">
+                            <img class="share-img" style="margin-left: 6px;" src="{{asset('public/img/qr-code-scan.png')}}">
+                        </span>
+                        <div>
+                            QR Code
+                        </div>
                     </td>
                     <td>
-                        <img class="share-img" onclick="copyToClipboard()" src="{{asset('public/img/link.png')}}">
+                        <img class="share-img" style="margin-left: 10px;" onclick="copyToClipboard()" src="{{asset('public/img/link.png')}}">
+                        <div>
+                            Copy Link
+                        </div>
                     </td>
                     <td>
-                        <img class="share-img" onclick="more()" src="{{asset('public/img/more.png')}}" style="cursor: pointer">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        WhatsApp
-                    </td>
-                    <td>
-                        QR Code
-                    </td>
-                    <td>
-                        Copy Link
-                    </td>
-                    <td>
-                        More
+                        <img class="share-img" style="margin-left: -6px;" onclick="more()" src="{{asset('public/img/more.png')}}" style="cursor: pointer">
+                        <div>
+                            More
+                        </div>
                     </td>
                 </tr>
             </table>
