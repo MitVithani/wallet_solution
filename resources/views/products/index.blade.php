@@ -29,7 +29,7 @@
         <table class="table product-table">
             <tbody>
                 @foreach ($products as $product)
-                    <tr class={{($product->quantity == 0) ? "emptyQtyTableTab" : ""  }} >
+                    <tr id="product_tr_{{$product->id}}" class='{{($product->quantity == 0) ? "emptyQtyTableTab" : ""  }}' >
                         <td>
                             <div>
                                 <input name="product_ids" type="hidden" value="{{$product->id}}"/>
@@ -37,7 +37,7 @@
                                 <input id="discount_{{$product->id}}" type="hidden" value="{{$product->discount}}"/>
                                 <input id="discount_price_{{$product->id}}" type="hidden" value="{{$product->discount_price}}"/>
                                 {{-- <img class="product-img" src="{{asset('public/img/empty_cart.png')}}" /> --}}
-                                <img id="product_tr_{{$product->id}}" data-toggle="modal" data-target="#product_tr_{{$product->id}}"  class="product-img" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
+                                <img id="product_img_{{$product->id}}" data-toggle="modal" data-target="#product_img_{{$product->id}}"  class="product-img" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
 
                             </div>
                         </td>
@@ -67,7 +67,7 @@
                         </td>
                     </tr>
 
-                    <div class="modal fade" id="product_tr_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="product_tr_Label" aria-hidden="true">
+                    <div class="modal fade" id="product_img_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="product_img_Label" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -94,7 +94,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="details col-md-6">
-                                                    <h3 class="product-title">{{$product->name}}</h3>
+                                                    <h3 class="product-title">{{$product->name}} <a href="{{ url('edit') . '/' . $product->id }}"><i class="fa fa-edit"></i> </a> </h3>
                                                     <p class="product-description">{{$product->additional_details}}</p>
                                                     <p>Describe Item:
                                                         <span class="product-description">{{$product->describe_item}}</span>
@@ -366,14 +366,14 @@
                     $('#product_tr_' + product_id).addClass('emptyQtyTableTab');
                 }else{
                     $('#product_tr_' + product_id).removeClass('emptyQtyTableTab');
+                    product_price_total_val = product_price * product_quantity;
+                    $('#product_price_total_' + product_id).text(product_price_total_val);
+                    sendorder += product_price_total_val;
+                    if(discount_type != '' && discount != ''){
+                        discountTotal +=  product_price - discount_price;
+                    }
+                    subtotal += product_price_total_val;
                 }
-                product_price_total_val = product_price * product_quantity;
-                $('#product_price_total_' + product_id).text(product_price_total_val);
-                sendorder += product_price_total_val;
-                if(discount_type != '' && discount != ''){
-                    discountTotal +=  product_price - discount_price;
-                }
-                subtotal += product_price_total_val;
             });
             $('#subtotal').text(subtotal);
             $('#discountTotal').text((Math.round(discountTotal * 100) / 100).toFixed(2));

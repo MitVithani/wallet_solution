@@ -17,22 +17,22 @@
 </div>
 <div class="form-outline mb-4">
     <label class="form-label" for="name">Name or pruduct or serivce</label>
-    <input type="text" name="name" id="name" class="form-control" required>
+    <input type="text" name="name" id="name" class="form-control" value="{{$productDtl->name ?? ''}}" required>
 
 </div>
 <div class="form-outline mb-4">
     <label class="form-label" for="price">Price</label>
-    <input type="text" name="price" id="price" class="form-control" required>
+    <input type="text" name="price" id="price" class="form-control" value="{{$productDtl->price ?? ''}}" required>
 
 </div>
 <div class="form-outline mb-4">
     <label class="form-label" for="additional_details">Additional Details     (Optional)</label>
-    <input type="text" name="additional_details" id="additional_details" class="form-control">
+    <input type="text" name="additional_details" id="additional_details" class="form-control" value="{{$productDtl->additional_details ?? ''}}">
 </div>
 
 <div class="form-outline mb-4">
     <label class="form-label" for="describe_item">Describe this item</label>
-    <input type="text" name="describe_item" id="describe_item" class="form-control" required>
+    <input type="text" name="describe_item" id="describe_item" class="form-control" value="{{$productDtl->describe_item ?? ''}}" required>
 </div>
 
 <div class="form-outline">
@@ -47,7 +47,7 @@
         </label>
     </div> --}}
 
-    <input type="text" name="quantity" id="quantity" class="form-control">
+    <input type="text" name="quantity" id="quantity" class="form-control" value="{{$productDtl->quantity ?? ''}}">
     {{-- <span> You have an endless stock available.</span> --}}
 </div>
 
@@ -61,7 +61,7 @@
 
     </div>
     <div class="col-3 webkit-right">
-        <input id="is_delivery" name="is_delivery" class="form-check-input" type="checkbox" data-toggle="toggle" data-style="ios" data-onstyle="success" data-offstyle="danger">
+        <input id="is_delivery" name="is_delivery" class="form-check-input" type="checkbox" data-toggle="toggle" data-style="ios" data-onstyle="success" data-offstyle="danger" {{!empty($productDtl->is_delivery) && $productDtl->is_delivery == "on" ? 'checked' : ''}}>
     </div>
 
     {{-- </div> --}}
@@ -76,7 +76,7 @@
         <label class="blockquote-footer-label">Show this items to anyone who visites</label>
     </div>
     <div class="col-3 webkit-right">
-        <input name="is_visible" class="form-check-input" type="checkbox" data-toggle="toggle" data-style="ios" data-onstyle="success" data-offstyle="danger">
+        <input name="is_visible" class="form-check-input" type="checkbox" data-toggle="toggle" data-style="ios" data-onstyle="success" data-offstyle="danger" {{!empty($productDtl->is_visible) && $productDtl->is_visible == "on" ? 'checked' : ''}} {{ $productDtl->is_visible ?? ''}}>
     </div>
 
 </div>

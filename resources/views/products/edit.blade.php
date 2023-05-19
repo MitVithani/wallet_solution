@@ -44,16 +44,18 @@
     <div class="content px-3">
 
         <div class="card">
+            {!! Form::open(['route' => ['productUpdate'], 'method' => 'post']) !!}
 
-            {!! Form::open(['route' => 'products.store', 'files' => true]) !!}
             <div class="card-body">
+                <input type="hidden" name="product_id" id="product_id" class="form-control" value="{{$productDtl->id ?? ''}}">
+
                 {{-- <div class="row"> --}}
                     @include('products.fields')
                 {{-- </div> --}}
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary discountForm theamBtnColor']) !!}
+                {!! Form::submit('Update', ['class' => 'btn btn-primary discountForm theamBtnColor']) !!}
                 <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
             </div>
             {!! Form::close() !!}

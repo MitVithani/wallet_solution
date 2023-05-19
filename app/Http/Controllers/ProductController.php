@@ -110,15 +110,37 @@ class ProductController extends AppBaseController
      */
     public function edit($id)
     {
-        $user = $this->userRepository->find($id);
+        $productDtl = Product::where(['id' => $id])->first();
+        // dd($productDtl);
+        return view('products.edit')->with('productDtl', $productDtl);
+    }
 
-        if (empty($user)) {
-            // Flash::error('User not found');
+    public function productUpdate(Request $request)
+    {
+        // dd($request->all());
+        $productDataid = $request->product_id;
+        $data['name'] = $request->name;
+        $data['price'] = $request->price;
+        $data['discount_price'] = $request->price;
+        $data['additional_details'] = $request->additional_details;
+        $data['describe_item'] = $request->describe_item;
+        $data['quantity'] = $request->quantity;
+        $data['is_delivery'] = $request->is_delivery ?? 'off';
+        $data['is_visible'] = $request->is_visible ?? 'off';
+        $productData = Product::where([ 'id' => $productDataid])->update($data);
 
-            return redirect(route('users.index'));
+        if(!empty($request->images)){
+            // foreach ($request->images as $key => $image) {
+            //     if(){
+
+            //         $image_name = time().uniqId().$image->getClientOriginalName();
+            //         $image->move("public/media/images", $image_name);
+            //         // $productDataid = $productData->id;
+            //         Product_Image::create(['p_id' => $productDataid, 'image' => 'public/media/images/' . $image_name]);
+            //     }
+            // }
         }
-
-        return view('admin.users.edit')->with('user', $user);
+        return redirect(route('products.index'));
     }
 
     public function update($id, Request $request)

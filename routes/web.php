@@ -49,6 +49,10 @@ Route::get('usersProducts/payout/{id}', 'UsersProductController@usersProductspay
 Route::get('usersProducts/check_out/{id}', 'UsersProductController@usersProductspayout');
 Route::get('checkoutNow/{id}', 'UsersProductController@usersProductspayout');
 
+Route::get('edit/{id}', 'ProductController@edit');
+Route::post('productUpdate', 'ProductController@productUpdate')->name('productUpdate');
+// Route::get('edit/{id}', 'ProductController@edit');
+
 Route::post('save_customer', 'UsersProductController@saveCustomer');
 Route::post('send_payment', 'UsersProductController@sendPayment');
 Route::get('successPayment/{id}/{cust_id}/{amount}', 'UsersProductController@successPayment');
