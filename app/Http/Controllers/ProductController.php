@@ -235,6 +235,7 @@ class ProductController extends AppBaseController
         if(empty($checkLink)){
             $checkLink = ShareLink::create(["user_id" => $userId, "rand_link" => $request->link]);
         }
+        ShareUrlProduct::where(["share_link_id" => $checkLink->id])->delete();
         $getProducts = Product::where(['user_id' => $userId])->get();
         if(!empty($getProducts)){
             foreach ($getProducts as $key => $getProduct) {
