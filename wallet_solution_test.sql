@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2023 at 04:39 PM
+-- Generation Time: May 19, 2023 at 11:53 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `address` text DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
@@ -40,17 +41,20 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `name`, `email`, `phone_number`, `created_at`, `updated_at`) VALUES
-(1, 'name', 'admin@gmail.com', '9904914079', '2023-04-01 01:05:02', '2023-04-01 01:05:02'),
-(2, 'name', 'longestvision01@gmail.com', '9904914079', '2023-04-01 01:11:39', '2023-04-01 01:11:39'),
-(3, 'mit', 'mit.vithani@innovation-kite.com', '9904914079', '2023-04-04 10:30:13', '2023-04-04 10:30:13'),
-(4, 'mit', 'mit.vithani@gmail.com', '9904914079', '2023-04-04 10:45:51', '2023-04-04 10:45:51'),
-(5, 'mit', 'amit@gmail.com', '9904914079', '2023-04-09 11:13:05', '2023-04-09 11:13:05'),
-(6, 'mit', 'test@gmail.com', '9904914079', '2023-04-23 06:13:59', '2023-04-23 06:13:59'),
-(7, 'mit', 'am@gmail.com', '9904914090', '2023-04-23 08:33:49', '2023-04-23 08:33:49'),
-(8, 'Mit', 'mit@gmail.com', '99049214079', '2023-04-23 10:31:27', '2023-04-23 10:31:27'),
-(9, 'mit vithani', 'longestvision01@gmail.com', '09904914079', '2023-04-24 23:31:42', '2023-04-24 23:31:42'),
-(10, 'mit vithani', 'longestvision01@gmail.com', '09904914079', '2023-04-27 09:03:46', '2023-04-27 09:03:46');
+INSERT INTO `customers` (`id`, `name`, `address`, `email`, `phone_number`, `created_at`, `updated_at`) VALUES
+(1, 'name', NULL, 'admin@gmail.com', '9904914079', '2023-04-01 01:05:02', '2023-04-01 01:05:02'),
+(2, 'name', NULL, 'longestvision01@gmail.com', '9904914079', '2023-04-01 01:11:39', '2023-04-01 01:11:39'),
+(3, 'mit', NULL, 'mit.vithani@innovation-kite.com', '9904914079', '2023-04-04 10:30:13', '2023-04-04 10:30:13'),
+(4, 'mit', NULL, 'mit.vithani@gmail.com', '9904914079', '2023-04-04 10:45:51', '2023-04-04 10:45:51'),
+(5, 'mit', NULL, 'amit@gmail.com', '9904914079', '2023-04-09 11:13:05', '2023-04-09 11:13:05'),
+(6, 'mit', NULL, 'test@gmail.com', '9904914079', '2023-04-23 06:13:59', '2023-04-23 06:13:59'),
+(7, 'mit', NULL, 'am@gmail.com', '9904914090', '2023-04-23 08:33:49', '2023-04-23 08:33:49'),
+(8, 'Mit', NULL, 'mit@gmail.com', '99049214079', '2023-04-23 10:31:27', '2023-04-23 10:31:27'),
+(9, 'mit vithani', NULL, 'longestvision01@gmail.com', '09904914079', '2023-04-24 23:31:42', '2023-04-24 23:31:42'),
+(10, 'mit vithani', NULL, 'longestvision01@gmail.com', '09904914079', '2023-04-27 09:03:46', '2023-04-27 09:03:46'),
+(11, 'name', NULL, 'amit@gmail.com', '9904914075', '2023-05-09 04:12:58', '2023-05-09 04:12:58'),
+(12, 'mit', NULL, 'mit@gmail.com', '9904914071', '2023-05-09 08:17:38', '2023-05-09 08:17:38'),
+(13, 'mit', '24 gopinath', 'mit@gmail.com', '9904914071', '2023-05-09 08:23:53', '2023-05-09 08:23:53');
 
 -- --------------------------------------------------------
 
@@ -80,8 +84,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `user_id`, `price`, `additional_details`, `describe_item`, `discount_type`, `discount`, `discount_price`, `quantity`, `is_delivery`, `is_visible`, `created_at`, `updated_at`) VALUES
-(10, 'name villein', 6, '110', '21', '12', 'flat', '200', '-90', '1', 'off', 'off', '2023-03-15 06:28:01', '2023-04-23 06:03:47'),
-(11, 'nacho product', 6, '25', 'Additional details', 'Describe for item', NULL, NULL, '25', '6', 'off', 'off', '2023-04-09 08:00:43', '2023-04-22 22:17:36');
+(10, 'name villein', 6, '110', '21', '12', 'flat', '10', '100', '0', 'off', 'off', '2023-03-15 06:28:01', '2023-05-17 23:05:35'),
+(11, 'nacho product2', 6, '25', 'Additional details', 'Describe for item', 'flat', '10', '25', '6', 'on', 'on', '2023-04-09 08:00:43', '2023-05-19 04:20:50');
 
 -- --------------------------------------------------------
 
@@ -117,8 +121,10 @@ INSERT INTO `product_images` (`id`, `p_id`, `image`, `created_at`, `updated_at`)
 CREATE TABLE `share_links` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `cust_id` int(11) DEFAULT NULL,
   `rand_link` varchar(255) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0 COMMENT '0-padding, 1-success',
+  `amount` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -127,12 +133,15 @@ CREATE TABLE `share_links` (
 -- Dumping data for table `share_links`
 --
 
-INSERT INTO `share_links` (`id`, `user_id`, `rand_link`, `status`, `created_at`, `updated_at`) VALUES
-(5, 6, 'Ni8zMTcx', 1, '2023-04-23 08:33:31', '2023-04-23 12:20:26'),
-(6, 6, 'Ni8xMDQ3', 0, '2023-04-24 23:31:32', '2023-04-24 23:31:32'),
-(7, 6, 'Ni83ODQ5', 0, '2023-04-25 23:48:04', '2023-04-25 23:48:04'),
-(8, 6, 'Ni8xNzE=', 0, '2023-04-27 04:55:51', '2023-04-27 04:55:51'),
-(9, 6, 'Ni82MzY2', 0, '2023-04-27 08:53:27', '2023-04-27 08:53:27');
+INSERT INTO `share_links` (`id`, `user_id`, `cust_id`, `rand_link`, `status`, `amount`, `created_at`, `updated_at`) VALUES
+(5, 6, 3, 'Ni8zMTcx', 1, NULL, '2023-04-23 08:33:31', '2023-04-23 12:20:26'),
+(6, 6, NULL, 'Ni8xMDQ3', 0, NULL, '2023-04-24 23:31:32', '2023-04-24 23:31:32'),
+(7, 6, NULL, 'Ni83ODQ5', 0, NULL, '2023-04-25 23:48:04', '2023-04-25 23:48:04'),
+(8, 6, NULL, 'Ni8xNzE=', 0, NULL, '2023-04-27 04:55:51', '2023-04-27 04:55:51'),
+(9, 6, 9, 'Ni82MzY2', 1, NULL, '2023-04-27 08:53:27', '2023-04-28 03:52:23'),
+(10, 6, NULL, 'Ni82MTEw', 0, NULL, '2023-05-03 01:26:21', '2023-05-03 01:26:21'),
+(11, 6, NULL, 'Ni81Njc4', 0, NULL, '2023-05-09 03:23:17', '2023-05-09 03:23:17'),
+(12, 6, NULL, 'Ni81MTE4', 0, NULL, '2023-05-09 08:12:17', '2023-05-09 08:12:17');
 
 -- --------------------------------------------------------
 
@@ -183,7 +192,13 @@ INSERT INTO `share_url_products` (`id`, `user_id`, `share_link_id`, `product_id`
 (15, 6, 8, 10, '110', '12', 'flat', '200', '-90', '1', '2023-04-27 10:25:51', '2023-04-27 10:25:51'),
 (16, 6, 8, 11, '25', 'Describe for item', NULL, NULL, '25', '6', '2023-04-27 10:25:51', '2023-04-27 10:25:51'),
 (17, 6, 9, 10, '110', '12', 'flat', '200', '-90', '1', '2023-04-27 14:23:27', '2023-04-27 14:23:27'),
-(18, 6, 9, 11, '25', 'Describe for item', NULL, NULL, '25', '6', '2023-04-27 14:23:27', '2023-04-27 14:23:27');
+(18, 6, 9, 11, '25', 'Describe for item', NULL, NULL, '25', '6', '2023-04-27 14:23:27', '2023-04-27 14:23:27'),
+(19, 6, 10, 10, '110', '12', 'flat', '200', '-90', '1', '2023-05-03 06:56:21', '2023-05-03 06:56:21'),
+(20, 6, 10, 11, '25', 'Describe for item', NULL, NULL, '25', '6', '2023-05-03 06:56:21', '2023-05-03 06:56:21'),
+(21, 6, 11, 10, '110', '12', 'flat', '200', '-90', '1', '2023-05-09 08:53:17', '2023-05-09 08:53:17'),
+(22, 6, 11, 11, '25', 'Describe for item', NULL, NULL, '25', '6', '2023-05-09 08:53:17', '2023-05-09 08:53:17'),
+(23, 6, 12, 10, '110', '12', 'flat', '5', '105', '2', '2023-05-09 13:42:17', '2023-05-09 13:42:17'),
+(24, 6, 12, 11, '25', 'Describe for item', 'flat', '10', '15', '6', '2023-05-09 13:42:17', '2023-05-09 13:42:17');
 
 -- --------------------------------------------------------
 
@@ -204,7 +219,7 @@ CREATE TABLE `users` (
   `tax_number` varchar(255) DEFAULT NULL,
   `otp` int(11) DEFAULT NULL,
   `address` text NOT NULL,
-  `status` enum('padding','active','deactive') NOT NULL DEFAULT 'padding',
+  `status` enum('pending','active','deactive') NOT NULL DEFAULT 'pending',
   `city_name` varchar(255) NOT NULL,
   `bank_iban` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -216,14 +231,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `is_admin`, `shop_name`, `phone_number`, `email`, `password`, `logo`, `company_name`, `tax_number`, `otp`, `address`, `status`, `city_name`, `bank_iban`, `created_at`, `updated_at`) VALUES
-(1, 'Mit Vithani1', 1, 'q', '09313242813', 'admin@gmail.com', '$2y$10$ti96Hl5dJNFu9oJkiaEgXe/.IdQjQ4mcdK2RhHkYX0SBrbkHiw9xS', '167758692363fdf1eb03b80.png', 'Longest Vision', 'q', NULL, '38 gopinath banglows', 'padding', 'surat', 'eqq', '2023-02-27 05:43:43', '2023-03-23 12:49:21'),
-(2, 'Mit Vithani', 0, 'q', '09313242813', 'mit@gmail.com', '$2y$10$ti96Hl5dJNFu9oJkiaEgXe/.IdQjQ4mcdK2RhHkYX0SBrbkHiw9xS', '167758693363fdf1f521299.JPG', 'Longest Vision', 'q', NULL, '38 gopinath banglows', 'deactive', 'surat', 'eqq', '2023-02-27 05:43:43', '2023-03-23 07:26:31'),
-(4, 'mit vithani', 0, 'aa', '9904914079', 'longestvision01@gmail.com', '$2y$10$pt6tQQsSfSEmYfhD7M/jX./w23r6dA4w4.e.045wHNwyd/hTmgn.i', '167757642563fdc8e92ad0a.png', 'longest', '1', 1034, 'surat', 'padding', 'surat', '21', '2023-02-27 22:27:05', '2023-03-23 12:57:24'),
-(5, 'mit vithani', 0, 'a', '09904914079', 'longestvision02@gmail.com', '$2y$10$Fk8pTue.drz5Jpsk8MmmHOjDBNMkB52JmTOeeKuFXbv7q5ULgCeuO', '167757707963fdcb779d468.png', 'longest', '4', NULL, 'surat', 'padding', 'surat', '1', '2023-02-27 22:37:59', '2023-03-23 12:57:25'),
-(6, 'Amit test', 0, 'Amit shop', '1234567890', 'amit@gmail.com', '$2y$10$O0GGR4Sn2TLxrqyt9wyacO4e76OAbD5n2se52hruFQpLQTY3Y/fMa', '167758824063fdf710a09b2.png', 'longest', '14', NULL, 'surat', 'padding', 'surat', '21', '2023-02-28 01:43:41', '2023-03-23 12:57:27'),
-(8, 'name', 0, 'amit', '9904914075', 'longestvision05@gmail.com', '$2y$10$WPNExO.HRTyno6YZlY8cNuKF2UhOgnIRmVbHpF8UNvxRKvunnXiO2', '16793168066418574688159file_example_PNG_500kB.png', 'ABC', '526', NULL, 'hari', 'padding', 'surat', NULL, '2023-03-20 07:23:26', '2023-03-23 12:57:30'),
-(9, 'name', 0, 'amit', '9904914071', 'longestvision10@gmail.com', '$2y$10$SD/IJeAIMvLenp.tYu.u6eMD986lTZD5YOJiwdVH3ae2n.sxDECfG', '1679321039641867cfe5680lab-g8e50c32bd_640.jpg', 'ABC', '526', NULL, 'hari', 'padding', 'surat', NULL, '2023-03-20 08:33:59', '2023-03-23 12:57:28'),
-(10, 'mit', 0, 'crazzy', '9904914090', 'amit_wallet@gmail.com', '$2y$10$2ZlWXwamnustcyByACZKdOAgsvSJmjA.OBMmwCKZsqfGWWJSl0v3a', '168215267664439ce461042Hotpot (5).png', 'hari', '12', NULL, 'test', 'padding', 'surat', '45', '2023-04-22 03:07:56', '2023-04-22 03:07:56');
+(1, 'Mit Vithani1', 1, 'q', '09313242813', 'admin@gmail.com', '$2y$10$ti96Hl5dJNFu9oJkiaEgXe/.IdQjQ4mcdK2RhHkYX0SBrbkHiw9xS', '167758692363fdf1eb03b80.png', 'Longest Vision', 'q', NULL, '38 gopinath banglows', 'pending', 'surat', 'eqq', '2023-02-27 05:43:43', '2023-05-13 06:37:50'),
+(2, 'Mit Vithani', 0, 'q', '09313242813', 'mit@gmail.com', '$2y$10$ti96Hl5dJNFu9oJkiaEgXe/.IdQjQ4mcdK2RhHkYX0SBrbkHiw9xS', '167758693363fdf1f521299.JPG', 'Longest Vision', 'q', NULL, '38 gopinath banglows', 'pending', 'surat', 'eqq', '2023-02-27 05:43:43', '2023-05-13 06:38:03'),
+(4, 'mit vithani', 0, 'aa', '9904914079', 'longestvision01@gmail.com', '$2y$10$pt6tQQsSfSEmYfhD7M/jX./w23r6dA4w4.e.045wHNwyd/hTmgn.i', '167757642563fdc8e92ad0a.png', 'longest', '1', 1034, 'surat', 'pending', 'surat', '21', '2023-02-27 22:27:05', '2023-05-13 06:38:03'),
+(5, 'mit vithani', 0, 'a', '09904914079', 'longestvision02@gmail.com', '$2y$10$Fk8pTue.drz5Jpsk8MmmHOjDBNMkB52JmTOeeKuFXbv7q5ULgCeuO', '167757707963fdcb779d468.png', 'longest', '4', NULL, 'surat', 'pending', 'surat', '1', '2023-02-27 22:37:59', '2023-05-13 06:38:03'),
+(6, 'Amit test', 0, 'Amit shop', '1234567890', 'amit@gmail.com', '$2y$10$O0GGR4Sn2TLxrqyt9wyacO4e76OAbD5n2se52hruFQpLQTY3Y/fMa', '167758824063fdf710a09b2.png', 'longest', '14', NULL, 'surat', 'active', 'surat', '21', '2023-02-28 01:43:41', '2023-05-16 23:58:49'),
+(8, 'name', 0, 'amit', '9904914075', 'longestvision05@gmail.com', '$2y$10$WPNExO.HRTyno6YZlY8cNuKF2UhOgnIRmVbHpF8UNvxRKvunnXiO2', '16793168066418574688159file_example_PNG_500kB.png', 'ABC', '526', NULL, 'hari', 'pending', 'surat', NULL, '2023-03-20 07:23:26', '2023-05-13 06:38:03'),
+(9, 'name', 0, 'amit', '9904914071', 'longestvision10@gmail.com', '$2y$10$SD/IJeAIMvLenp.tYu.u6eMD986lTZD5YOJiwdVH3ae2n.sxDECfG', '1679321039641867cfe5680lab-g8e50c32bd_640.jpg', 'ABC', '526', NULL, 'hari', 'pending', 'surat', NULL, '2023-03-20 08:33:59', '2023-05-13 06:38:03'),
+(10, 'mit', 0, 'crazzy', '9904914090', 'amit_wallet@gmail.com', '$2y$10$2ZlWXwamnustcyByACZKdOAgsvSJmjA.OBMmwCKZsqfGWWJSl0v3a', '168215267664439ce461042Hotpot (5).png', 'hari', '12', NULL, 'test', 'active', 'surat', '45', '2023-04-22 03:07:56', '2023-05-16 23:58:13');
 
 --
 -- Indexes for dumped tables
@@ -279,7 +294,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -297,7 +312,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `share_links`
 --
 ALTER TABLE `share_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `share_url_datas`
@@ -309,7 +324,7 @@ ALTER TABLE `share_url_datas`
 -- AUTO_INCREMENT for table `share_url_products`
 --
 ALTER TABLE `share_url_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`

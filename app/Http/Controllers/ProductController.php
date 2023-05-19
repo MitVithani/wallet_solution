@@ -130,15 +130,14 @@ class ProductController extends AppBaseController
         $productData = Product::where([ 'id' => $productDataid])->update($data);
 
         if(!empty($request->images)){
-            // foreach ($request->images as $key => $image) {
-            //     if(){
-
-            //         $image_name = time().uniqId().$image->getClientOriginalName();
-            //         $image->move("public/media/images", $image_name);
-            //         // $productDataid = $productData->id;
-            //         Product_Image::create(['p_id' => $productDataid, 'image' => 'public/media/images/' . $image_name]);
-            //     }
-            // }
+            foreach ($request->images as $key => $image) {
+                if(is_file($image)){
+                    $image_name = time().uniqId().$image->getClientOriginalName();
+                    $image->move("public/media/images", $image_name);
+                    // $productDataid = $productData->id;
+                    Product_Image::create(['p_id' => $productDataid, 'image' => 'public/media/images/' . $image_name]);
+                }
+            }
         }
         return redirect(route('products.index'));
     }
