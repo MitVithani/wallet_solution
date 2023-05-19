@@ -209,7 +209,7 @@ class ProductController extends AppBaseController
     public function clearQuantity(Request $request)
     {
         $userId = auth()->user()->id;
-        // Product::where(['user_id' => $userId])->update(['quantity' => 0]);
+        Product::where(['user_id' => $userId])->update(['quantity' => 0]);
         return true;
     }
 
