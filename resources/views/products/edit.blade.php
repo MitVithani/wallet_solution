@@ -44,7 +44,7 @@
     <div class="content px-3">
 
         <div class="card">
-            {!! Form::open(['route' => ['productUpdate'], 'method' => 'post']) !!}
+            {!! Form::open(['route' => ['productUpdate'], 'method' => 'post', 'files' => true]) !!}
 
             <div class="card-body">
                 <input type="hidden" name="product_id" id="product_id" class="form-control" value="{{$productDtl->id ?? ''}}">
