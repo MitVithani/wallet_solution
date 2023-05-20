@@ -72,6 +72,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Product Detils</h4>
+                                    <a href="{{ url('edit') . '/' . $product->id }}" class="close add-item-text">Edit</a>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
@@ -94,7 +95,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="details col-md-6">
-                                                    <h3 class="product-title">{{$product->name}} <a href="{{ url('edit') . '/' . $product->id }}"><i class="fa fa-edit"></i> </a> </h3>
+                                                    <h3 class="product-title">{{$product->name}}</h3>
                                                     <p class="product-description">{{$product->additional_details}}</p>
                                                     <p>Describe Item:
                                                         <span class="product-description">{{$product->describe_item}}</span>
