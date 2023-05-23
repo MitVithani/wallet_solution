@@ -1,7 +1,7 @@
 @extends('layout')
-  
+
 @section('nav_bar_content')
-    <a class="nav-link d-inline float-right" href="{{ route('login-user') }}">Login</a>
+    <a class="nav-link d-inline float-right text-dark" href="{{ route('login-user') }}">Login</a>
 @endsection
 @section('content')
     <form action="{{ route('register.post') }}" method="POST" enctype="multipart/form-data">
@@ -46,7 +46,7 @@
                 @endif
             </div>
 
-            
+
             <div class="input-box">
                 <span class="details">E-Mail Address</span>
                 <input type="text" id="email_address" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
@@ -103,7 +103,7 @@
                 @endif
             </div>
 
-            
+
         </div>
         <button type="submit" class="button">
             Register
