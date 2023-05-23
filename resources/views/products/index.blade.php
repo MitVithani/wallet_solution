@@ -61,7 +61,7 @@
                             <div class="align-self-center text-center">
                                 <b>USD <span name="product_price_total" id="product_price_total_{{$product->id}}" >0</span></b>
                             </div>
-                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom p-1" data-toggle="modal" data-target="#discount" data-whatever="{{$product->id}}">
+                            <div class="position-absolute top-100 start-50 translate-middle fixed-bottom p-1 text-danger" data-toggle="modal" data-target="#discount" data-whatever="{{$product->id}}">
                                 Apply discount
                             </div>
                         </td>

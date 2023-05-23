@@ -8,6 +8,7 @@ use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ShareLink;
 // use Flash;
 use Response;
 
@@ -75,13 +76,16 @@ class UserController extends AppBaseController
     {
         $user = $this->userRepository->find($id);
 
+        $shareLinks = ShareLink::where(['user_id' => $id])->get();
+
         if (empty($user)) {
             // Flash::error('User not found');
 
             return redirect(route('users.index'));
         }
-
-        return view('admin.users.show')->with('user', $user);
+        return view('admin.share_link.index')
+        ->with('shareLinks', $shareLinks);
+        // return view('admin.users.show')->with('user', $user);
     }
 
     /**

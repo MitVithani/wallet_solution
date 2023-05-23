@@ -8,8 +8,8 @@
             <th>Phone</th>
             <th>Email</th>
             <th>Logo</th>
-            <th>Status</th>
             <th>Company</th>
+            <th>Status</th>
             <th>Tax</th>
             <th>Address</th>
             <th>City</th>

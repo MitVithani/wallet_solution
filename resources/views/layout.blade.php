@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <!---<title> Responsive Registration Form | CodingLab </title>--->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
         <meta charset="utf-8">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -17,18 +17,18 @@
         <script src="{{ asset('public/js/jquery.min.js') }}"></script>
     </head>
     <body>
-        
+
     <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
-        <div class="container d-block">
+        <div class="container d-block text-left">
             <a class="navbar-brand d-inline" href="#"><img alt="image" src="{{ asset('public/img/logo.jpg') }}" width="25%";></a>
             {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button> --}}
 
             {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> --}}
-                
+
                 {{-- <a class="nav-link" href="{{ route('login-user') }}">Login</a> --}}
-    
+
                 {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
 
             {{-- </div> --}}

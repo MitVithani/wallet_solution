@@ -40,7 +40,7 @@
             <table class="table borderless user-product-table" cellspacing="0" cellpadding="0">
                 <tbody>
                     @foreach ($productDtl as $product)
-                        <tr>
+                        <tr style="border-top: 0.5px solid #000">
                             <td>
                                 <p>{{$product->name}}</p>
                             </td>
@@ -53,7 +53,7 @@
                         </tr>
                         <tr>
                             <td class="pb-0 user-product-quantity">
-                                <p class="mb-0">Qty {{$product->quantity}}</p>
+                                <p class="mb-0">Qty $ {{$product->quantity}}</p>
                             </td>
                         </tr>
                         <tr>
@@ -71,7 +71,7 @@
         </div>
 
     </div>
-    <div class="">
+    <div style="border-top: 0.5px solid #000" class="">
         <div class="col-12 row pt-2">
             <div class="col-8">
                 Subtotal ({{ count($productDtl) }} items)
