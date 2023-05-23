@@ -10,6 +10,12 @@
         .borderless td, .borderless tr {
             border-top: none
         }
+        @media (min-width: 1200px){
+
+            .container {
+                max-width: 512px !important;
+            }
+        }
     </style>
 @endsection
 @section('navbar_header')
