@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('nav_bar_content')
-    <a class="nav-link d-inline float-right text-dark" href="{{ route('login-user') }}">Login</a>
+    <a class="nav-link d-inline float-right text-dark font-weight-bold" href="{{ route('login-user') }}">Login</a>
 @endsection
 @section('content')
     <form action="{{ route('register.post') }}" method="POST" enctype="multipart/form-data">

@@ -50,6 +50,7 @@ Route::get('usersProducts/check_out/{id}', 'UsersProductController@usersProducts
 Route::get('checkoutNow/{id}', 'UsersProductController@usersProductspayout');
 
 Route::get('edit/{id}', 'ProductController@edit');
+Route::get('delete/{id}', 'ProductController@delete');
 Route::post('productUpdate', 'ProductController@productUpdate')->name('productUpdate');
 // Route::get('edit/{id}', 'ProductController@edit');
 

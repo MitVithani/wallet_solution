@@ -11,7 +11,6 @@
             border-top: none
         }
         @media (min-width: 1200px){
-
             .container {
                 max-width: 512px !important;
             }
@@ -38,7 +37,7 @@
     ?>
     <div class="px-3">
 
-        <div class="d-block">
+        <div class="d-block add-item-text">
             <h2 class="d-inline">YOUR CART</h2>
             <h4 class="d-inline">({{count($productDtl)}} items)</h4>
         </div>
@@ -46,18 +45,20 @@
             <table class="table borderless user-product-table" cellspacing="0" cellpadding="0">
                 <tbody>
                     @foreach ($productDtl as $product)
-                        <tr style="border-top: 0.5px solid #000">
-                            <td>
-                                <p>{{$product->name}}</p>
+                        <tr style="border-top: 0.5px solid gray">
+                            <td style="font-size: 15px">
+                                <p class="mb-0">{{$product->name}}</p>
+                                <p style="font-size: 12px" class="mb-0">Qty $ {{$product->quantity}}</p>
+                                <p style="font-size: 12px" class="mb-0"> USD <span>{{$product->price}}</span></p>
                             </td>
-                            <td rowspan="3">
+                            <td>
                                 <img class="user-product-img float-right" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
 
                                 {{-- <img class="product-img " style="width: 100px; height: 100px;" src="{{asset('public/img/empty_cart.png')}}" /> --}}
                             </td>
 
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td class="pb-0 user-product-quantity">
                                 <p class="mb-0">Qty $ {{$product->quantity}}</p>
                             </td>
@@ -67,7 +68,7 @@
                                 <p class="mb-0"> USD <span>{{$product->price}}</span></p>
                             </td>
 
-                        </tr>
+                        </tr> --}}
                         <?php
                             $subTotal += $product->price * $product->quantity;
                         ?>
@@ -77,7 +78,7 @@
         </div>
 
     </div>
-    <div style="border-top: 0.5px solid #000" class="">
+    <div style="border-top: 0.5px solid gray" class="">
         <div class="col-12 row pt-2">
             <div class="col-8">
                 Subtotal ({{ count($productDtl) }} items)

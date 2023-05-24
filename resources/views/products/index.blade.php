@@ -73,6 +73,7 @@
                                 <div class="modal-header">
                                     <h4 class="modal-title">Product Detils</h4>
                                     <a href="{{ url('edit') . '/' . $product->id }}" class="close add-item-text">Edit</a>
+                                    {{-- <a href="{{ url('delete') . '/' . $product->id }}" class="close add-item-text">Delete</a> --}}
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
