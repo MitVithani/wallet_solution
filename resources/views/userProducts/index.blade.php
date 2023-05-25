@@ -52,9 +52,10 @@
                                 <p style="font-size: 12px" class="mb-0"> USD <span>{{$product->price}}</span></p>
                             </td>
                             <td>
-                                <img class="user-product-img float-right" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
-
-                                {{-- <img class="product-img " style="width: 100px; height: 100px;" src="{{asset('public/img/empty_cart.png')}}" /> --}}
+                                <input id="discount_type_{{$product->id}}" name="discount_type" type="hidden" value="{{$product->discount_type}}"/>
+                                <input id="discount_{{$product->id}}" name="discount" type="hidden" value="{{$product->discount}}"/>
+                                <input id="discount_price_{{$product->id}}" name="discount_price" type="hidden" value="{{$product->discount_price}}"/>
+                                <img class="user-product-img float-right" data-toggle="modal" data-target="#product_img_{{$product->id}}" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
                             </td>
 
                         </tr>
@@ -72,6 +73,50 @@
                         <?php
                             $subTotal += $product->price * $product->quantity;
                         ?>
+
+                        <div class="modal fade" id="product_img_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="product_img_Label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Product Detils</h4>
+                                        {{-- <a href="{{ url('edit') . '/' . $product->id }}" class="close add-item-text">Edit</a> --}}
+                                        {{-- <a href="{{ url('delete') . '/' . $product->id }}" class="close add-item-text">Delete</a> --}}
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card p-3">
+                                            <div class="container-fliud">
+                                                <div class="wrapper row">
+                                                    <div class="preview col-md-6">
+                                                        <div class="preview-pic tab-content">
+                                                            <div class="tab-pane active">
+                                                                <img id="main_product_image{{$product->id}}" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
+                                                            </div>
+                                                        </div>
+                                                        <ul class="preview-thumbnail nav nav-tabs">
+                                                            @if(!empty($product->productImage))
+                                                            @foreach ($product->productImage as $productImage)
+                                                                <li><img onclick="changeImage(this, '{{$product->id}}')" src="../{{$productImage->image}}" /></li>
+                                                            @endforeach
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                    <div class="details col-md-6">
+                                                        <h3 class="product-title">{{$product->name}}</h3>
+                                                        <p class="product-description">{{$product->additional_details}}</p>
+                                                        <p>Describe Item:
+                                                            <span class="product-description">{{$product->describe_item}}</span>
+                                                        </p>
+                                                        <h5 class="quantity">quantity: <span>${{$product->quantity}}</span></h5>
+                                                        <h5 class="">Current Price: <span>${{$product->price}}</span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </tbody>
             </table>
@@ -85,6 +130,14 @@
             </div>
             <div class="col-4 webkit-right user-product-total">
                 <b>USD <span id="subtotal">{{$subTotal}}</span></b>
+            </div>
+        </div>
+        <div class="col-12 row pt-2 pr-0">
+            <div class="col-9">
+                Discount Total
+            </div>
+            <div class="col-3 webkit-right pr-0">
+                <b>USD <span id="discountTotal">0</span></b>
             </div>
         </div>
         <div class="col-12 row pt-2">
@@ -286,7 +339,44 @@
                     }
                 });
             });
+            priceCount();
 		});
+        function priceCount(){
+            var subtotal= 0;
+            var sendorder= 0;
+            var discountTotal= 0;
+            $('input[name^="product_ids"]').each(function(){
+                var product_id = $(this).val();
+                var product_price = $('#product_price_' + product_id).text();
+                var product_quantity = $('#qun_' + product_id).val();
+                var discount_type = $('#discount_type_' + product_id).val();
+                var discount = $('#discount_' + product_id).val();
+                var discount_price = $('#discount_price_' + product_id).val();
+                // console.log(discount_type + ' - ' + discount + ' - ' + discount_price);
+                if(product_quantity == 0){
+                    $('#product_tr_' + product_id).addClass('emptyQtyTableTab');
+                }else{
+                    $('#product_tr_' + product_id).removeClass('emptyQtyTableTab');
+                    product_price_total_val = product_price * product_quantity;
+                    $('#product_price_total_' + product_id).text(product_price_total_val);
+                    sendorder += product_price_total_val;
+                    if(discount_type == 'flat' && discount != ''){
+                        discountTotal +=  product_price - discount_price;
+                    }else if(discount_type == 'percentage' && discount != ''){
+                        discountTotal +=  discount_price * product_quantity;
+                    }
+
+                    subtotal += product_price_total_val;
+                }
+            });
+            $('#subtotal').text(subtotal);
+            $('#discountTotal').text((Math.round(discountTotal * 100) / 100).toFixed(2));
+            $('#sendorder').text(sendorder);
+        }
+        function changeImage(element, product_id) {
+            var main_prodcut_image = document.getElementById('main_product_image' + product_id);
+            main_prodcut_image.src = element.src;
+        }
 
         // function saveCustomerData() {
 
