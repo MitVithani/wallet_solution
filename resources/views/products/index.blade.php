@@ -33,9 +33,9 @@
                         <td>
                             <div>
                                 <input name="product_ids" type="hidden" value="{{$product->id}}"/>
-                                <input id="discount_type_{{$product->id}}" type="hidden" value="{{$product->discount_type}}"/>
-                                <input id="discount_{{$product->id}}" type="hidden" value="{{$product->discount}}"/>
-                                <input id="discount_price_{{$product->id}}" type="hidden" value="{{$product->discount_price}}"/>
+                                <input id="discount_type_{{$product->id}}" name="discount_type" type="hidden" value="{{$product->discount_type}}"/>
+                                <input id="discount_{{$product->id}}" name="discount" type="hidden" value="{{$product->discount}}"/>
+                                <input id="discount_price_{{$product->id}}" name="discount_price" type="hidden" value="{{$product->discount_price}}"/>
                                 {{-- <img class="product-img" src="{{asset('public/img/empty_cart.png')}}" /> --}}
                                 <img id="product_img_{{$product->id}}" data-toggle="modal" data-target="#product_img_{{$product->id}}"  class="product-img" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
 
@@ -283,7 +283,9 @@
                     data: {_token:  $('meta[name="csrf-token"]').attr('content'), discountAmt: discountAmt, product_id: productId, discountType: discountType},
                     dataType: 'JSON',
                     success: function (res) {
-                        var discount_price = $('#discount_price_' + productId).val(res);
+                        var discount_price = $('#discount_price_' + productId).val(res.discount_price);
+                        var discount_price = $('#discount_' + productId).val(res.discount);
+                        var discount_type = $('#discount_type_' + productId).val(res.discount_type);
                         priceCount();
                     }
                 });
@@ -369,9 +371,12 @@
                     product_price_total_val = product_price * product_quantity;
                     $('#product_price_total_' + product_id).text(product_price_total_val);
                     sendorder += product_price_total_val;
-                    if(discount_type != '' && discount != ''){
+                    if(discount_type == 'flat' && discount != ''){
                         discountTotal +=  product_price - discount_price;
+                    }else if(discount_type == 'percentage' && discount != ''){
+                        discountTotal +=  discount_price * product_quantity;
                     }
+
                     subtotal += product_price_total_val;
                 }
             });
@@ -414,6 +419,15 @@
                     success: function (res) {
                         $('input[name^="quantity"]').each(function(){
                             $(this).val(0);
+                        });
+                        $('input[name^="discount_type"]').each(function(){
+                            $(this).val('');
+                        });
+                        $('input[name^="discount"]').each(function(){
+                            $(this).val('');
+                        });
+                        $('input[name^="discount_price"]').each(function(){
+                            $(this).val('');
                         });
                         priceCount();
                     }

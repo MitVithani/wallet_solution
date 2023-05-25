@@ -209,7 +209,7 @@ class ProductController extends AppBaseController
     public function clearQuantity(Request $request)
     {
         $userId = auth()->user()->id;
-        Product::where(['user_id' => $userId])->update(['quantity' => 0]);
+        Product::where(['user_id' => $userId])->update(['quantity' => 0, 'discount_type' => '', 'discount' => '', 'discount_price' => '']);
         return true;
     }
 
@@ -220,10 +220,12 @@ class ProductController extends AppBaseController
         if($request->discountType == 'flat'){
             $discount_price = $price - $request->discountAmt;
         }elseif ($request->discountType == 'percentage') {
-            $discount_price = $price - (($price * $request->discountAmt) / 100);
+            $discount_price = ($price * $request->discountAmt) / 100;
         }
+        // dd($discount_price);
         Product::where(['id' => $request->product_id])->update(['discount' => $request->discountAmt, 'discount_type' => $request->discountType, 'discount_price' => $discount_price]);
-        return $discount_price;
+        $sendProduct = Product::where(['id' => $request->product_id])->first();
+        return $sendProduct;
     }
 
     public function saveLink(Request $request)
