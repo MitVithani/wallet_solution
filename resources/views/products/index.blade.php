@@ -73,7 +73,7 @@
                                 <div class="modal-header">
                                     <h4 class="modal-title">Product Detils</h4>
                                     <a href="{{ url('edit') . '/' . $product->id }}" class="close add-item-text">Edit</a>
-                                    {{-- <a href="{{ url('delete') . '/' . $product->id }}" class="close add-item-text">Delete</a> --}}
+                                    <a href="{{ url('delete') . '/' . $product->id }}" class="close add-item-text">Delete</a>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
@@ -134,6 +134,14 @@
             </div>
             <div class="col-3 webkit-right pr-0">
                 <b>USD <span id="subtotal">0</span></b>
+            </div>
+        </div>
+        <div class="col-12 row pt-2 pr-0">
+            <div class="col-9">
+                Delivary Charge
+            </div>
+            <div class="col-3 webkit-right pr-0" data-toggle="modal" data-target="#delivaryCharge">
+                <b>USD <span id="delChargeTotal">0</span></b>
             </div>
         </div>
         <div class="col-12 row pt-2 pr-0">
@@ -258,11 +266,43 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="delivaryCharge">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Delivary Charges</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card-body mb-12">
+                        <div class="form-outline">
+                            <input type="text" name="delivary_charge" id="delivary_charge" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="footer">
+                        {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
+                        <button type="button" class="btn btn-primary delivaryCharge theamBtnColor" >Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('page_scripts')
     <script>
         $(document).ready(function() {
+
+            priceCount();
 
             $('#cart_lock').click(function() {
                 if(!$(this).is(':checked')){
@@ -273,6 +313,15 @@
                     $('.product-list').addClass('product_list_disable');
                 }
             });
+
+            $(".delivaryCharge").click(function(){
+                var delivary_charge = $('#delivary_charge').val();
+                localStorage.setItem('delivary_charge', delivary_charge);
+                // $('#delChargeTotal').text(delivary_charge);
+                priceCount();
+
+            });
+
             $(".discountForm").click(function(){
                 var discountAmt = $('#discountAmt').val();
                 var productId = $('#productId').val();
@@ -298,7 +347,6 @@
                 modal.find('#productId').val(recipient)
             })
 
-            priceCount();
 		});
 
         function whatsapp() {
@@ -337,10 +385,11 @@
 
         function saveLink(){
             var link = "{{ $link }}";
+            var delivary_charge = localStorage.getItem('delivary_charge');
             $.ajax({
                 url: "{{ url('save_link') }}",
                 type: 'POST',
-                data: {_token:  $('meta[name="csrf-token"]').attr('content'), link: link},
+                data: {_token:  $('meta[name="csrf-token"]').attr('content'), link: link, delivary_charge: delivary_charge},
                 dataType: 'JSON',
                 success: function (res) {
 
@@ -380,6 +429,8 @@
                     subtotal += product_price_total_val;
                 }
             });
+            var delivary_charge = localStorage.getItem('delivary_charge');
+            $('#delChargeTotal').text(delivary_charge);
             $('#subtotal').text(subtotal);
             $('#discountTotal').text((Math.round(discountTotal * 100) / 100).toFixed(2));
             $('#sendorder').text(sendorder);

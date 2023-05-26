@@ -36,6 +36,7 @@ class Product extends Model
         'discount_type',
         'discount_price',
         'discount',
+        'is_delete',
     ];
 
     /**

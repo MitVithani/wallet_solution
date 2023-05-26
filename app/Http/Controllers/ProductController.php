@@ -31,7 +31,7 @@ class ProductController extends AppBaseController
     public function index(Request $request)
     {
         $userId = auth()->user()->id;
-        $products = Product::with('productImage')->where('user_id' , $userId)->get();
+        $products = Product::with('productImage')->where(['user_id' => $userId, 'is_delete' => 0])->get();
         if(count($products) <= 0){
             return redirect(route('home'));
         }
@@ -199,6 +199,11 @@ class ProductController extends AppBaseController
 
         return redirect(route('admin.users.index'));
     }
+    public function delete($id)
+    {
+        Product::where(['id' => $id])->update(['is_delete' => 1]);
+        return redirect(route('products.index'));
+    }
 
     public function changeQuantity(Request $request)
     {
@@ -235,7 +240,10 @@ class ProductController extends AppBaseController
         $checkLink = ShareLink::where(['user_id' => $userId, "rand_link" => $request->link])->first();
         // dd($checkLink);
         if(empty($checkLink)){
-            $checkLink = ShareLink::create(["user_id" => $userId, "rand_link" => $request->link]);
+            $checkLink = ShareLink::create(["user_id" => $userId, "rand_link" => $request->link, "delivary_charge" => $request->delivary_charge]);
+        }else{
+            $checkLink->delivary_charge = $request->delivary_charge;
+            $checkLink->save();
         }
         ShareUrlProduct::where(["share_link_id" => $checkLink->id])->delete();
         $getProducts = Product::where(['user_id' => $userId])->get();

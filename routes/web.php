@@ -39,6 +39,7 @@ Route::post('change_quantity', 'ProductController@changeQuantity');
 Route::post('clear_quantity', 'ProductController@clearQuantity');
 Route::post('change_discount', 'ProductController@changeDiscount');
 Route::post('save_link', 'ProductController@saveLink');
+Route::post('add_delivary_charges', 'ProductController@addDelivaryCharges');
 
 Route::post('send_otp', 'Auth\ForgotPasswordController@sendOtp')->name('send_otp');
 Route::post('verify_otp', 'Auth\ForgotPasswordController@verifyOtp')->name('verify_otp');

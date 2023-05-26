@@ -52,6 +52,9 @@
                                 <p style="font-size: 12px" class="mb-0"> USD <span>{{$product->price}}</span></p>
                             </td>
                             <td>
+                                <input id="qun_{{$product->id}}" type="hidden" value="{{$product->quantity}}"/>
+                                <span class="hidden" id="product_price_{{$product->id}}">{{$product->price}}</span>
+                                <input name="product_ids" type="hidden" value="{{$product->id}}"/>
                                 <input id="discount_type_{{$product->id}}" name="discount_type" type="hidden" value="{{$product->discount_type}}"/>
                                 <input id="discount_{{$product->id}}" name="discount" type="hidden" value="{{$product->discount}}"/>
                                 <input id="discount_price_{{$product->id}}" name="discount_price" type="hidden" value="{{$product->discount_price}}"/>
@@ -124,28 +127,28 @@
 
     </div>
     <div style="border-top: 0.5px solid gray" class="">
-        <div class="col-12 row pt-2">
+        <div class="col-12 row pt-2 pr-0">
             <div class="col-8">
                 Subtotal ({{ count($productDtl) }} items)
             </div>
-            <div class="col-4 webkit-right user-product-total">
+            <div class="col-4 webkit-right user-product-total pr-0">
                 <b>USD <span id="subtotal">{{$subTotal}}</span></b>
             </div>
         </div>
         <div class="col-12 row pt-2 pr-0">
-            <div class="col-9">
+            <div class="col-8">
                 Discount Total
             </div>
-            <div class="col-3 webkit-right pr-0">
+            <div class="col-4 webkit-right pr-0">
                 <b>USD <span id="discountTotal">0</span></b>
             </div>
         </div>
-        <div class="col-12 row pt-2">
+        <div class="col-12 row pt-2 pr-0">
             <div class="col-8">
                 Total <span>(inclusive of VAT)</span>
             </div>
-            <div class="col-4 webkit-right user-product-total">
-                <b>USD <span id="sendorder">{{$subTotal}}</span></b>
+            <div class="col-4 webkit-right user-product-total pr-0">
+                <b>USD <span id="sendorder">0</span></b>
             </div>
         </div>
         <div class="col-12 row pt-2 d-flex justify-content-center">
@@ -154,7 +157,7 @@
             </a> --}}
             <form action="{{ url('send_payment') }}" method="POST">
                 @csrf
-                <input type="hidden" name="amount" value="{{$subTotal}}"/>
+                <input type="hidden" id="amount" name="amount" value="0"/>
                 <input type="hidden" name="user_id" value="{{$userDtl->id}}"/>
                 <input type="hidden" name="link_product_dtl" value="{{$linkProductDtl->id}}"/>
                 <input type="hidden" class="cust_id" name="cust_id" value=""/>
@@ -371,7 +374,8 @@
             });
             $('#subtotal').text(subtotal);
             $('#discountTotal').text((Math.round(discountTotal * 100) / 100).toFixed(2));
-            $('#sendorder').text(sendorder);
+            $('#sendorder').text(sendorder - (Math.round(discountTotal * 100) / 100).toFixed(2));
+            $('#amount').val(sendorder - (Math.round(discountTotal * 100) / 100).toFixed(2));
         }
         function changeImage(element, product_id) {
             var main_prodcut_image = document.getElementById('main_product_image' + product_id);
@@ -396,11 +400,9 @@
             var userData = localStorage.getItem('userData');
             if(userData){
                 // $('#paymentModal').modal('show');
-                console.log(userData);
+                // console.log(userData);
                 $('.cust_id').val();
                 $('#checkoutbtn').removeAttr("type").attr("type", "submit");
-
-
             }else{
                 $('#userForm').modal('show');
                 // var userData = localStorage.setItem('userData', 'userData');
