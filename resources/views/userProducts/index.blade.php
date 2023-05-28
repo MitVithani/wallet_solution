@@ -145,6 +145,14 @@
         </div>
         <div class="col-12 row pt-2 pr-0">
             <div class="col-8">
+                Delivary Charge
+            </div>
+            <div class="col-4 webkit-right pr-0">
+                <b>USD <span id="delivary_charge">{{$linkProductDtl->delivary_charge ?? '0'}}</span></b>
+            </div>
+        </div>
+        <div class="col-12 row pt-2 pr-0">
+            <div class="col-8">
                 Total <span>(inclusive of VAT)</span>
             </div>
             <div class="col-4 webkit-right user-product-total pr-0">
@@ -374,8 +382,9 @@
             });
             $('#subtotal').text(subtotal);
             $('#discountTotal').text((Math.round(discountTotal * 100) / 100).toFixed(2));
-            $('#sendorder').text(sendorder - (Math.round(discountTotal * 100) / 100).toFixed(2));
-            $('#amount').val(sendorder - (Math.round(discountTotal * 100) / 100).toFixed(2));
+            $('#sendorder').text(sendorder - (Math.round(discountTotal * 100) / 100).toFixed(2) - parseInt($('#delivary_charge').text()));
+            // console.log(parseInt($('#delivary_charge').text()));
+            $('#amount').val(sendorder - ((Math.round(discountTotal * 100) / 100).toFixed(2)) - parseInt($('#delivary_charge').text()));
         }
         function changeImage(element, product_id) {
             var main_prodcut_image = document.getElementById('main_product_image' + product_id);

@@ -268,4 +268,11 @@ class ProductController extends AppBaseController
         }
         return 1;
     }
+
+    public function removeImg(Request $request)
+    {
+        // dd($request->all());
+        Product_Image::where(['p_id' => $request->id, 'id' => $request->img])->delete();
+        return 1;
+    }
 }

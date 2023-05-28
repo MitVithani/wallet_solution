@@ -15,6 +15,14 @@
         <div class="product_img" style="padding-top: .5rem;"></div>
     </div>
 </div>
+    @if(isset($productDtl->productImage))
+        @foreach($productDtl->productImage as $img)
+            @php $rand = rand(111111111,999999999) @endphp
+            {{-- {{dd($img)}} --}}
+            <img class="{{ $rand }}" src="{{ asset($img->image ?? '') }}" height="80px" style="position: relative" alt="">
+            <span class="{{ $rand }}" onclick="remove_img('{{ $rand }}','{{ $productDtl->id }}','{{ $img->id }}')" style="color: white;position: absolute;margin-left: -20px;margin-top: 0px;font-size: 24px;background: red;height: 32px">&times;</span>
+        @endforeach
+    @endif
 <div class="form-outline mb-4">
     <label class="form-label" for="name">Name or pruduct or serivce</label>
     <input type="text" name="name" id="name" class="form-control" value="{{$productDtl->name ?? ''}}" required>
@@ -80,3 +88,17 @@
     </div>
 
 </div>
+<script>
+
+function remove_img(rand,id,img) {
+    var token="{{ csrf_token() }}";
+    $.ajax({
+        type: 'post',
+        url: "{{url('remove_img')}}",
+        data: {id:id,img:img,_token:token},
+        success: function (action) {
+            $("." + rand).remove();
+        }
+    });
+}
+</script>

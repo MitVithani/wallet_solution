@@ -279,7 +279,7 @@
                 <div class="modal-body">
                     <div class="card-body mb-12">
                         <div class="form-outline">
-                            <input type="text" name="delivary_charge" id="delivary_charge" class="form-control" required>
+                            <input type="text" name="delivary_charge" id="delivary_charge" class="form-control" value="0">
                         </div>
                     </div>
                 </div>
@@ -315,7 +315,7 @@
             });
 
             $(".delivaryCharge").click(function(){
-                var delivary_charge = $('#delivary_charge').val();
+                var delivary_charge = $('#delivary_charge').text();
                 localStorage.setItem('delivary_charge', delivary_charge);
                 // $('#delChargeTotal').text(delivary_charge);
                 priceCount();
