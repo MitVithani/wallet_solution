@@ -50,6 +50,7 @@ Route::get('usersProducts/{id}', 'UsersProductController@usersProducts');
 Route::get('usersProducts/payout/{id}', 'UsersProductController@usersProductspayout');
 Route::get('usersProducts/check_out/{id}', 'UsersProductController@usersProductspayout');
 Route::get('checkoutNow/{id}', 'UsersProductController@usersProductspayout');
+Route::post('user_change_quantity', 'UsersProductController@userChangeQuantity');
 
 Route::get('edit/{id}', 'ProductController@edit');
 Route::get('delete/{id}', 'ProductController@delete');

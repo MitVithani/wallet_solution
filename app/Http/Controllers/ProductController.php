@@ -240,13 +240,14 @@ class ProductController extends AppBaseController
         $checkLink = ShareLink::where(['user_id' => $userId, "rand_link" => $request->link])->first();
         // dd($checkLink);
         if(empty($checkLink)){
-            $checkLink = ShareLink::create(["user_id" => $userId, "rand_link" => $request->link, "delivary_charge" => $request->delivary_charge]);
+            $checkLink = ShareLink::create(["user_id" => $userId, "rand_link" => $request->link, "delivary_charge" => $request->delivary_charge, "is_cart_lock" => $request->cart_lock]);
         }else{
             $checkLink->delivary_charge = $request->delivary_charge;
+            $checkLink->is_cart_lock = $request->cart_lock;
             $checkLink->save();
         }
         ShareUrlProduct::where(["share_link_id" => $checkLink->id])->delete();
-        $getProducts = Product::where(['user_id' => $userId])->get();
+        $getProducts = Product::where(['user_id' => $userId, 'is_delete' => 0])->get();
         if(!empty($getProducts)){
             foreach ($getProducts as $key => $getProduct) {
                 if($getProduct->quantity > 0)

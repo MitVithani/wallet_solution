@@ -17,10 +17,13 @@
 
 @section('content')
 
-    <div class="content px-3 product-list product-listscroll">
+    <div class="content px-3 product-list product-listscroll" style="text-align: center;">
 
         <span class="float-left">
             <div class="btn cust-product-btns" onclick="clearAllqty()" >Clear All</div>
+        </span>
+        <span class="float-center">
+           <a class="btn cust-product-btns" target="_blank" href="{{ url('admin/users') .'/' . $user_id }}"> Admin Login </a>
         </span>
         <span class="float-right">
             <a class="btn cust-product-btns" style="font-size: 20px" href="{{ route('products.create') }}" >+</a>
@@ -301,6 +304,7 @@
 @section('page_scripts')
     <script>
         $(document).ready(function() {
+            localStorage.setItem('delivary_charge', '0');
 
             priceCount();
 
@@ -315,7 +319,7 @@
             });
 
             $(".delivaryCharge").click(function(){
-                var delivary_charge = $('#delivary_charge').text();
+                var delivary_charge = $('#delivary_charge').val();
                 localStorage.setItem('delivary_charge', delivary_charge);
                 // $('#delChargeTotal').text(delivary_charge);
                 priceCount();
@@ -385,11 +389,19 @@
 
         function saveLink(){
             var link = "{{ $link }}";
+            var cart_lock = 0;
+            if ($('#cart_lock').is(":checked"))
+            {
+                cart_lock = 1;
+                // it is checked
+            }
+
+
             var delivary_charge = localStorage.getItem('delivary_charge');
             $.ajax({
                 url: "{{ url('save_link') }}",
                 type: 'POST',
-                data: {_token:  $('meta[name="csrf-token"]').attr('content'), link: link, delivary_charge: delivary_charge},
+                data: {_token:  $('meta[name="csrf-token"]').attr('content'), link: link, delivary_charge: delivary_charge, cart_lock : cart_lock},
                 dataType: 'JSON',
                 success: function (res) {
 

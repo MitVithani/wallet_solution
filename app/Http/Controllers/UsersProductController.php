@@ -16,6 +16,7 @@ use App\Models\Product_Image;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\ShareLink;
+use App\Models\ShareUrlProduct;
 // use Flash;
 use Response;
 
@@ -31,7 +32,7 @@ class UsersProductController extends AppBaseController
         $user_id = explode('/', base64_decode($url_link))[0] ?? '';
         // $link = explode('/', base64_decode($url_link))[1] ?? '';
         $userDtl = User::where('id', $user_id)->first();
-        $productDtl = Product::where('user_id', $user_id)->get();
+        // $productDtl = Product::where('user_id', $user_id)->get();
         $shareLink = ShareLink::with('shareUrlProduct.product.productImage')->where(['user_id' => $user_id, 'rand_link' => $url_link])->first();
         $productDtl = [];
         if(!empty($shareLink->shareUrlProduct)){
@@ -42,6 +43,7 @@ class UsersProductController extends AppBaseController
                 $product['discount'] = $shareUrlProduct->discount;
                 $product['discount_price'] = $shareUrlProduct->discount_price;
                 $product['quantity'] = $shareUrlProduct->quantity;
+                $product['share_url_product_id'] = $shareUrlProduct->id;
                 $productDtl[] = $product;
             }
         }
@@ -120,4 +122,9 @@ class UsersProductController extends AppBaseController
         return view('userProducts.cancel_payment');
     }
 
+    public function userChangeQuantity(Request $request)
+    {
+        ShareUrlProduct::where(['id' => $request->id])->update(['quantity' => $request->count]);
+        return true;
+    }
 }

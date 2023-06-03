@@ -52,9 +52,18 @@
                                 <p style="font-size: 12px" class="mb-0"> USD <span>{{$product->price}}</span></p>
                             </td>
                             <td>
-                                <input id="qun_{{$product->id}}" type="hidden" value="{{$product->quantity}}"/>
-                                <span class="hidden" id="product_price_{{$product->id}}">{{$product->price}}</span>
-                                <input name="product_ids" type="hidden" value="{{$product->id}}"/>
+                                {{-- <input id="qun_{{$product->id}}" type="hidden" value="{{$product->quantity}}"/> --}}
+                                <span class="d-none" id="product_price_{{$product->id}}">{{$product->price}}</span>
+                                @if($linkProductDtl->is_cart_lock != 1)
+                                    <span class="minus" onclick='ChangeQuantity("minus", {{$product->id}} ,{{$product->share_url_product_id}})'>-</span>
+                                @endif
+
+                                <input id="qun_{{$product->id}}" name="quantity" type="text" disabled value="{{$product->quantity}}" style="width: 100px; text-align: center;"/>
+
+                                @if($linkProductDtl->is_cart_lock != 1)
+                                <span class="plus" onclick='ChangeQuantity("plus", {{$product->id}}, {{$product->share_url_product_id}})'>+</span>
+                                @endif
+                                <input name="user_product_ids" type="hidden" value="{{$product->id}}"/>
                                 <input id="discount_type_{{$product->id}}" name="discount_type" type="hidden" value="{{$product->discount_type}}"/>
                                 <input id="discount_{{$product->id}}" name="discount" type="hidden" value="{{$product->discount}}"/>
                                 <input id="discount_price_{{$product->id}}" name="discount_price" type="hidden" value="{{$product->discount_price}}"/>
@@ -356,39 +365,66 @@
             var subtotal= 0;
             var sendorder= 0;
             var discountTotal= 0;
-            $('input[name^="product_ids"]').each(function(){
+            $('input[name^="user_product_ids"]').each(function(){
                 var product_id = $(this).val();
-                var product_price = $('#product_price_' + product_id).text();
-                var product_quantity = $('#qun_' + product_id).val();
-                var discount_type = $('#discount_type_' + product_id).val();
-                var discount = $('#discount_' + product_id).val();
-                var discount_price = $('#discount_price_' + product_id).val();
-                // console.log(discount_type + ' - ' + discount + ' - ' + discount_price);
-                if(product_quantity == 0){
-                    $('#product_tr_' + product_id).addClass('emptyQtyTableTab');
-                }else{
-                    $('#product_tr_' + product_id).removeClass('emptyQtyTableTab');
-                    product_price_total_val = product_price * product_quantity;
-                    $('#product_price_total_' + product_id).text(product_price_total_val);
-                    sendorder += product_price_total_val;
-                    if(discount_type == 'flat' && discount != ''){
-                        discountTotal +=  product_price - discount_price;
-                    }else if(discount_type == 'percentage' && discount != ''){
-                        discountTotal +=  discount_price * product_quantity;
-                    }
+                if(parseInt(product_id) != 0){
+                    var product_price = $('#product_price_' + product_id).text();
+                    var product_quantity = $('#qun_' + product_id).val();
+                    var discount_type = $('#discount_type_' + product_id).val();
+                    var discount = $('#discount_' + product_id).val();
+                    var discount_price = $('#discount_price_' + product_id).val();
+                    // console.log(discount_type + ' - ' + discount + ' - ' + discount_price);
+                    if(product_quantity == 0){
+                        $('#product_tr_' + product_id).addClass('emptyQtyTableTab');
+                    }else{
+                        $('#product_tr_' + product_id).removeClass('emptyQtyTableTab');
+                        product_price_total_val = product_price * product_quantity;
+                        $('#product_price_total_' + product_id).text(product_price_total_val);
+                        sendorder += product_price_total_val;
+                        if(discount_type == 'flat' && discount != ''){
+                            discountTotal +=  product_price - discount_price;
+                        }else if(discount_type == 'percentage' && discount != ''){
+                            discountTotal +=  discount_price * product_quantity;
+                        }
 
-                    subtotal += product_price_total_val;
+                        subtotal += product_price_total_val;
+                    }
                 }
             });
+            console.log(subtotal);
             $('#subtotal').text(subtotal);
             $('#discountTotal').text((Math.round(discountTotal * 100) / 100).toFixed(2));
-            $('#sendorder').text(sendorder - (Math.round(discountTotal * 100) / 100).toFixed(2) - parseInt($('#delivary_charge').text()));
+            $('#sendorder').text(sendorder - (Math.round(discountTotal * 100) / 100).toFixed(2) + parseInt($('#delivary_charge').text()));
             // console.log(parseInt($('#delivary_charge').text()));
-            $('#amount').val(sendorder - ((Math.round(discountTotal * 100) / 100).toFixed(2)) - parseInt($('#delivary_charge').text()));
+            $('#amount').val(sendorder - ((Math.round(discountTotal * 100) / 100).toFixed(2)) + parseInt($('#delivary_charge').text()));
         }
         function changeImage(element, product_id) {
             var main_prodcut_image = document.getElementById('main_product_image' + product_id);
             main_prodcut_image.src = element.src;
+        }
+
+        function ChangeQuantity(p_type, product_id, share_url_product_id){
+            var $input = $('#qun_' + product_id);
+            if(p_type == "minus"){
+                var count = parseInt($input.val()) - 1;
+            }else if(p_type == "plus"){
+                var count = parseInt($input.val()) + 1;
+            }
+            count = count < 0 ? 0 : count;
+            $.ajax({
+                url: "{{ url('user_change_quantity') }}",
+                type: 'POST',
+                data: {_token:  $('meta[name="csrf-token"]').attr('content'), count: count, id: share_url_product_id},
+                dataType: 'JSON',
+                success: function (res) {
+                    $input.val(count);
+                    $input.change();
+                    var product_price = $('#product_price_' + product_id).text();
+                    product_price_total_val = product_price * count;
+                    $('#product_price_total_' + product_id).text(product_price_total_val);
+                    priceCount();
+                }
+            });
         }
 
         // function saveCustomerData() {

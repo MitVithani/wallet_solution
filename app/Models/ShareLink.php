@@ -21,6 +21,7 @@ class ShareLink extends Authenticatable
         'rand_link',
         'cust_id',
         'delivary_charge',
+        'is_cart_lock',
     ];
 
     public function shareUrlProduct()
