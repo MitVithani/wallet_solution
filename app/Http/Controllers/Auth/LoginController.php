@@ -51,7 +51,16 @@ class LoginController extends Controller
         {
             if (auth()->user()->is_admin == 1) {
                 return redirect()->route('admin.home');
-            }else if(auth()->user()->status == "pending"){
+            }
+            else if(auth()->user()->is_confirm == 0){
+                auth()->logout();
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Confirmation link is sent to your registered email address. \n Please check spam folder also for verification mail.'
+                ]);
+            }
+            else if(auth()->user()->status == "pending"){
                 auth()->logout();
                 return redirect()->back()
                 ->withInput()
@@ -67,7 +76,8 @@ class LoginController extends Controller
                 ]);
             }else if(auth()->user()->status == "active"){
                 return redirect()->route('home');
-            }else{
+            }
+            else{
                 auth()->logout();
 
                 return redirect()->back()
