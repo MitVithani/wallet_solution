@@ -97,9 +97,13 @@ class RegisterController extends Controller
             $data['logo'] = $image_name;
         }
         User::create($data);
-        // CommonController::verify_email($request->email, $request->name);
+        CommonController::verify_email($request->email, $request->name);
 
 
-        return redirect(route('login'));
+        return redirect(route('login'))
+        ->withInput()
+        ->withErrors([
+            'password' => 'Confirmation link is sent to your registered email address. \n Please check spam folder also for verification mail'
+        ]);
     }
 }

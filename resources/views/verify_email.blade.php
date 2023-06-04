@@ -28,7 +28,7 @@
         <div class="row">
             <br /><br />
             <center>
-                <div class='boder'><img class="logosize img" src="{{ env('PUBLIC_PATH') }}images/logo.png" />
+                <div class='boder'><img class="logosize img" src="{{ asset('public/img/logo.jpg') }}" />
                 <br/>
 
                 {{--<h2>Hello, <?= $data1['name']?></h2>--}}

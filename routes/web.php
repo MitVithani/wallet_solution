@@ -35,7 +35,7 @@ Route::prefix('admin')->group(function() {
     Route::post('change_status', 'Admin\UserController@changeStatus');
 });
 
-Route::get('mail', 'HomeController@getVerifyMail');
+Route::get('mail', 'UsersProductController@getVerifyMail');
 
 Route::resource('products', 'ProductController');
 Route::post('change_quantity', 'ProductController@changeQuantity');
