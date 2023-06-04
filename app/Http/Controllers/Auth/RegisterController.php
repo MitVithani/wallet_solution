@@ -100,10 +100,10 @@ class RegisterController extends Controller
         CommonController::verify_email($request->email, $request->name);
 
 
-        return redirect(route('login'))
+        return redirect(route('login-user'))
         ->withInput()
         ->withErrors([
-            'password' => 'Confirmation link is sent to your registered email address. \n Please check spam folder also for verification mail'
+            'password' => 'Confirmation link is sent to your registered email address. Please check spam folder also for verification mail'
         ]);
     }
 }

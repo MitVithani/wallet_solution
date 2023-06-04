@@ -1,85 +1,70 @@
 @extends('layout')
 
 @section('content')
-<main class="login-form">
-    <div class="cotainer">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Reset Password</div>
-                    <div class="card-body">
-                        <form class="otp-form">
-                            @csrf
 
-                            <div class="form-group row">
-                                <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+    <form class="otp-form">
+        @csrf
+        <div class="user-details user-details-login">
 
-                                {{-- <div class="col-md-1">
-                                    <input id="country_code" type="text" class="form-control numberonly" name="country_code" value="+" required autocomplete="country_code">
-                                </div> --}}
-                                <div class="col-md-5">
-                                    <input id="phone_number" type="text" class="form-control phone-field phone_number numberonly @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number">
-                                </div>
-                            </div>
-                            <div class="send-otp-class" style="display: none">
-                                <div class="form-group row ">
-                                    <label for="otp" class="col-md-4 col-form-label text-md-right">{{ __('OTP') }}</label>
+            <div class="input-box">
 
-                                    <div class="col-md-6">
-                                        <input id="otp" type="text" class="form-control numberonly" name="otp" value="{{ old('otp') }}" required autocomplete="otp">
-                                    </div>
-                                </div>
-                            </div>
+                <label class="details">{{ __('Phone Number') }}</label>
+                <input id="phone_number" type="text" class="form-control phone-field phone_number numberonly @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number">
+            </div>
+            <div class="send-otp-class" style="display: none">
+                <div class="input-box ">
+                    <label for="otp" class="details">{{ __('OTP') }}</label>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="button" class="btn btn-primary btn-send-otp" onclick="SendOtp()">
-                                        {{ __('Send OTP Code') }}
-                                    </button>
-                                    <button type="button" class="btn btn-primary send-otp-class" style="display: none" onclick="VerifyOtp()">
-                                        {{ __('Verify OTP') }}
-                                    </button>
-                                </div>
-                            </div>
-
-                        </form>
-                        <form class="pas-form" style="display: none">
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="button" class="btn btn-primary" onclick="ChangeOtp()">
-                                        {{ __('Reset Password') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="">
+                        <input id="otp" type="text" class="form-control numberonly" name="otp" value="{{ old('otp') }}" required autocomplete="otp">
                     </div>
                 </div>
             </div>
+
+            <div class="input-box mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <button type="button" class="btn btn-primary btn-send-otp" onclick="SendOtp()">
+                        {{ __('Send OTP Code') }}
+                    </button>
+                    <button type="button" class="btn btn-primary send-otp-class" style="display: none" onclick="VerifyOtp()">
+                        {{ __('Verify OTP') }}
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-</main>
+
+    </form>
+    <form class="pas-form" style="display: none">
+        <div class="user-details user-details-login">
+
+            <div class="input-box">
+                <label for="password" class="details">{{ __('Password') }}</label>
+
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="input-box">
+                <label for="password-confirm" class="details">{{ __('Confirm Password') }}</label>
+
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+            </div>
+
+            <div class="input-box">
+                <div class="col-md-6 offset-md-4">
+                    <button type="button" class="btn btn-primary" onclick="ChangeOtp()">
+                        {{ __('Reset Password') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
 @endsection
 
 @section('page_scripts')

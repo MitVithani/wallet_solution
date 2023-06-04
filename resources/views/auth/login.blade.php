@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('nav_bar_content')
-    <a class="nav-link d-inline float-right text-dark font-weight-bold" href="{{ route('register') }}">Register</a>
+    <a class="nav-link d-inline float-right text-dark font-weight-bold side-text" href="{{ route('register') }}">Register</a>
 @endsection
 @section('content')
     <form action="{{ route('login.post') }}" method="POST">
@@ -22,13 +22,18 @@
                     <span class="text-danger">{{ $errors->first('password') }}</span>
                 @endif
             </div>
-
+            <div class="input-box">
+                <label>
+                    <a href="{{ route('forget.password.get') }}">Reset Password</a>
+                </label>
+            </div>
         </div>
         @if ($errors->has('email'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('email') }}</strong>
             </span>
         @endif
+
         <button type="submit" class="user-details-login-button">
             Login
         </button>

@@ -13,6 +13,9 @@
     color: white !important;
     cursor: pointer;
 }
+.side-text{
+    padding: 25px;
+}
 .counter-number{
     border: 1px solid #ddd;
     border-radius: 28px 28px;
@@ -371,7 +374,9 @@ span {cursor:pointer; }
 
 /* If the screen size is 600px or less, set the font-size of <div> to 30px */
 @media only screen and (max-width: 600px) {
-
+    .side-text{
+        padding: 5px;
+    }
     .product-list input {
         height: 22px;
         width: 60px;

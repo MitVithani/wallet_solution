@@ -57,7 +57,7 @@ class LoginController extends Controller
                 return redirect()->back()
                 ->withInput()
                 ->withErrors([
-                    'password' => 'Confirmation link is sent to your registered email address. \n Please check spam folder also for verification mail.'
+                    'password' => 'Confirmation link is sent to your registered email address. Please check spam folder also for verification mail.'
                 ]);
             }
             else if(auth()->user()->status == "pending"){

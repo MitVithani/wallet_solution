@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('nav_bar_content')
-    <a class="nav-link d-inline float-right text-dark font-weight-bold" href="{{ route('login-user') }}">Login</a>
+    <a class="nav-link d-inline float-right text-dark font-weight-bold side-text" href="{{ route('login-user') }}">Login</a>
 @endsection
 @section('content')
     <form action="{{ route('register.post') }}" method="POST" enctype="multipart/form-data">
@@ -16,7 +16,7 @@
                     </div>
                     <div class="avatar-edit">
                         {{-- <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" /> --}}
-                        <input type="file" id="logo" class="auth-class-input" name="logo" accept="image/*" required>
+                        <input type="file" id="logo" class="auth-class-input" name="logo" accept="image/*">
                         <label for="logo">Change Profile Picture</label>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
 
             <div class="input-box">
                 <span class="details">Tax Number</span>
-                <input type="text" id="tax_number" placeholder="Enter your Tax Number" name="tax_number" value="{{ old('tax_number') }}" required>
+                <input type="text" id="tax_number" placeholder="Enter your Tax Number" name="tax_number" value="{{ old('tax_number') }}" >
                 @if ($errors->has('tax_number'))
                     <span class="text-danger">{{ $errors->first('tax_number') }}</span>
                 @endif
@@ -97,7 +97,7 @@
 
             <div class="input-box">
                 <span class="details">Bank IBAN</span>
-                <input type="text" id="bank_iban" placeholder="Enter your bank iban" name="bank_iban" value="{{ old('bank_iban') }}"  required>
+                <input type="text" id="bank_iban" placeholder="Enter your bank iban" name="bank_iban" value="{{ old('bank_iban') }}" >
                 @if ($errors->has('bank_iban'))
                     <span class="text-danger">{{ $errors->first('bank_iban') }}</span>
                 @endif
