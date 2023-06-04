@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CommonController;
 
 
 class RegisterController extends Controller
@@ -96,6 +97,7 @@ class RegisterController extends Controller
             $data['logo'] = $image_name;
         }
         User::create($data);
+        // CommonController::verify_email($request->email, $request->name);
 
 
         return redirect(route('login'));

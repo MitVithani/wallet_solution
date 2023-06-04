@@ -34,6 +34,9 @@ Route::prefix('admin')->group(function() {
     Route::resource('ShareLink', 'Admin\ShareLinkController');
     Route::post('change_status', 'Admin\UserController@changeStatus');
 });
+
+Route::get('mail', 'HomeController@getVerifyMail');
+
 Route::resource('products', 'ProductController');
 Route::post('change_quantity', 'ProductController@changeQuantity');
 Route::post('clear_quantity', 'ProductController@clearQuantity');
