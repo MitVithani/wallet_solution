@@ -80,6 +80,17 @@ span {cursor:pointer; }
     vertical-align: middle;
 }
 
+.user-product-table  input{
+    height: 34px;
+    width: 100px;
+    text-align: center;
+    /* font-size: 26px; */
+    border: none;
+    /* border-radius: 28px 28px; */
+    /* display: inline-block; */
+    vertical-align: middle;
+}
+
 
 /* body {
 	overflow-x: hidden;

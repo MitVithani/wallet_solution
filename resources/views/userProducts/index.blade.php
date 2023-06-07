@@ -53,20 +53,25 @@
                             </td>
                             <td>
                                 {{-- <input id="qun_{{$product->id}}" type="hidden" value="{{$product->quantity}}"/> --}}
-                                <span class="d-none" id="product_price_{{$product->id}}">{{$product->price}}</span>
-                                @if($linkProductDtl->is_cart_lock != 1)
+                                <div class="align-self-center text-center counter-number">
+                                    @if($linkProductDtl->is_cart_lock != 1)
                                     <span class="minus" onclick='ChangeQuantity("minus", {{$product->id}} ,{{$product->share_url_product_id}})'>-</span>
-                                @endif
+                                    @endif
 
-                                <input id="qun_{{$product->id}}" name="quantity" type="text" disabled value="{{$product->quantity}}" style="width: 100px; text-align: center;"/>
+                                    <input id="qun_{{$product->id}}" name="quantity" type="text" disabled value="{{$product->quantity}}" style="width: 100px; text-align: center;"/>
 
-                                @if($linkProductDtl->is_cart_lock != 1)
-                                <span class="plus" onclick='ChangeQuantity("plus", {{$product->id}}, {{$product->share_url_product_id}})'>+</span>
-                                @endif
+                                    @if($linkProductDtl->is_cart_lock != 1)
+                                    <span class="plus" onclick='ChangeQuantity("plus", {{$product->id}}, {{$product->share_url_product_id}})'>+</span>
+                                    @endif
+                                </div>
+                                <span class="d-none" id="product_price_{{$product->id}}">{{$product->price}}</span>
+
                                 <input name="user_product_ids" type="hidden" value="{{$product->id}}"/>
                                 <input id="discount_type_{{$product->id}}" name="discount_type" type="hidden" value="{{$product->discount_type}}"/>
                                 <input id="discount_{{$product->id}}" name="discount" type="hidden" value="{{$product->discount}}"/>
                                 <input id="discount_price_{{$product->id}}" name="discount_price" type="hidden" value="{{$product->discount_price}}"/>
+                            </td>
+                            <td>
                                 <img class="user-product-img float-right" data-toggle="modal" data-target="#product_img_{{$product->id}}" src="{{ !empty($product->productImage[0]->image) ? asset($product->productImage[0]->image) : ''}}" />
                             </td>
 

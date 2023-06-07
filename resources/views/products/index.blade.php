@@ -23,7 +23,7 @@
             <div class="btn cust-product-btns" onclick="clearAllqty()" >Clear All</div>
         </span>
         <span class="float-center">
-           <a class="btn cust-product-btns" target="_blank" href="{{ url('admin/users') .'/' . $user_id }}"> Admin Login </a>
+           <a class="btn cust-product-btns" target="_blank" href="{{ url('admin/users') .'/' . $user_id }}"> {{ auth()->user()->shop_name ?? ''}} </a>
         </span>
         <span class="float-right">
             <a class="btn cust-product-btns" style="font-size: 20px" href="{{ route('products.create') }}" >+</a>
@@ -291,7 +291,7 @@
                 <div class="modal-footer">
                     <div class="footer">
                         {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
-                        <button type="button" class="btn btn-primary delivaryCharge theamBtnColor" >Submit</button>
+                        <button type="button" class="btn btn-primary delivaryCharge theamBtnColor" data-dismiss="modal">Submit</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

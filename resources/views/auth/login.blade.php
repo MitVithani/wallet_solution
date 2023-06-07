@@ -24,7 +24,7 @@
             </div>
             <div class="input-box">
                 <label>
-                    <a href="{{ route('forget.password.get') }}">Reset Password</a>
+                    <a class="text-dark font-weight-bold" href="{{ route('forget.password.get') }}">Reset Password</a>
                 </label>
             </div>
         </div>
