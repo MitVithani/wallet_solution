@@ -73,3 +73,13 @@ Route::get('/clear-cache', function() {
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//route for allseller apge
+Route::get('all_seller','SellerController@index')->name('all_seller');
+
+//route for product page
+Route::get('product_list/{id}','UsersProductController@product_list')->name('product_list');
+
+//route for product detail page
+Route::get('product_detail/{pid}','UsersProductController@product_detail')->name('product_detail');

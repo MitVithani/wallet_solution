@@ -154,4 +154,16 @@ class UsersProductController extends AppBaseController
         ShareUrlProduct::where(['id' => $request->id])->update(['quantity' => $request->count]);
         return true;
     }
+
+    public function product_list($id){
+        $products=Product::where('user_id',$id)->paginate(25);
+        return view('product_list',compact('products'));
+    }
+
+    public function product_detail($pid){
+        $product_details=Product::where('id',$pid)->paginate(25);
+        return view('product_detail',compact('product_details'));
+    }
+
+
 }
