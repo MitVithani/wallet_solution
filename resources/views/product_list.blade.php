@@ -63,14 +63,14 @@ img {
      border: 1px solid  #36a0a6 !important;
 }
 .wallet_visit_seller{
-    background-image: linear-gradient(#11CFF1, #94FFBA);
+    background-image: linear-gradient(#5CEBD2, #15D1F0);
     color: #ffffff;
     width: 100%;
     padding: 3px 5px;
     border-radius: 25px 25px;
 }
 .wallet_product_disc{
-    background-image: linear-gradient(#11CFF1, #94FFBA);
+    background-image: linear-gradient(#5CEBD2, #15D1F0);
     height: 30px;
     width: 30px;
     border-radius: 50%;
