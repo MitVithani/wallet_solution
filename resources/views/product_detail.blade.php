@@ -70,7 +70,7 @@
     font-size: 1.1rem;
 }
 .wallet_visit_seller{
-    background-image: linear-gradient(#59a8ee, #2cc99a);
+    background-image: linear-gradient(#5CEBD2, #15D1F0);
     color: #ffffff;
     width: 100%;
     padding: 3px 0px;
@@ -111,8 +111,8 @@ img {
 } */
 .active{
 
-    border:2px solid #16cdbb;
-    border-radius: 0.25rem;
+    /* border:1px solid #16cdbb;
+    border-radius: 0.25rem; */
 }
 .card{
     border:none !important;
@@ -213,9 +213,9 @@ img {
                                         <tr>
                                             <td colspan="2">
                                                 <div class="text-center wallet_visit_seller" style="width:180px;height:32px;">
-                                                    <a onclick='ChangeQuantity("plus")'><i class="fa-solid fa-circle-plus fa-2xl" style="color:#e2e3e5;"></i></a>
-                                                    <span id="quantity" class="text-reset wallet_font" style="margin:0% 27%">1</span>
                                                     <a onclick='ChangeQuantity("minus")'><i class="fa-solid fa-circle-minus fa-2xl" style="color:#e2e3e5;"></i></a>
+                                                    <span id="quantity" class="text-reset wallet_font" style="margin:0% 27%">1</span>
+                                                    <a onclick='ChangeQuantity("plus")'><i class="fa-solid fa-circle-plus fa-2xl" style="color:#e2e3e5;"></i></a>
                                                 </div>
                                                 @csrf
                                                 <input type="hidden" id="amount" name="amount" value="0"/>
@@ -226,11 +226,11 @@ img {
                                         <tr>
                                             <td>
                                                 {{-- <div class="text-center wallet_visit_seller" style="height:34px"> --}}
-                                                <button id="checkoutbtn" role="button" class="text-center wallet_visit_seller" onclick="checkoutnow()" style="height:34px; width:80px">{{('Pay Now')}}</button>
+                                                <button id="checkoutbtn" role="button" class="text-center wallet_visit_seller" onclick="checkoutnow()" style="height:34px; width:80px; border: 0">{{('Pay Now')}}</button>
                                                 {{-- </div> --}}
                                             </td>
                                             <td>
-                                                <button id="checkoutbtn" role="button" class="text-center wallet_visit_seller" onclick="checkoutnow()" style="height:34px; width:180px">{{('Share Payment Link')}}</button>
+                                                <button id="checkoutbtn" role="button" class="text-center wallet_visit_seller" onclick="checkoutnow()" style="height:34px; width:180px; border: 0">{{('Share Payment Link')}}</button>
 
                                                 {{-- <div class="text-center wallet_visit_seller" style="height:34px;width:180px">
                                                     <a href="#" role="button" class="text-reset wallet_font">{{('Share Payment Link')}}</a>
