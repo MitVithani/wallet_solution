@@ -102,36 +102,46 @@ class UsersProductController extends AppBaseController
 
     public function sendPayment(Request $request)
     {
-
-        $order_number = 'order-'. rand(1, 99) . rand(1, 99) . rand(1, 99) . rand(1, 99);
-        $order_amount = number_format((float)$request->amount, 2, '.', '');
-        $order_currency = 'USD';
-        $order_description = '4payOrder';
-        $merchant_pass = env('MERCHANDPASS');
-        $to_md5 = $order_number . $order_amount . $order_currency . $order_description . $merchant_pass;
-
-        $hash = sha1(md5(strtoupper($to_md5)));
-
-        $reqData['merchant_key'] = env('MERCHANDKEY');
-        $reqData['operation'] = 'purchase';
-        $reqData['methods'] = [ "card" ];
-        $reqData['order'] = [
-            "number" => $order_number,
-            "amount" => $order_amount,
-            "currency" => $order_currency,
-            "description" => $order_description,
-        ];
-        $reqData['cancel_url'] = env('APP_URL'). 'cancelPayment/' . $request->link_product_dtl . '/' . $request->cust_id . '/' . $order_amount;
-        $reqData['success_url'] = env('APP_URL'). 'successPayment/' . $request->link_product_dtl . '/' . $request->cust_id . '/' . $order_amount;
-        $reqData['recurring_init'] = true;
-        $reqData['hash'] = $hash;
-        // dd($reqData);
         try {
+            $order_number = 'order-'. rand(1, 99) . rand(1, 99) . rand(1, 99) . rand(1, 99);
+            $order_amount = number_format((float)$request->amount, 2, '.', '');
+            $order_currency = 'USD';
+            $order_description = '4payOrder';
+            $merchant_pass = env('MERCHANDPASS');
+            $to_md5 = $order_number . $order_amount . $order_currency . $order_description . $merchant_pass;
+
+            $hash = sha1(md5(strtoupper($to_md5)));
+
+            $reqData['merchant_key'] = env('MERCHANDKEY');
+            $reqData['operation'] = 'purchase';
+            $reqData['methods'] = [ "card" ];
+            $reqData['order'] = [
+                "number" => $order_number,
+                "amount" => $order_amount,
+                "currency" => $order_currency,
+                "description" => $order_description,
+            ];
+
+            if(!empty($request->link_product_dtl)){
+                $reqData['cancel_url'] = env('APP_URL'). 'cancelPayment/' . $request->link_product_dtl . '/' . $request->cust_id . '/' . $order_amount;
+                $reqData['success_url'] = env('APP_URL'). 'successPayment/' . $request->link_product_dtl . '/' . $request->cust_id . '/' . $order_amount;
+            }else{
+                $reqData['cancel_url'] = env('APP_URL'). 'cancelPayment/' .  $request->cust_id . '/' . $order_amount;
+                $reqData['success_url'] = env('APP_URL'). 'successPayment/' . $request->cust_id . '/' . $order_amount;
+            }
+
+            $reqData['recurring_init'] = true;
+            $reqData['hash'] = $hash;
+            // dd($reqData);
             $response = Http::withBody(
                 json_encode($reqData), 'application/json'
             )->post('https://checkout.montypay.com/api/v1/session');
             $jsonData = json_decode(json_encode($response->json()));
-            return Redirect::to($jsonData->redirect_url);
+            if(!empty($jsonData->redirect_url)){
+                return Redirect::to($jsonData->redirect_url);
+            }else{
+                return redirect()->back()->getTargetUrl();
+            }
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -156,12 +166,12 @@ class UsersProductController extends AppBaseController
     }
 
     public function product_list($id){
-        $products=Product::where('user_id',$id)->paginate(25);
+        $products=Product::where('user_id',$id)->get();
         return view('product_list',compact('products'));
     }
 
     public function product_detail($pid){
-        $product_details=Product::where('id',$pid)->paginate(25);
+        $product_details=Product::where('id',$pid)->get();
         return view('product_detail',compact('product_details'));
     }
 

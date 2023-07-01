@@ -3,6 +3,8 @@
   <head>
     <title>product detail</title>
     <!-- Required meta tags -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -125,7 +127,7 @@ img {
                                 <div class="card-body">
                                     <a href="#">
                                         <img
-                                            src="{{ asset('public/assets/images/profile.jpg')}}"
+                                            src="{{ asset('public/img/logo4.jpg')}}"
                                             class="img-fluid"
                                             style="border-radius:7px;height:150px;width:150px"
                                         >
@@ -138,7 +140,7 @@ img {
                                 <div class="card-body">
                                     <a href="#">
                                         <img
-                                            src="{{ asset('public/assets/images/profile.jpg')}}"
+                                            src="{{ asset('public/img/logo.jpg')}}"
                                             class="img-fluid"
                                             style="border-radius:7px;height:150px;width:150px"
                                         >
@@ -146,19 +148,7 @@ img {
                                 </div>
                             </div>
                         </div>
-                        <div class="row ml-1">
-                            <div class="card pro_gallery_img">
-                                <div class="card-body">
-                                    <a href="#">
-                                        <img
-                                            src="{{ asset('public/assets/images/profile.jpg')}}"
-                                            class="img-fluid"
-                                            style="border-radius:7px;height:150px;width:150px"
-                                        >
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                     {{-- main image --}}
@@ -167,7 +157,7 @@ img {
                             <div class="card-body">
                                 <a href="#">
                                     <img
-                                        src="{{ asset('public/assets/images/profile.jpg')}}"
+                                        src="{{ asset('public/img/logo4.jpg')}}"
                                         class="img-fluid image_hw"
                                         style="border-radius:7px;"
                                     >
@@ -176,40 +166,15 @@ img {
                         </div>
                     </div>
 
-                    <div class="slider">
+                    {{-- <div class="slider">
                         <div class="row">
+
                             <div class="col-4">
                                 <div class="card slide_img">
                                     <div class="card-body">
                                         <a href="#">
                                             <img
-                                                src="{{ asset('public/assets/images/profile.jpg')}}"
-                                                class="simage_hw"
-                                                style="border-radius:7px;"
-                                            >
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="card slide_img">
-                                    <div class="card-body">
-                                        <a href="#">
-                                            <img
-                                                src="{{ asset('public/assets/images/profile.jpg')}}"
-                                                class="simage_hw"
-                                                style="border-radius:7px;"
-                                            >
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="card slide_img">
-                                    <div class="card-body">
-                                        <a href="#">
-                                            <img
-                                                src="{{ asset('public/assets/images/profile.jpg')}}"
+                                                src="{{ asset('public/img/logo4.jpg')}}"
                                                 class="simage_hw"
                                                 style="border-radius:7px;"
                                             >
@@ -218,46 +183,54 @@ img {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-xl-5 col-lg-6">
                         <div class="text-left">
                             <div class="row">
-                                <table width="90%" cellpadding="15px" style="margin-top:-20px">
-                                    <tr>
-                                        <td colspan="2">
-                                            <span class="fs-20">{{$product->name}}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="wallet_price">${{$product->price}}.00</span></td>
-                                        {{-- <td>$800</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><span class="wallet_description">{{$product->describe_item}}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="text-center wallet_visit_seller" style="width:180px;height:32px;">
-                                                <a href=""><i class="fa-solid fa-circle-plus fa-2xl" style="color:#e2e3e5;"></i></a>
-                                                <span class="text-reset wallet_font" style="margin:0% 27%">{{('5')}}</span>
-                                                <a href=""><i class="fa-solid fa-circle-minus fa-2xl" style="color:#e2e3e5;"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-center wallet_visit_seller" style="height:34px">
-                                            <a href="#" role="button" class="text-reset wallet_font">{{('Pay Now')}}</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center wallet_visit_seller" style="height:34px;width:180px">
-                                                <a href="#" role="button" class="text-reset wallet_font">{{('Share Payment Link')}}</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <form action="{{ url('send_payment') }}" method="POST">
+
+                                    <table width="90%" cellpadding="15px" style="margin-top:-20px">
+                                        <tr>
+                                            <td colspan="2">
+                                                <span class="fs-20">{{$product->name}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="wallet_price">${{$product->discount_price}}</span></td>
+
+                                            {{-- <td>$800</td> --}}
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span class="wallet_description">{{$product->describe_item}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="text-center wallet_visit_seller" style="width:180px;height:32px;">
+                                                    <a onclick='ChangeQuantity("plus")'><i class="fa-solid fa-circle-plus fa-2xl" style="color:#e2e3e5;"></i></a>
+                                                    <span id="quantity" class="text-reset wallet_font" style="margin:0% 27%">1</span>
+                                                    <a onclick='ChangeQuantity("minus")'><i class="fa-solid fa-circle-minus fa-2xl" style="color:#e2e3e5;"></i></a>
+                                                </div>
+                                                @csrf
+                                                <input type="hidden" id="amount" name="amount" value="0"/>
+                                                <input type="hidden" id="product_price" name="product_price" value="{{$product->discount_price}}"/>
+                                                <input type="hidden" class="cust_id" name="cust_id" value=""/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="text-center wallet_visit_seller" style="height:34px">
+                                                <button id="checkoutbtn" role="button" class="text-reset wallet_font" onclick="checkoutnow()">{{('Pay Now')}}</button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-center wallet_visit_seller" style="height:34px;width:180px">
+                                                    <a href="#" role="button" class="text-reset wallet_font">{{('Share Payment Link')}}</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -265,12 +238,134 @@ img {
                 @endforeach
             </div>
         </div>
+
+        <div class="modal fade" id="userForm">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">Information</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="card-body mb-12">
+                            <div class="form-outline mb-4">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Full Name">
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Phone Number">
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="text" name="address" id="address" class="form-control" placeholder="Address">
+                            </div>
+                            {{-- <div class="form-outline">
+                                <input type="text" name="discountAmt" id="discountAmt" class="form-control" placeholder="">
+                            </div> --}}
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <div class="footer">
+                            {{-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} --}}
+                            <button type="button" class="btn btn-primary saveCustomerData theamBtnColor" data-dismiss="modal" >Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+
+    <script>
+        $(document).ready(function() {
+            var userData = localStorage.getItem('userData');
+            if(userData){
+                // console.log(userData);
+                $('.cust_id').val(jQuery.parseJSON(userData).cust_id);
+                $('#checkoutbtn').removeAttr("type").attr("type", "submit");
+            }
+
+            $(".saveCustomerData").click(function(){
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var phone_number = $("#phone_number").val();
+                var address = $("#address").val();
+                if(name == ""){
+                    alert("Please enter full name");
+                    return false;
+                }else if(email == ""){
+                    alert("Please enter email");
+                    return false;
+                }else if(phone_number == ""){
+                    alert("Please enter phone number");
+                    return false;
+                }else if(address == ""){
+                    alert("Please enter address");
+                    return false;
+                }
+                $.ajax({
+                    url: "{{ url('save_customer') }}",
+                    type: 'POST',
+                    data: {_token:  $('meta[name="csrf-token"]').attr('content'), name: name, email: email, phone_number: phone_number, address: address},
+                    dataType: 'JSON',
+                    success: function (res) {
+                        $('.cust_id').val(res.request.cust_id);
+                        if(res.status == 1){ // new customer
+                            localStorage.setItem('userData', JSON.stringify(res.request));
+                        }else if(res.status == 2){ // old customer
+                            localStorage.setItem('userData', JSON.stringify(res.request));
+                        }
+                        alert('Registration Successfully');
+                        checkoutnow();
+                    }
+                });
+            });
+        });
+
+        function priceCount(){
+            var amountVal = $('#product_price').val() * parseInt($('#quantity').text());
+            $('#amount').val(amountVal);
+        }
+        function ChangeQuantity(p_type){
+            var $input = $('#quantity');
+            if(p_type == "minus"){
+                var count = parseInt($input.text()) - 1;
+            }else if(p_type == "plus"){
+                var count = parseInt($input.text()) + 1;
+            }
+            count = count < 0 ? 0 : count;
+            $input.text(count);
+            priceCount();
+        }
+
+        function checkoutnow()
+        {
+            var userData = localStorage.getItem('userData');
+            console.log(userData);
+            if(userData){
+                // $('#paymentModal').modal('show');
+                // console.log(userData);
+                $('.cust_id').val();
+                $('#checkoutbtn').removeAttr("type").attr("type", "submit");
+            }else{
+                $('#userForm').modal('show');
+                // var userData = localStorage.setItem('userData', 'userData');
+            }
+        }
+    </script>
+
+    </body>
 </html>

@@ -65,6 +65,9 @@ Route::post('send_payment', 'UsersProductController@sendPayment');
 Route::get('successPayment/{id}/{cust_id}/{amount}', 'UsersProductController@successPayment');
 Route::get('cancelPayment/{id}/{cust_id}/{amount}', 'UsersProductController@cancelPayment');
 
+Route::get('successPayment/{cust_id}/{amount}', 'UsersProductController@successPayment');
+Route::get('cancelPayment/{cust_id}/{amount}', 'UsersProductController@cancelPayment');
+
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('optimize:clear');
     // dd('good');
