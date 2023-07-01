@@ -29,10 +29,7 @@
         justify-content: space-between;
     }
     .slide_img{
-    height: 100px;
-    width:100px;
-    /* margin:5px 0%; */
-    border:1px solid rgb(22, 205, 187);
+    border:1px solid #16cdbb;
     }
     .simage_hw{
         width:98px !important;
@@ -73,7 +70,7 @@
     font-size: 1.1rem;
 }
 .wallet_visit_seller{
-    background-image: linear-gradient(#59a8ee, rgb(44, 201, 154));
+    background-image: linear-gradient(#59a8ee, #2cc99a);
     color: #ffffff;
     width: 100%;
     padding: 3px 0px;
@@ -88,24 +85,37 @@
 .img-fluid {
     max-width: 100%;
     height: auto;
+    border:1px solid #16cdbb;
+    border-radius: 0.25rem;
 }
 img {
     vertical-align: middle;
     border-style: none;
 }
 .pro_img{
-    border:1px solid rgb(22, 205, 187);
+    border:1px solid #16cdbb;
     margin:5px 0%;
 }
 .pro_gallery_img{
     height: 152px;
     width:150px;
     margin:5px 0%;
-    border:1px solid rgb(22, 205, 187);
+    border:1px solid #16cdbb;
 }
 .image_hw{
     width:480px;
     height:480px;
+}
+/* .card-body:active{
+    border:2px solid red;
+} */
+.active{
+
+    border:2px solid #16cdbb;
+    border-radius: 0.25rem;
+}
+.card{
+    border:none !important;
 }
 
 </style>
@@ -124,12 +134,13 @@ img {
                     <div class="col-2 mb-4">
                         <div class="row ml-1">
                             <div class="card pro_gallery_img">
-                                <div class="card-body">
-                                    <a href="#">
+                                <div class="card-body active">
+                                    <a href="#" class="aimg">
                                         <img
                                             src="{{ asset('public/img/logo4.jpg')}}"
                                             class="img-fluid"
-                                            style="border-radius:7px;height:150px;width:150px"
+                                            style="border-radius:0.25rem;height:150px;width:150px;"
+                                            onclick="myFunction(this)"
                                         >
                                     </a>
                                 </div>
@@ -138,11 +149,12 @@ img {
                         <div class="row ml-1">
                             <div class="card pro_gallery_img">
                                 <div class="card-body">
-                                    <a href="#">
+                                    <a href="#" class="aimg">
                                         <img
                                             src="{{ asset('public/img/logo.jpg')}}"
                                             class="img-fluid"
-                                            style="border-radius:7px;height:150px;width:150px"
+                                            style="border-radius:0.25rem;height:150px;width:150px"
+                                            onclick="myFunction(this)"
                                         >
                                     </a>
                                 </div>
@@ -159,31 +171,62 @@ img {
                                     <img
                                         src="{{ asset('public/img/logo4.jpg')}}"
                                         class="img-fluid image_hw"
-                                        style="border-radius:7px;"
+                                        style="border-radius:0.25rem;"
+                                        id="expandedImg"
                                     >
                                 </a>
                             </div>
                         </div>
                     </div>
+{{-- for mobileview --}}
 
-                    {{-- <div class="slider">
+                    <div class="slider">
                         <div class="row">
-
                             <div class="col-4">
                                 <div class="card slide_img">
                                     <div class="card-body">
-                                        <a href="#">
+                                        <a href="#" class="aimg">
                                             <img
                                                 src="{{ asset('public/img/logo4.jpg')}}"
-                                                class="simage_hw"
-                                                style="border-radius:7px;"
+                                                class="img-fluid"
+                                                style="border-radius:0.25rem;height:150px;width:150px;"
+                                                onclick="myFunction(this)"
+                                            >
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card slide_img">
+                                    <div class="card-body">
+                                        <a href="#" class="aimg">
+                                            <img
+                                                src="{{ asset('public/img/logo.jpg')}}"
+                                                class="img-fluid"
+                                                style="border-radius:0.25rem;height:150px;width:150px"
+                                                onclick="myFunction(this)"
+                                            >
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card slide_img">
+                                    <div class="card-body">
+                                        <a href="#" class="aimg">
+                                            <img
+                                                src="{{ asset('public/img/logo4.jpg')}}"
+                                                class="img-fluid"
+                                                style="border-radius:0.25rem;height:150px;width:150px"
+                                                onclick="myFunction(this)"
                                             >
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
+
 
                     <div class="col-xl-5 col-lg-6">
                         <div class="text-left">
@@ -365,6 +408,25 @@ img {
                 // var userData = localStorage.setItem('userData', 'userData');
             }
         }
+
+        //for image gallery
+
+        function myFunction(imgs) {
+        var expandImg = document.getElementById("expandedImg");
+        expandImg.src = imgs.src;
+        expandImg.parentElement.style.display = "block";
+        }
+
+        var cardbody = document.getElementsByClassName("card-body");
+
+        for (var i = 0; i < cardbody.length; i++) {
+            cardbody[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+  });
+}
+
     </script>
 
     </body>
