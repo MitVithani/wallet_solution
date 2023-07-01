@@ -126,68 +126,20 @@ img {
                 @foreach ($product_details as $key => $product)
                     @php
                         $product_id = $product->id;
-                        $productdata=\App\Models\Product_Image::where('p_id',$product_id)->first();
-                        $product_img=$productdata->image ?? '';
+                        // $productdata=\App\Models\Product_Image::where('p_id',$product_id)->first();
+                        $productdatas = \App\Models\Product_Image::where('p_id',$product_id)->get();
+                        $product_img_main = $productdatas[0]->image ?? '';
                     @endphp
                 <div class="row">
                     {{-- gallery images --}}
                     <div class="col-2 mb-4">
-                        <div class="row ml-1">
-                            <div class="card pro_gallery_img">
-                                <div class="card-body active">
-                                    <a href="#" class="aimg">
-                                        <img
-                                            src="{{ asset('public/img/logo4.jpg')}}"
-                                            class="img-fluid"
-                                            style="border-radius:0.25rem;height:150px;width:150px;"
-                                            onclick="myFunction(this)"
-                                        >
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row ml-1">
-                            <div class="card pro_gallery_img">
-                                <div class="card-body">
-                                    <a href="#" class="aimg">
-                                        <img
-                                            src="{{ asset('public/img/logo.jpg')}}"
-                                            class="img-fluid"
-                                            style="border-radius:0.25rem;height:150px;width:150px"
-                                            onclick="myFunction(this)"
-                                        >
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {{-- main image --}}
-                    <div class="col-xl-5 col-lg-6 mb-4">
-                        <div class="card pro_img">
-                            <div class="card-body">
-                                <a href="#">
-                                    <img
-                                        src="{{ asset('public/img/logo4.jpg')}}"
-                                        class="img-fluid image_hw"
-                                        style="border-radius:0.25rem;"
-                                        id="expandedImg"
-                                    >
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-{{-- for mobileview --}}
-
-                    <div class="slider">
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card slide_img">
-                                    <div class="card-body">
+                        @foreach ($productdatas as $productdata)
+                            <div class="row ml-1">
+                                <div class="card pro_gallery_img">
+                                    <div class="card-body active">
                                         <a href="#" class="aimg">
                                             <img
-                                                src="{{ asset('public/img/logo4.jpg')}}"
+                                                src="{{ asset($productdata->image)}}"
                                                 class="img-fluid"
                                                 style="border-radius:0.25rem;height:150px;width:150px;"
                                                 onclick="myFunction(this)"
@@ -196,34 +148,45 @@ img {
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
+                    </div>
+
+                    {{-- main image --}}
+                    <div class="col-xl-5 col-lg-6 mb-4">
+                        <div class="card pro_img">
+                            <div class="card-body">
+                                <a href="#">
+                                    <img
+                                        src="{{ asset($product_img_main)}}"
+                                        class="img-fluid image_hw"
+                                        style="border-radius:0.25rem;"
+                                        id="expandedImg"
+                                    >
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- for mobileview --}}
+
+                    <div class="slider">
+                        <div class="row">
+                            @foreach ($productdatas as $productdata)
                             <div class="col-4">
                                 <div class="card slide_img">
                                     <div class="card-body">
                                         <a href="#" class="aimg">
                                             <img
-                                                src="{{ asset('public/img/logo.jpg')}}"
+                                                src="{{ asset($productdata->image)}}"
                                                 class="img-fluid"
-                                                style="border-radius:0.25rem;height:150px;width:150px"
+                                                style="border-radius:0.25rem;height:150px;width:150px;"
                                                 onclick="myFunction(this)"
                                             >
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <div class="card slide_img">
-                                    <div class="card-body">
-                                        <a href="#" class="aimg">
-                                            <img
-                                                src="{{ asset('public/img/logo4.jpg')}}"
-                                                class="img-fluid"
-                                                style="border-radius:0.25rem;height:150px;width:150px"
-                                                onclick="myFunction(this)"
-                                            >
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
@@ -262,14 +225,16 @@ img {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="text-center wallet_visit_seller" style="height:34px">
-                                                <button id="checkoutbtn" role="button" class="text-reset wallet_font" onclick="checkoutnow()">{{('Pay Now')}}</button>
-                                                </div>
+                                                {{-- <div class="text-center wallet_visit_seller" style="height:34px"> --}}
+                                                <button id="checkoutbtn" role="button" class="text-center wallet_visit_seller" onclick="checkoutnow()" style="height:34px; width:80px">{{('Pay Now')}}</button>
+                                                {{-- </div> --}}
                                             </td>
                                             <td>
-                                                <div class="text-center wallet_visit_seller" style="height:34px;width:180px">
+                                                <button id="checkoutbtn" role="button" class="text-center wallet_visit_seller" onclick="checkoutnow()" style="height:34px; width:180px">{{('Share Payment Link')}}</button>
+
+                                                {{-- <div class="text-center wallet_visit_seller" style="height:34px;width:180px">
                                                     <a href="#" role="button" class="text-reset wallet_font">{{('Share Payment Link')}}</a>
-                                                </div>
+                                                </div> --}}
                                             </td>
                                         </tr>
                                     </table>
@@ -334,6 +299,7 @@ img {
 
     <script>
         $(document).ready(function() {
+            priceCount();
             var userData = localStorage.getItem('userData');
             if(userData){
                 // console.log(userData);
