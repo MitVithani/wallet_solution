@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>all sellers</title>
+    <title>All Products</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -138,7 +138,11 @@ a{
                                                 >
                                             </a>
                                             <div class="col-12">
-                                                    <div class="text-center wallet_font" style="height:30px">
+                                                    <div class="text-center wallet_font" style="height:30px;    display: inline-block;
+                                                        width: 180px;
+                                                        white-space: nowrap;
+                                                        overflow: hidden !important;
+                                                        text-overflow: ellipsis;">
                                                         <a href="{{route('product_detail',['pid'=>$product->id])}}" class="text-reset">{{$product->name}}</a>
                                                     </div>
 
