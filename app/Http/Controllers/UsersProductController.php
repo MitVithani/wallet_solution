@@ -172,7 +172,8 @@ class UsersProductController extends AppBaseController
 
     public function product_detail($pid){
         $product_details=Product::where('id',$pid)->get();
-        return view('product_detail',compact('product_details'));
+        $related_products=Product::where('id',$pid)->get();
+        return view('product_detail',compact('product_details','related_products'));
     }
 
 
