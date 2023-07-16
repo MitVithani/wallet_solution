@@ -62,7 +62,7 @@ img {
     border-radius: 0.10rem !important;
 }
 .border {
-     border: 1px solid  #36a0a6 !important;
+     border: 1px solid  #454545 !important;
 }
 .wallet_visit_seller{
     background-color: #454545;
@@ -96,14 +96,11 @@ img {
 a{
     text-decoration: none !important;
 }
-.pname{
-    height:30px;
-    display: inline-block;
-    width: 180px;
+/* .pname{
     white-space: nowrap;
     overflow: hidden !important;
-    text-overflow: ellipsis;"
-}
+    text-overflow: ellipsis;
+} */
 .nav-link{
     color:#A0D18C!important;
 }
@@ -139,6 +136,21 @@ a{
 }
 #inner-div .card-title{
     color:#A0D18C;font-weight:400;font-family:Fugaz One;font-size:44px;
+}
+
+.tt-line-clamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.tt-line-clamp.tt-clamp-1 {
+    -webkit-line-clamp: 1;
+}
+.tt-line-clamp.tt-clamp-2 {
+    -webkit-line-clamp: 2;
+}
+.tt-line-clamp.tt-clamp-3 {
+    -webkit-line-clamp: 3;
 }
 
 </style>
@@ -228,12 +240,12 @@ a{
                                                     height="210px" width="90%"
                                                 >
                                             </a>
-                                            <div class="col-12">
-                                                    <div class="text-center wallet_font pname">
+
+                                                    <div class="text-center wallet_font pname mt-2 tt-line-clamp tt-clamp-2">
                                                         <a href="{{route('product_detail',['pid'=>$product->id])}}" class="text-reset">{{$product->name}}</a>
                                                     </div>
 
-                                                    <div class="row"  style="height:40px;">
+                                                    <div class="row mt-2">
                                                         <div class="col text-center wallet_font">
                                                             $&nbsp;{{$product->discount_price}}
                                                         </div>
@@ -242,12 +254,12 @@ a{
                                                         </div>
                                                     </div>
 
-                                                    <div style="width: 100% !important;">
-                                                        <div class="text-center wallet_visit_seller" style="height:34px">
+                                                    {{-- <div style="width: 100% !important;"> --}}
+                                                        <div class="text-center wallet_visit_seller  mt-2" style="height:34px">
                                                             <a href="{{route('product_detail',['pid'=>$product->id])}}" role="button" class="text-reset wallet_font">{{('Add To Cart')}}</a>
                                                         </div>
-                                                    </div>
-                                            </div>
+                                                    {{-- </div> --}}
+
                                         </div>
                                     </div>
                             @endif
