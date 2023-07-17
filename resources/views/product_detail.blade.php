@@ -29,7 +29,7 @@
         justify-content: space-between;
     }
     .slide_img{
-    border:1px solid #16cdbb;
+    border:1px solid #454545;
     }
     .simage_hw{
         width:98px !important;
@@ -97,7 +97,7 @@ table{
     background-color:#454545;
     color: #ffffff;
     width: 100%;
-    padding: 3px 0px;
+    padding: 5px 0px;
     border-radius: 25px 25px;
 }
 .wallet_font{
@@ -109,7 +109,7 @@ table{
 .img-fluid {
     max-width: 100%;
     height: auto;
-    border:1px solid #16cdbb;
+    border:1px solid #454545;
     border-radius: 0.25rem;
 }
 img {
@@ -117,14 +117,14 @@ img {
     border-style: none;
 }
 .pro_img{
-    border:1px solid #16cdbb;
+    border:1px solid #454545;
     margin:5px 0%;
 }
 .pro_gallery_img{
     height: 152px;
     width:150px;
     margin:5px 0%;
-    border:1px solid #16cdbb;
+    border:1px solid #454545;
 }
 .image_hw{
     width:480px;
@@ -135,7 +135,7 @@ img {
 } */
 .active{
 
-    /* border:1px solid #16cdbb;
+    /* border:1px solid #454545;
     border-radius: 0.25rem; */
 }
 .card{
@@ -148,14 +148,7 @@ img {
     height: 34px;
     border: 0;
 }
-.pname{
-    height:30px;
-    display: inline-block;
-    width: 180px;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;"
-}
+
 .wallet_product_disc{
     /* background-image: linear-gradient(#5CEBD2, #15D1F0); */
     height: 30px;
@@ -179,6 +172,7 @@ a{
     width: 100%;
     text-align: center;
     background-color: #0a0a2a;
+    /* background-image: url("bgimg.png"); */
     border-radius: 7px;
     height:225px;
 }
@@ -199,6 +193,20 @@ a{
 }
 #inner-div .card-title{
     color:#A0D18C;font-weight:400;font-family:Fugaz One;font-size:44px;
+}
+.tt-line-clamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.tt-line-clamp.tt-clamp-1 {
+    -webkit-line-clamp: 1;
+}
+.tt-line-clamp.tt-clamp-2 {
+    -webkit-line-clamp: 2;
+}
+.tt-line-clamp.tt-clamp-3 {
+    -webkit-line-clamp: 3;
 }
 
 </style>
@@ -248,16 +256,16 @@ a{
 
       <div id="outer-div">
         <div id="inner-div">
-            <div class="card mr-auto ml-auto">
+            <div class="card">
                 <div class="row no-gutters">
                     <div class="col-md-3 col-5">
                         <img src="{{asset('public/img/gimg.png')}}" height="124" width="124" alt="...">
                     </div>
                     <div class="col-md-9 col-7">
-                        <div class="card-body text-left ml-4">
-                            <div class="card-title">Shop Now</div>
+                        <div class="card-body text-left">
+                            <div class="card-title ml-4">Shop Now</div>
                             <a href="{{ url()->previous() }}">
-                                <img src="{{asset('public/img/backtocatalog.png')}}" alt="" id="cateimg">
+                                <img src="{{asset('public/img/backtocatalog.png')}}" alt="" id="cateimg" class="ml-4">
                             </a>
                         </div>
                     </div>
@@ -359,9 +367,9 @@ a{
                                         <tr>
                                             <td colspan="2">
                                                 <div class="text-center wallet_visit_seller" style="width:180px;height:32px;">
-                                                    <a onclick='ChangeQuantity("minus")'><i class="fa-solid fa-circle-minus fa-2xl" style="color:#e2e3e5;"></i></a>
-                                                    <span id="quantity" class="text-reset wallet_font" style="margin:0% 27%">1</span>
-                                                    <a onclick='ChangeQuantity("plus")'><i class="fa-solid fa-circle-plus fa-2xl" style="color:#e2e3e5;"></i></a>
+                                                    <a onclick='ChangeQuantity("minus")'><i class="fa-solid fa-minus fa-sm"></i></a>
+                                                    <span id="quantity" class="text-reset wallet_font" style="padding:0% 27%">1</span>
+                                                    <a onclick='ChangeQuantity("plus")'><i class="fa-solid fa-plus fa-sm"></i></a>
                                                 </div>
                                                 @csrf
                                                 <input type="hidden" id="amount" name="amount" value="0"/>
@@ -458,26 +466,26 @@ a{
                                             height="210px" width="90%"
                                         >
                                     </a>
-                                    <div class="col-12">
-                                            <div class="text-center wallet_font pname">
-                                                <a href="{{route('product_detail',['pid'=>$product->id])}}" class="text-reset">{{$product->name}}</a>
-                                            </div>
 
-                                            <div class="row"  style="height:40px;">
-                                                <div class="col text-center wallet_font">
-                                                    $&nbsp;{{$product->discount_price}}
-                                                </div>
-                                                <div class="col text-center wallet_strike">
-                                                    $&nbsp;{{$product->price}}
-                                                </div>
-                                            </div>
-
-                                            <div style="width: 100% !important;">
-                                                <div class="text-center wallet_visit_seller" style="height:34px">
-                                                    <a href="{{route('product_detail',['pid'=>$product->id])}}" role="button" class="text-reset wallet_font">{{('Add To Cart')}}</a>
-                                                </div>
-                                            </div>
+                                    <div class="text-center wallet_font pname mt-2 tt-line-clamp tt-clamp-2">
+                                        <a href="{{route('product_detail',['pid'=>$product->id])}}" class="text-reset">{{$product->name}}</a>
                                     </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col text-center wallet_font">
+                                            $&nbsp;{{$product->discount_price}}
+                                        </div>
+                                        <div class="col text-center wallet_strike">
+                                            $&nbsp;{{$product->price}}
+                                        </div>
+                                    </div>
+
+                                    {{-- <div style="width: 100% !important;"> --}}
+                                        <div class="text-center wallet_visit_seller  mt-2" style="height:34px">
+                                            <a href="{{route('product_detail',['pid'=>$product->id])}}" role="button" class="text-reset wallet_font">{{('Add To Cart')}}</a>
+                                        </div>
+                                    {{-- </div> --}}
+
                                 </div>
                             </div>
                     @endif
@@ -487,7 +495,7 @@ a{
                  {{('no product funds')}}
             @endif
         </div>
-    {{-- {{ $products->links() }} --}}
+        {{-- {{ $products->links() }} --}}
     </section>
 
 </div>
