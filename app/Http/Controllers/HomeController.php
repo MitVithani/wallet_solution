@@ -48,4 +48,9 @@ class HomeController extends Controller
         return view('admin.home')->with(['totalUsers' => $totalUsers, 'totalPayment' => $totalPayment]);
     }
 
+    public function userHome(){
+        $shops=User::paginate(25);
+        return view('homepage', compact('shops'));
+    }
+
 }
