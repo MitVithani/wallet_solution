@@ -29,6 +29,16 @@
     background-color: #454545;
     color: #ffffff;
 }
+#product_amount{
+    font-weight: 600;
+    color:#454545;
+    font-size: 18px;
+}
+#product_name{
+    font-weight: 500;
+    color:#454545;
+    font-size: 18px;
+}
 
 </style>
 <div class="container">
@@ -62,12 +72,12 @@
                                     </span>
                                     <span class="col-md-8"  style="display: block !important;" >
                                         <div class="col-md-12">
-                                            <span class="tt-line-clamp tt-clamp-2">{{$product->name}}</span>
+                                            <span class="tt-line-clamp tt-clamp-2" id="product_name">{{$product->name}}</span>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mt-3">
                                             <span class="tt-line-clamp tt-clamp-2" id="product_amount">$&nbsp;{{$product->price}}</span>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mt-3">
                                                 <div class="text-center wallet_visit_seller" style="width:180px;">
                                                     <button class="increment-btn rounded-circle" onclick='ChangeQuantity("minus")'><i class="fa-solid fa-minus fa-sm"></i></button>
                                                     <span id="quantity" class="qty-input text-reset wallet_font" style="padding:0% 27%">{{$cartItem->qty}}</span>
