@@ -38,6 +38,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
+
     public function postLogin(Request $request)
     {
         $input = $request->all();
@@ -76,6 +78,71 @@ class LoginController extends Controller
                 ]);
             }else if(auth()->user()->status == "active"){
                 return redirect()->route('home');
+            }
+            else{
+                auth()->logout();
+
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Some thing is worg please try again.'
+                ]);
+            }
+        }else{
+            return redirect()->back()
+            ->withInput()
+            ->withErrors([
+                'password' => 'Your email and password do not match.'
+            ]);
+        }
+
+    }
+
+     //user_login
+     public function show_user_login(){
+        // return redirect(route('user_login'));
+        return view('auth.user_login');
+    }
+
+
+    public function post_user_login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if (auth()->user()->is_admin == 1) {
+                return redirect()->route('admin.home');
+            }
+            else if(auth()->user()->is_confirm == 0){
+                auth()->logout();
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Confirmation link is sent to your registered email address. Please check spam folder also for verification mail.'
+                ]);
+            }
+            else if(auth()->user()->status == "pending"){
+                auth()->logout();
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Your Verification pending form admin side.'
+                ]);
+            }else if(auth()->user()->status == "deactive"){
+                auth()->logout();
+                return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Your account suspended by admin.'
+                ]);
+            }else if(auth()->user()->status == "active"){
+                return redirect()->route('userhome');
             }
             else{
                 auth()->logout();
