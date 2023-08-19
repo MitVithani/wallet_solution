@@ -106,4 +106,36 @@ class RegisterController extends Controller
             'password' => 'Confirmation link is sent to your registered email address. Please check spam folder also for verification mail'
         ]);
     }
+
+
+    //user_register
+    public function show_user_register(){
+        return view('auth.user_register');
+    }
+
+    public function post_user_registration(Request $request)
+    {
+        $this->validate($request,[
+            'email'=>'unique:users',
+            'phone_number'=>'unique:users',
+            'password'=>'required|min:6|confirmed',
+            'password_confirmation'=>'required|min:6|',
+        ]);
+        $data['name'] = $request->name;
+        $data['phone_number'] = $request->phone_number;
+        $data['email'] = $request->email;
+        $data['password'] = Hash::make($request->password);
+        // $data['confirm_password'] = $request->confirm_password;
+
+        User::create($data);
+        // CommonController::verify_email($request->email, $request->name);
+
+        return redirect(route('user_login'))
+        ->withInput()
+        ->withErrors([
+            'password' => 'Some thing is worg please try again.'
+        ]);
+
+    }
+
 }

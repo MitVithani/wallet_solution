@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'SellerController@index')->name('home');
+Route::get('/', 'HomeController@userHome')->name('userhome');
 
 
 Auth::routes();
@@ -23,6 +23,12 @@ Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middle
 Route::post('post-login', 'Auth\LoginController@postLogin')->name('login.post');
 Route::get('login-user', 'Auth\LoginController@showLoginForm')->name('login-user');
 Route::post('post-registration', 'Auth\RegisterController@postRegistration')->name('register.post');
+
+//for the user_login and register_login
+Route::get('user_login', 'Auth\LoginController@show_user_login')->name('user_login');
+Route::get('user_register', 'Auth\RegisterController@show_user_register')->name('user_register');
+Route::post('post_user_register', 'Auth\RegisterController@post_user_registration')->name('post_user_registration');
+Route::post('post_user_login', 'Auth\LoginController@post_user_login')->name('post_user_login');
 
 Route::get('forget-password', 'Auth\ForgotPasswordController@showForgetPasswordForm')->name('forget.password.get');
 Route::post('forget-password', 'Auth\ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post');
@@ -86,3 +92,17 @@ Route::get('product_list/{id}','UsersProductController@product_list')->name('pro
 
 //route for product detail page
 Route::get('product_detail/{pid}','UsersProductController@product_detail')->name('product_detail');
+
+//footer page
+Route::get('term_condition','FooterController@show_term_condition')->name('term_condition');
+Route::get('aboutus','FooterController@show_aboutus')->name('aboutus');
+Route::get('privacy','FooterController@show_privacy')->name('privacy');
+Route::get('prohibited_ausinesses_and_activities','FooterController@show_activities')->name('activities');
+Route::get('acceptable_use_policy','FooterController@show_acceptable_use_policy')->name('acceptable_use_policy');
+
+//cart page
+Route::get('cart','CartController@cart_list')->name('cart_list');
+Route::post('cart','CartController@addToCart')->name('cart_store');
+Route::get('cart/removeFromCart/{id}','CartController@removeFromCart')->name('removeFromCart');
+Route::post('cart/updateQuantity','CartController@updateQuantity')->name('cart_updateQuantity');
+
