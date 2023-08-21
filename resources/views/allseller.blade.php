@@ -13,23 +13,7 @@
         vertical-align: middle;
         border-style: none;
     }
-    .border {
-        border: 1px solid  #36a0a6;
-    }
-    .wallet_visit_seller{
-        /* background-image: linear-gradient(#11CFF1, #94FFBA); */
-        background-color: #454545;
-        color: #ffffff;
-        width: 100%;
-        padding: 3px 5px;
-        border-radius: 7px 7px 7px 7px;
-    }
-    .card{
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 4px 4px rgba(0,0,0,0.23);
-    }
-    .card:hover {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    }
+
     </style>
 
 
@@ -56,7 +40,7 @@
                                                     <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{$shop->shop_name}}</a>
                                                 </h2>
 
-                                                <div class="text-center wallet_visit_seller">
+                                                <div class="text-center home_visit_seller">
                                                     <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{('Visit Seller')}}</a>
                                                 </div>
                                             </div>

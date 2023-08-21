@@ -49,7 +49,7 @@
                                             <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{$shop->shop_name}}</a>
                                         </h2>
 
-                                        <div class="text-center wallet_visit_seller">
+                                        <div class="text-center home_visit_seller">
                                             <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{('Visit Seller')}}</a>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
                                                 <h2 class="h6 fw-600 text-center">
                                                     <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{$shop->shop_name}}</a>
                                                 </h2>
-                                                <div class="text-center wallet_visit_seller">
+                                                <div class="text-center home_visit_seller">
                                                     <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{('Visit Seller')}}</a>
                                                 </div>
                                             </div>
@@ -166,7 +166,7 @@
                                                     <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{$shop->shop_name}}</a>
                                                 </h2>
 
-                                                <div class="text-center wallet_visit_seller">
+                                                <div class="text-center home_visit_seller">
                                                     <a href="{{route('product_list',['id'=>$shop->id])}}" class="text-reset">{{('Visit Seller')}}</a>
                                                 </div>
                                             </div>
