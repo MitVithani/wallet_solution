@@ -106,3 +106,14 @@ Route::post('cart','CartController@addToCart')->name('cart_store');
 Route::get('cart/removeFromCart/{id}','CartController@removeFromCart')->name('removeFromCart');
 Route::post('cart/updateQuantity','CartController@updateQuantity')->name('cart_updateQuantity');
 
+//order confirmed
+Route::get('/order_confirmed', 'CheckoutController@order_confirmed')->name('order_confirmed');
+Route::get('/order_history', 'CheckoutController@order_history')->name('order_history');
+Route::get('/order_history/detail', 'CheckoutController@order_detail')->name('order_detail');
+
+
+//profile
+Route::get('/profile', 'UserController@show')->name('user_profile');
+Route::post('/user/update-profile', 'UserController@userProfileUpdate')->name('user_profile_update');
+
+
