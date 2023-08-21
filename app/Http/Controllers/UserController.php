@@ -29,6 +29,6 @@ class UserController extends Controller
         $user->password= $request['new_password'];
 
         $user->save();
-        return back();
+        return back()->with('success','updated successfully!');;
     }
 }

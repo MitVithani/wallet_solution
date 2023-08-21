@@ -131,7 +131,7 @@
     .nav-link{
         color:#A0D18C!important;
     }
-    span{
+    .spanfont{
         font-family: Frank Ruhl;
     }
     .rectangle {

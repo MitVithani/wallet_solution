@@ -8,10 +8,10 @@
                     <img class="img-left" src="{{ asset('public/img/Vector.png')}}" alt="" style="margin-left:-117px" width="10%" height="10%">
                     <div class="col-xl-5 col-lg-7 text-left" id="main_banner_text">
                         <div class="heading">
-                            <span>Find The Best Product Item For You</span>
+                            <span class="spanfont">Find The Best Product Item For You</span>
                         </div>
                         <div class="text2">
-                            <span>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</span>
+                            <span class="spanfont">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</span>
                         </div>
                         <a name="" id="" class="btn mb-3 mt-4" href="#" role="button" style="border: 2px solid #646262;background-color:#A0D18C">Shop Now</a>
                     </div>

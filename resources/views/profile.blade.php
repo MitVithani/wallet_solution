@@ -7,32 +7,39 @@
 </style>
 
 <div class="container">
-    <div class="row my-2    ">
+
+    <div class="row my-2 ">
         <div class="col-md-10 mx-auto">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
             <form action="{{route('user_profile_update')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- Basic Info-->
                 <div class="card  border-0">
                     <div class="card-body">
                         <div class="row px-3 pb-3">
-                            <div class="fs-19s fw-600">{{ ('Update profile')}}</div>
+                            <div class="fs-19 fw-600">{{ ('Update profile')}}</div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">{{ ('Your Name') }}</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Your Name') }}</span></label>
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" placeholder="{{ ('Your Name') }}" name="name" value="{{ auth()->user()->name }}">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">{{ ('Your Phone') }}</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Your Phone') }}</span></label>
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" placeholder="{{ ('Your Phone')}}" name="phone" value="{{ auth()->user()->phone_number }} ">
                             </div>
                         </div>
                         {{-- <div class="form-group row">
-                            <label class="col-md-2 col-form-label">{{ ('Photo') }}</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Photo') }}</span></label>
+                            <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-soft-secondary font-weight-medium">{{ ('Browse')}}</div>
@@ -45,20 +52,20 @@
                             </div>
                         </div> --}}
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">{{ ('Your E-mail') }}</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Your E-mail') }}</span></label>
+                            <div class="col-md-9">
                                 <input type="email" class="form-control" placeholder="{{ ('New E-mail') }}" name="new_email">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">{{ ('Your Password') }}</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Your Password') }}</span></label>
+                            <div class="col-md-9">
                                 <input type="password" class="form-control" placeholder="{{ ('New Password') }}" name="new_password">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">{{ ('Confirm Password') }}</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Confirm Password') }}</span></label>
+                            <div class="col-md-9">
                                 <input type="password" class="form-control" placeholder="{{ ('Confirm Password') }}" name="confirm_password">
                             </div>
                         </div>
