@@ -37,20 +37,6 @@
                                 <input type="text" class="form-control" placeholder="{{ ('Your Phone')}}" name="phone" value="{{ auth()->user()->phone_number }} ">
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Photo') }}</span></label>
-                            <div class="col-md-9">
-                                <div class="input-group" data-toggle="aizuploader" data-type="image">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text bg-soft-secondary font-weight-medium">{{ ('Browse')}}</div>
-                                    </div>
-                                    <div class="form-control file-amount">{{ ('Choose File') }}</div>
-                                    <input type="hidden" name="photo" value="{{ Auth::user()->avatar_original }}" class="selected-files">
-                                </div>
-                                <div class="file-preview box sm">
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"><span class="fw-500">{{ ('Your E-mail') }}</span></label>
                             <div class="col-md-9">
