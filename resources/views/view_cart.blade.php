@@ -1,5 +1,7 @@
 @extends('mainlayout')
 
+
+
 @section('content')
 <style>
     .h_50{
@@ -71,7 +73,7 @@
                                         </a>
                                     </span>
                                     <span class="col-md-8"  style="display: block !important;" >
-                                        <div class="col-md-12">
+                                        <div class="col-md-8">
                                             <span class="tt-line-clamp tt-clamp-2" id="product_name">{{$product->name}}</span>
                                         </div>
                                         <div class="col-md-12 mt-3">
@@ -92,15 +94,148 @@
                     @endforeach
                 </ul>
             </div>
-            <div clas="col-xl-5 mx-auto">
+        </div>
 
+        <!-- Button trigger modal -->
+        <div class="row">
+            <div class="col-md-12 text-center my-3">
+                <button type="button" id="btn" class="btn wallet_button">{{('Pay Now')}}
+                </button>
             </div>
         </div>
+
     {{-- @endif --}}
 </div>
 
+      <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="examplemodal"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body pb-0">
+                        <form class="form-default" role="form" action="{{route('store_address')}}" method="POST">
+                            @csrf
+                            @php
+                                $address = \App\Models\Address::where('user_id',auth()->user()->id)->first();
+                            @endphp
+
+                                <div class="p-3">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('First Name')}}</label>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control mb-3" placeholder="{{ ('First Name')}}" value="{{$address->firstname ?? ''}}" name="firstname" required>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('Last Name')}}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control mb-3" placeholder="{{ ('Last Name')}}" value="{{$address->lastname ?? ''}}" name="lastname" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('Country')}}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <select class="form-control aiz-selectpicker"  data-placeholder="{{ ('Select your country') }}" name="country" required>
+                                                    <option value="">{{ ('Select your country') }}</option>
+                                                        @foreach (\App\Models\Country::get() as $key => $country)
+                                                            <option value="{{ $country->name }}"  @isset($address) @if($address->country ==  $country->name) selected @endif @endif>{{ $country->name }}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('State')}}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="form-control mb-3 aiz-selectpicker"  data-placeholder="{{ ('Select State') }}" name="state" required>
+                                                <option value="">{{ ('Select State') }}</option>
+                                                    @foreach (\App\Models\State::get() as $key => $state)
+                                                    <option value="{{ $state->name }}" @isset($address) @if($address->state ==  $state->name) selected @endif @endif>{{ $state->name }}</option>
+                                                    @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('City')}}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="form-control mb-3 aiz-selectpicker"  data-placeholder="{{ ('Select City') }}" name="city" required>
+                                                <option value="">{{ ('Select City') }}</option>
+                                                    @foreach (\App\Models\City::get() as $key => $city)
+                                                            <option value="{{ $city->name }}" @isset($address) @if($address->city ==  $city->name) selected @endif @endif>{{ $city->name }}</option>
+                                                    @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('Postal code')}}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control mb-3" placeholder="{{ ('Enter Your Postal Code')}}" name="postal_code" value="{{$address->postal_code ?? ''}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('Phone')}}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control mb-3" placeholder="{{ ('+880')}}" name="phone" value="{{$address->phone ?? ''}}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('Address')}}</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            @isset($address)
+                                                <textarea class="form-control mb-3" placeholder="{{ ('Enter Your Address')}}" rows="2" name="address" required>{{$address->address}}</textarea>
+                                            @else
+                                                <textarea class="form-control mb-3" placeholder="{{ ('Enter Your Address')}}" rows="2" name="address" required></textarea>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn wallet_button col-4">{{('Pay Now')}}</button>
+                                    </div>
+                                </div>
+
+                        </form>
+                    </div>
+                {{-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">save</button>
+                </div> --}}
+            </div>
+        </div>
+      </div>
+
+
 
 <script type="text/javascript">
+
+    $('#btn').on('click',function(e){
+        e.preventDefault();
+        $('#examplemodal').modal('show');
+    });
+
     $(document).ready(function() {
 
         // increment product quantity when + button is clicked
@@ -132,4 +267,6 @@
         });
     });
 </script>
+
+
 @endsection
