@@ -63,136 +63,135 @@
             }
 
     }
-    .vector_img {
-                margin-left:1100px;
-            }
-            .right_vector_img {
-                margin-left: 1050px;
-            }
-    .osmargin{
-            margin-top: -110px;
-            margin-bottom:-110;
-        }
-    body{
-        overflow-x: hidden;
-    }
-    .img-fluid {
-        max-width: 100%;
-        height: auto;
-    }
-    img {
-        vertical-align: middle;
-        border-style: none;
-    }
-    .align-items-center {
-        justify-content: space-between;
-    }
-    .rounded {
-        border-radius: 0.10rem;
-    }
-    .border {
-        border: 1px solid  #36a0a6;
-    }
-    .wallet_font{
-        font-weight: 600;
-    }
-    .wallet_strike{
-        text-decoration: line-through;
-        color:#9da3a3;
-    }
-    .wallet_visit_seller{
-        background-color: #454545;
-        color: #ffffff !important;
-        width: 100%;
-        padding: 5px 5px;
-        border-radius: 25px 25px;
-    }
-    .home_visit_seller{
-        /* background-image: linear-gradient(#11CFF1, #94FFBA); */
-        background-color: #454545;
-        color: #ffffff;
-        width: 100%;
-        padding: 3px 5px;
-        border-radius: 7px 7px 7px 7px;
-    }
-
-    .card_shadow{
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 4px 4px rgba(0,0,0,0.23);
-    }
-    .card_shadow:hover {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    }
-    a{
-        text-decoration: none !important;
-    }
-    .hcolor{
-        color: #454545;
-    }
-    .nav-link{
-        color:#A0D18C!important;
-    }
-    .spanfont{
-        font-family: Frank Ruhl;
-    }
-    .rectangle {
-        height: 70px;
-        width: 500px;
-        background-color:#546A86;
-        color:#A0D18C;
-        margin-left: -200px;
-        margin-top: 50px;
-    }
-    #gb1{
-        background-image: linear-gradient(to right, #c6d0d6 , #ffffff, #ffffff, #ffffff);
-    }
-    #gb2{
-        background-image: linear-gradient(to right, #ffffff, #ffffff, #ffffff,#c6d0d6);
-    }
-    .heading{
-        color: #454545;font-size:64px;font-weight:900;line-height:80px;font-family: Frank Ruhl;
-    }
-    .text2{
-        color: #454545;font-size:24px;font-weight:400;line-height:40px;font-family: Frank Ruhl;
-    }
-    .bset_sel_t2{
-        color: #454545;font-size:20px;font-weight:400;line-height:30px;
-    }
-    .card_t1{
-       color: #454545;font-size:30px;font-weight:900;line-height:36px;font-family: Frank Ruhl;
-    }
-    .card_t2{
-        margin-top:20px;color: #454545;font-size:20px;font-weight:400;line-height:25px;font-family:Lato;
-    }
-    .cname{
-        color: #454545;font-size:23px;font-weight:900;line-height:36px;font-family: Frank Ruhl;
-    }
-    .ctype{
-        color: #454545;font-size:20px;font-weight:400;line-height:25px;font-family: Frank Ruhl;
-    }
-    .ep_t1{
-        color: #454545;font-size:55px;font-weight:900;line-height:70px;
-    }
-    .ep_t2{
-        color: #454545;font-size:20px;font-weight:400;line-height:24px;
-    }
-    .footer_text{
-        margin-top:-10px;color:#A0D18C;font-weight:800;font-family:Fugaz One;font-size:60px;line-height:88px;
-    }
-
-    .tt-line-clamp {
+.vector_img {
+     margin-left:1100px;
+}
+.right_vector_img {
+    margin-left: 1050px;
+}
+.osmargin{
+    margin-top: -110px;
+    margin-bottom:-110;
+}
+body{
+    overflow-x: hidden;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.align-items-center {
+    justify-content: space-between;
+}
+.rounded {
+    border-radius: 0.10rem;
+}
+.border {
+    border: 1px solid  #36a0a6;
+}
+.wallet_font{
+    font-weight: 600;
+}
+.wallet_strike{
+    text-decoration: line-through;
+    color:#9da3a3;
+}
+.wallet_visit_seller{
+    background-color: #454545;
+    color: #ffffff !important;
+    width: 100%;
+    padding: 5px 5px;
+    border-radius: 25px 25px;
+}
+.home_visit_seller{
+    /* background-image: linear-gradient(#11CFF1, #94FFBA); */
+    background-color: #454545;
+    color: #ffffff;
+    width: 100%;
+    padding: 3px 5px;
+    border-radius: 7px 7px 7px 7px;
+}
+.card_shadow{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 4px 4px rgba(0,0,0,0.23);
+}
+.card_shadow:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+a{
+    text-decoration: none !important;
+}
+.hcolor{
+    color: #454545;
+}
+.nav-link{
+    color:#A0D18C!important;
+}
+.spanfont{
+    font-family: Frank Ruhl;
+}
+.rectangle {
+    height: 70px;
+    width: 500px;
+    background-color:#546A86;
+    color:#A0D18C;
+    margin-left: -200px;
+    margin-top: 50px;
+ }
+#gb1{
+    background-image: linear-gradient(to right, #c6d0d6 , #ffffff, #ffffff, #ffffff);
+}
+#gb2{
+    background-image: linear-gradient(to right, #ffffff, #ffffff, #ffffff,#c6d0d6);
+}
+.heading{
+    color: #454545;font-size:64px;font-weight:900;line-height:80px;font-family: Frank Ruhl;
+}
+.text2{
+    color: #454545;font-size:24px;font-weight:400;line-height:40px;font-family: Frank Ruhl;
+}
+.bset_sel_t2{
+    color: #454545;font-size:20px;font-weight:400;line-height:30px;
+}
+.card_t1{
+   color: #454545;font-size:30px;font-weight:900;line-height:36px;font-family: Frank Ruhl;
+}
+.card_t2{
+    margin-top:20px;color: #454545;font-size:20px;font-weight:400;line-height:25px;font-family:Lato;
+}
+ .cname{
+    color: #454545;font-size:23px;font-weight:900;line-height:36px;font-family: Frank Ruhl;
+}
+.ctype{
+    color: #454545;font-size:20px;font-weight:400;line-height:25px;font-family: Frank Ruhl;
+}
+.ep_t1{
+    color: #454545;font-size:55px;font-weight:900;line-height:70px;
+}
+.ep_t2{
+    color: #454545;font-size:20px;font-weight:400;line-height:24px;
+}
+.footer_text{
+    margin-top:-10px;color:#A0D18C;font-weight:800;font-family:Fugaz One;font-size:60px;line-height:88px;
+}
+.tt-line-clamp {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    }
-    .tt-line-clamp.tt-clamp-1 {
-        -webkit-line-clamp: 1;
-    }
-    .tt-line-clamp.tt-clamp-2 {
-        -webkit-line-clamp: 2;
-    }
-    .tt-line-clamp.tt-clamp-3 {
-        -webkit-line-clamp: 3;
-    }
+}
+.tt-line-clamp.tt-clamp-1 {
+    -webkit-line-clamp: 1;
+}
+.tt-line-clamp.tt-clamp-2 {
+    -webkit-line-clamp: 2;
+}
+.tt-line-clamp.tt-clamp-3 {
+    -webkit-line-clamp: 3;
+}
+
 /*bootstrap extend*/
 .fw-100 {
     font-weight: 100 !important;
@@ -279,8 +278,7 @@
 
 .noborder td,th{
         border: 0 !important;
-    }
-
+}
 .aiz-table {
     height: 0;
     opacity: 1;
@@ -345,7 +343,6 @@ div.footable-loader > span.fooicon:after {
     position: relative;
     padding-top: 100px;
 }
-
 .aiz-table.footable > tbody > tr.footable-empty > td:before {
     content: "\f119";
     font-family: "Line Awesome Free";
@@ -413,16 +410,16 @@ div.footable-loader > span.fooicon:after {
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav mr-auto ml-auto">
                                         <li class="nav-item">
-                                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="{{route('userhome')}}">Home<span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
                                         <a class="nav-link" href="#">Overview<span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
-                                        <a class="nav-link" href="#">Shop<span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="{{('all_seller')}}">Shop<span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
-                                        <a class="nav-link" href="#">About Us<span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="{{route('aboutus')}}">About Us<span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
                                         <a class="nav-link" href="#">In Store<span class="sr-only">(current)</span></a>
