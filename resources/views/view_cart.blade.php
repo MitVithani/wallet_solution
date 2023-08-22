@@ -83,7 +83,6 @@
                                                     <span id="quantity" class="qty-input text-reset wallet_font" style="padding:0% 27%">{{$cartItem->qty}}</span>
                                                     <button class="decrement-btn rounded-circle" onclick='ChangeQuantity("plus")'><i class="fa-solid fa-plus fa-sm"></i></button>
                                                 </div>
-
                                         </div>
                                     </span>
                                 </div>
