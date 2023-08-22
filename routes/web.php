@@ -116,4 +116,8 @@ Route::get('/order_history/detail', 'CheckoutController@order_detail')->name('or
 Route::get('/profile', 'UserController@show')->name('user_profile');
 Route::post('/user/update-profile', 'UserController@userProfileUpdate')->name('user_profile_update');
 
+//Address
+Route::post('/address', 'AddressController@store')->name('store_address');
+
+
 
