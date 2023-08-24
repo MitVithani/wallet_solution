@@ -19,7 +19,7 @@ class AddressController extends Controller
 
         $data=new Address();
         $data->user_id = auth()->user()->id;
-        $data->firstname =$request['firstname'];
+        $data->name =$request['name'];
         // $data->lastname =$request['lastname'];
         $data->address =$request['address'];
         $data->country=$request['country'];
