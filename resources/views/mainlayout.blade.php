@@ -63,6 +63,15 @@
             .ep_t2,.bset_sel_t2{
                 font-size:18px !important;line-height:25px !important;
             }
+            .main_content{
+                margin:0% !important;
+            }
+            .trash{
+                margin-left: -35px !important;
+            }
+            .pro-detail{
+                padding: 0%;
+            }
 
     }
 .vector_img {
@@ -394,6 +403,20 @@ div.footable-loader > span.fooicon:after {
     border: 2px solid #646262;
     background-color:#A0D18C;
 }
+.detail{
+    word-spacing: 0.2rem;
+    font-size:16px;
+    padding: 0 20px;
+}
+.paybtn
+{
+    width: 100%;
+    background-color:#454545;
+    color: #ffffff;
+}
+.paybtn:hover{
+    color: #ffffff;
+}
 
     </style>
 
@@ -426,8 +449,22 @@ div.footable-loader > span.fooicon:after {
                                         <li class="nav-item">
                                         <a class="nav-link" href="#">In Store<span class="sr-only">(current)</span></a>
                                         </li>
+                                        <li class="nav-item">
+                                        @guest
+                                            <a class="nav-link" href="{{route('user_login')}}">Login<span class="sr-only">(current)</span></a>
+                                        @else
+                                            <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();
+                                                                document.getElementById('logout-form').submit();">
+                                                                    {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        @endguest
+                                        </li>
                                     </ul>
-                                    <a name="" id="" class="btn btn-light" href="{{ route('register') }}" style="border: 2px solid #646262" role="button">List my business</a>
+                                    <a name="" id="" class="btn btn-light" href="{{ route('all_seller') }}" style="border: 2px solid #646262" role="button">List my business</a>
                                     {{-- <button type="button" class="btn btn-light" style="border: 2px solid #646262">List my business</button> --}}
                                     <img src="{{ asset('public/img/Vector.png')}}" alt="" style="margin-right:-80px;margin-left:20px" width="12%">
                                 </div>
