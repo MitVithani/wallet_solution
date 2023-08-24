@@ -30,6 +30,23 @@ class AddressController extends Controller
         $data->save();
 
         return back();
-
     }
+
+    public function edit(Request $request){
+
+
+        $id=auth()->user()->id;
+        $address = Address::where('user_id',$id)->first();
+        $address->name =$request['name'];
+        $address->address =$request['address'];
+        $address->country=$request['country'];
+        $address->state =$request['state'];
+        $address->city =$request['city'];
+        $address->postal_code =$request['postal_code'];
+        $address->phone =$request['phone'];
+        $address->save();
+
+        return back();
+    }
+
 }

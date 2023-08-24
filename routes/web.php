@@ -118,6 +118,7 @@ Route::post('/user/update-profile', 'UserController@userProfileUpdate')->name('u
 
 //Address
 Route::post('/address', 'AddressController@store')->name('store_address');
+Route::post('/address/edit', 'AddressController@edit')->name('edit_address');
 
 
 
