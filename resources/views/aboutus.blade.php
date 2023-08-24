@@ -16,12 +16,18 @@
             font-size: 18px;
             font-weight: 500;
         }
+        h2,h4{
+            color: #546A86;
+        }
+        .main_content{
+            margin-top:-150px
+        }
 
     </style>
 
     <div class="container mb-4">
         <img src="{{ asset('public/img/left.png')}}" alt="" style="margin-left:-70px" width="12%">
-        <div class="col-md-12 text-center" style="margin-top:-150px">
+        <div class="col-md-12 text-center main_content">
             <h2>About Us</h2>
             <div class="mt-4 fsize">
                 Are you hoping to grow your company to new heights and achieve record sales?

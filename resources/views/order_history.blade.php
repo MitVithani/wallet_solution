@@ -5,9 +5,11 @@
     <style>
         .wallet_card{
             border-radius: 15px;
-            border:1px solid #03254C;
-            box-shadow: 0px 0px 2px 2px #d4d3d3;
+            border:1px solid #646262;
+            box-shadow: 0px 0px 10px 5px rgb(207, 206, 206);
+
         }
+
     </style>
 
     <div class="container my-4">
@@ -15,8 +17,8 @@
         <div class="row">
             <div class="col-xl-10 mx-auto">
                 <div class="row">
-                    <div class="col-md-10">
-                        <span class="fw-700 fs-22" style="color:#212529">{{ ('My Orders') }}</span>
+                    <div class="col-md-10 mb-3">
+                        <span class="fw-700 fs-22" style="color: #546A86;">{{ ('My Orders') }}</span>
                     </div>
                 </div>
                 <div class="card wallet_card">

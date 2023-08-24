@@ -132,9 +132,9 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <th><span class="fw-600">{{ ('Total')}}</span></th>
+                                                    <th>{{ ('Total')}}</th>
                                                     <td class="">
-                                                        <strong><span>{{('1000')}}</span></strong>
+                                                        <span class="fw-600">{{('1000')}}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>

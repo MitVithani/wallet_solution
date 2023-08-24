@@ -24,9 +24,6 @@
     padding: 5px 0px;
     border-radius: 25px 25px;
 }
-.wallet_font{
-    font-weight: 600;
-}
 #trashicon{
     background-color: #454545;
     color: #ffffff;
@@ -39,7 +36,23 @@
 #product_name{
     font-weight: 500;
     color:#454545;
-    font-size: 18px;
+    font-size: 17px;
+}
+
+.checkout{
+    background-color:#454545;
+    color: #ffffff;
+    padding: 5px 20px;
+    border-radius:15px 15px 0px 0px;
+    line-height:30px;
+}
+.trash{
+    margin-left: -80px;
+    z-index:100;
+    margin-top:-10px;
+}
+.pro-detail{
+    display: block !important;
 }
 
 </style>
@@ -65,15 +78,15 @@
                                             class="img-fit mx-auto h_50 w_30"
                                         >
                                     </span>
-                                    <span style="margin-left: -80px;z-index:100;margin-top:-10px" >
+                                    <span class="trash">
                                         <a href="{{route('removeFromCart',['id'=>$product->id])}}"
                                             {{-- onclick="removeFromCartView(event, {{ $cartItem['id'] }})" --}}
                                             class="btn btn-icon btn-sm rounded-circle" id="trashicon">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
                                     </span>
-                                    <span class="col-md-8"  style="display: block !important;" >
-                                        <div class="col-md-8">
+                                    <span class="col-md-8 pro-detail">
+                                        <div class="col-md-12">
                                             <span class="tt-line-clamp tt-clamp-2" id="product_name">{{$product->name}}</span>
                                         </div>
                                         <div class="col-md-12 mt-3">
@@ -94,15 +107,73 @@
                     @endforeach
                 </ul>
             </div>
-        </div>
+            <div class="col-md-5 mb-2">
+                <div class="card " style="border:2px solid #E8E9F0;border-radius:15px;">
+                    <div class="col-md-12 col-12 mb-1 checkout" >
 
-        <!-- Button trigger modal -->
-        <div class="row">
-            <div class="col-md-12 text-center my-3">
-                <button type="button" id="btn" class="btn wallet_button">{{('Pay Now')}}
-                </button>
+                        <div class="">
+                            <div class="row">
+                                <div class="col mt-1">
+                                        <span class="fs-24 fw-700">Checkout</span>
+                                </div>
+                                <div class="col-2 text-right">
+                                    <div class="row mb-1">
+                                        <span class="fs-24 fw-700 ml-2">{{ count($carts) }}</span>
+                                    </div>
+                                    <div class="row" style="margin-top:-15px">
+                                        <span class="fs-15 fw-400"> Items</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="card-body">
+                            <table class="table noborder" id="stable">
+                                <tbody>
+                                    <tr class="cart-subtotal tryzen-font">
+                                            <td><span class="fs-18 fw-500">{{ ('Subtotal') }}</span></td>
+                                            <td class="text-right" width="45%">
+                                                <span class="fw-600 fs-18">{{('0')}}</span>
+                                            </td>
+                                    </tr>
+
+                                    <tr class="cart-shipping tryzen-font">
+                                            <td><span class="fs-18 fw-500">{{ ('Tax') }}</span></td>
+                                            <td class="text-right" width="45%">
+                                                <span class="fw-600 fs-18">{{ ('0')}}</span>
+                                            </td>
+                                    </tr>
+
+                                    <tr class="cart-shipping tryzen-font">
+                                            <td><span class="fs-18 fw-500">{{ ('Total Shipping') }}</span></td>
+                                            <td class="text-right" width="45%">
+                                                <span class="fw-600 fs-18">{{ ('0') }}</span>
+                                            </td>
+                                    </tr>
+
+                                    <tr class="cart-total" style="border-top:3px solid #D8DBE3">
+                                        <td><span class="fs-20 fw-500">{{('Total') }}</span></td>
+                                        <td class="text-right" width="45%">
+                                            <span class="fw-600 fs-18">Rs</span>
+                                            <span class="fw-600 fs-18" id="grandtotal">{{('100')}}</span>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                                <!-- Button trigger modal -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" id="paybtn" class="paybtn btn">{{('Pay Now')}}
+                                        </button>
+                                    </div>
+                                </div>
+
+                        </div>
+                </div>
             </div>
-        </div>
+
 
     {{-- @endif --}}
 </div>
@@ -213,7 +284,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn wallet_button col-4">{{('Pay Now')}}</button>
+                                        <button type="submit" id="" class="btn paybtn col-4">{{('Pay Now')}}</button>
                                     </div>
                                 </div>
 
@@ -229,9 +300,10 @@
 
 
 
+
 <script type="text/javascript">
 
-    $('#btn').on('click',function(e){
+    $('#paybtn').on('click',function(e){
         e.preventDefault();
         $('#examplemodal').modal('show');
     });

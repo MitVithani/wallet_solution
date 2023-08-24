@@ -32,14 +32,24 @@
             }
 
             .content {
-            padding: 0 18px;
+            word-spacing: 0.2rem;
+            font-size:16px;
+            padding: 0 40px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
             }
+
             /* .header_text{
                 line-height: 10px;
             } */
+
+            h2,h4,.collapsible{
+                color: #546A86;
+            }
+            .header_text{
+                padding: 0 30px;
+            }
         </style>
 
         <div class="container">

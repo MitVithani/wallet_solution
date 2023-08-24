@@ -111,7 +111,7 @@
                         <div class="card  border-0 rounded">
                             <div class="card-body">
                                 <div class="text-center py-4 mb-4">
-                                    <h2 class="h5">{{ ('Order Code:')}} <span class="fw-700 text-primary">{{('989765')}}</span></h2>
+                                    <h2 class="h5">{{ ('Order Code:')}} <span class="fw-700 text-success">{{('989765')}}</span></h2>
                                 </div>
 
                                     <h5 class="fw-600 mb-3 fs-17 pb-2">{{ ('Order Details')}}</h5>
@@ -180,9 +180,9 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <th><span class="fw-600">{{ ('Total')}}</span></th>
+                                                    <th>{{ ('Total')}}</th>
                                                     <td class="">
-                                                        <strong><span>{{('1000')}}</span></strong>
+                                                        <span class="fw-600">{{('1000')}}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
