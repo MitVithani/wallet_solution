@@ -107,7 +107,52 @@
                     @endforeach
                 </ul>
             </div>
+
             <div class="col-md-5 mb-2">
+                <div class="card mb-4" style="border:2px solid #E8E9F0;border-radius:15px;">
+                    <div class="col-md-12 col-12 checkout" >
+
+                        @php
+                            $address = \App\Models\Address::where('user_id',auth()->user()->id)->first();
+                        @endphp
+
+                        <div class="">
+                            <div class="row">
+                                <div class="col mt-1">
+                                        <span class="fs-24 fw-700">Addess</span>
+                                </div>
+                                <div class="col-2 text-right">
+                                    @if($address == '')
+                                    <button type="button" id="paybtn" class="paybtn btn"><i class="fa-solid fa-plus fa-sm"></i>
+                                    </button>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @isset($address)
+                    <div class="card-body">
+                            <span class="fs-15 fw-700 mb-1">{{ ('Address:Home') }}</span>
+
+                                <span class="fw-500 ml-2">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            {{ $address->address }},
+                                            {{ $address->city }}-
+                                            {{ $address->postal_code }},
+                                            {{ $address->state}},
+                                            {{ $address->country}}
+                                        </div>
+                                    </div>
+                                </span>
+
+                    </div>
+                    @endif
+                </div>
+
+            {{-- </div>
+
+            <div class="col-md-5 mb-2"> --}}
                 <div class="card " style="border:2px solid #E8E9F0;border-radius:15px;">
                     <div class="col-md-12 col-12 mb-1 checkout" >
 
@@ -191,26 +236,29 @@
                     <div class="modal-body pb-0">
                         <form class="form-default" role="form" action="{{route('store_address')}}" method="POST">
                             @csrf
-                            @php
-                                $address = \App\Models\Address::where('user_id',auth()->user()->id)->first();
-                            @endphp
 
                                 <div class="p-3">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <label class="fs-16 fw-600">{{ ('First Name')}}</label>
+                                            <label class="fs-16 fw-600">{{ ('Name')}}</label>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control mb-3" placeholder="{{ ('First Name')}}" value="{{$address->firstname ?? ''}}" name="firstname" required>
+                                            <input type="text" class="form-control mb-3" placeholder="{{ ('Name')}}" value="{{$address->name ?? ''}}" name="firstname" required>
                                         </div>
 
                                         <div class="col-md-2">
+                                            <label class="fs-16 fw-600">{{ ('Phone')}}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control mb-3" placeholder="{{ ('+880')}}" name="phone" value="{{$address->phone ?? ''}}" required>
+                                        </div>
+                                        {{-- <div class="col-md-2">
                                             <label class="fs-16 fw-600">{{ ('Last Name')}}</label>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control mb-3" placeholder="{{ ('Last Name')}}" value="{{$address->lastname ?? ''}}" name="lastname" required>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <div class="row">
@@ -259,14 +307,6 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control mb-3" placeholder="{{ ('Enter Your Postal Code')}}" name="postal_code" value="{{$address->postal_code ?? ''}}" required>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <label class="fs-16 fw-600">{{ ('Phone')}}</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control mb-3" placeholder="{{ ('+880')}}" name="phone" value="{{$address->phone ?? ''}}" required>
                                         </div>
                                     </div>
 
