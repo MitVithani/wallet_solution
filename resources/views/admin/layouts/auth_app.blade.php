@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+
+        <!--aiz css-->
+        <link href="{{ asset('assets/css/aiz-core.css') }}" rel="stylesheet" type="text/css"/>
+
 </head>
 
 <body>
@@ -39,6 +43,7 @@
 
 <!-- General JS Scripts -->
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/aiz-core.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>

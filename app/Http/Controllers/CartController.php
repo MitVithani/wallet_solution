@@ -8,6 +8,11 @@ use App\Models\Cart;
 
 class CartController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //STORE DATA
     public function addToCart(Request $request){
 

@@ -32,14 +32,29 @@
             }
 
             .content {
-            padding: 0 18px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
+            padding: 0 50px;
+            word-spacing: 0.2rem;
+            font-size:16px;
+            }
+
+            h2,h4,.collapsible{
+                color: #546A86;
+            }
+            h6.mt-4 {
+                color:#91d178;
+            }
+            .header_text,.detail,.content{
+                word-spacing: 0.2rem;
+                font-size:16px;
+                padding: 0 20px;
             }
             </style>
             </head>
             <body>
+
 
 
     <div class="container mb-4">
@@ -51,7 +66,7 @@
             <div class="header_text">Legal Agreement
                 The Terms and Conditions described here constitute a legal agreement ("Agreement") among the sole proprietor or business listed as the "Merchant" in the 4pay registration page, (the "Merchant" on the registration page, sometimes referred to as "you, "your", "user"), 4pay ("4pay"), Payment processor ("processor"), and Business Bank, collectively with 4pau and the payment processing partner referred to as "we", ("our" or "us").
                 </div>
-            <h4 class="my-3"> A.The 4pay Service (the "Service")</h4>
+            <h4 class="my-3"> A. The 4pay Service (the "Service")</h4>
 
             <div class="collapsible">1. The Processor: </div>
                 <div class="content">
@@ -142,74 +157,74 @@
         <!--Financial and professional services-->
             <h4 class="my-4"> Financial and professional services:</h4>
                 <h6 class="mt-4">Investment & credit services</h6>
-                <div class="">
+                <div class="detail">
                     Securities brokers; mortgage consulting or debt reduction services; credit counseling or repair; real estate opportunities; lending instruments
                 </div>
                 <h6 class="mt-4">Money and legal services </h6>
-                <div class="">
+                <div class="detail">
                     Money transmitters, check cashing, wire transfers, money orders; currency exchanges or dealers; bail bonds; collections agencies; law firms collecting funds for any purpose other than to pay fees owed to the firm for services provided by the firm (e.g., firms cannot use 4pay Payments to hold client funds, collection or settlement amounts, disputed funds, etc.)
                 </div>
                 <h6 class="mt-4">Virtual currency or stored value </h6>
-                <div class="">
+                <div class="detail">
                     Virtual currency that can be monetized, resold, or converted to physical or digital products and services or otherwise exit the virtual world (e.g., Bitcoin); sale of stored value, quasi-cash or credits maintained, accepted and issued by anyone other than the seller
                 </div>
 
             <h4 class="my-4">IP Infringement, regulated or illegal products and services</h4>
                 <h6 class="mt-4">Intellectual property or proprietary rights infringement Sales</h6>
-                <div class="">
+                <div class="detail">
                     to counterfeit music, movies, software, or other licensed materials without the appropriate authorization from the rights holder; any product or service that infringes or facilitates infringement upon the trademark, patent, copyright, trade secrets, or proprietary or privacy rights of any third party; use of 4pay intellectual property without express consent from 4pay; use of the 4pay name or logo including use of 4pay trade or service marks inconsistent with the 4pay Trademark Usage Guidelines, or in a manner that otherwise harms 4pay or the 4pay brand; any action that implies an untrue endorsement by or affiliation with 4pay
                 </div>
                 <h6 class="mt-4">Counterfeit or unauthorized goods</h6>
-                <div class="">
+                <div class="detail">
                     Unauthorized sale or resale of brand name or designer products or services; sale of goods or services that are illegally imported or exported
                 </div>
                 <h6 class="mt-4">Gambling</h6>
-                <div class="">
+                <div class="detail">
                     Lotteries; bidding fee auctions; sports forecasting or odds making; fantasy sports leagues with cash prizes; internet gaming; contests; sweepstakes; games of chance
                 </div>
                 <h6 class="mt-4">Adult content and services</h6>
-                <div class="">
+                <div class="detail">
                     Pornography and other obscene materials (including literature, imagery and other media). Sites offering any sexually-related products or services such as prostitution, massage parlours, dating-services, companion/escort services; international match-making and mail-order brides; pay-per view, adult live chat or call features; child pornography, fetish gear and services including S&M paraphernalia; hard-core sexually oriented products and services; sex shows, sex clubs, topless bars, strip shows, and other adult entertainment; widgets that allow you to access pornography or pornographic ads
                 </div>
 
             <h4 class="my-2">Unfair, predatory, or deceptive practices</h4>
 
                 <h6 class="mt-4">Get rich quick schemes </h6>
-                <div class="">
+                <div class="detail">
                     Investment opportunities or other services that promise high rewards
                 </div>
                 <h6 class="mt-4">Mug shot publication or pay-to-remove sites</h6>
-                <div class="">
+                <div class="detail">
                     Platforms that facilitate the publication and removal of content (such as mug shots), where the primary purpose of posting such content is to cause or raise concerns of reputational harm
                 </div>
                 <h6 class="mt-4">No-value-added services</h6>
-                <div class="">
+                <div class="detail">
                     Sale or resale of a service without added benefit to the buyer; resale of government offerings without authorization or added value; sites that we determine in our sole discretion to be unfair, deceptive, or predatory towards consumers
                 </div>
 
             <h4 class="my-4">Products or services that are other wise prohibited by our financial partners</h4>
                 <h6 class="mt-4">Aggregation </h6>
-                <div class="">
+                <div class="detail">
                     Engaging in any form of licensed or unlicensed aggregation of funds owed to third parties, factoring, or other activities intended to obfuscate the origin of funds
                 </div>
                 <h6 class="mt-4">Drug paraphernalia </h6>
-                <div class="">
+                <div class="detail">
                     Any equipment designed for making or using drugs, such as bongs, vaporizers, and hookahs
                 </div>
                 <h6 class="mt-4">Event Tickets </h6>
-                <div class="">
+                <div class="detail">
                     Event or festival tickets, event ticket resellers, including theme park ticket reseller
                 </div>
                 <h6 class="mt-4">Government Services </h6>
-                <div class="">
+                <div class="detail">
                     Embassies, foreign consulates or other foreign governments
                 </div>
                 <h6 class="mt-4">High risk businesses </h6>
-                <div class="">
+                <div class="detail">
                     Human hair, fake hair, or hair-extensions; age verification services; bankruptcy lawyers; computer technical support; psychic services; extended warranties; travel reservation services and clubs; airlines; cruises; timeshares; chain-letters; essay mills; flea markets; prepaid phone cards, phone services, and cell phones; telemarketing, telecommunications equipment and telephone sales; shipping or forwarding brokers; door-to-door sales; negative response marketing; credit card and identity theft protection; the use of credit to pay for lending services; any businesses that we believe poses elevated financial risk, legal liability, or violates card network or bank policies
                 </div>
                 <h6 class="mt-4">Multi-level marketing</h6>
-                <div class="">
+                <div class="detail">
                     Pyramid schemes, network marketing, and referral marketing programs
                 </div>
 

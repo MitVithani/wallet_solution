@@ -30,23 +30,7 @@
     color:#9da3a3;
 }
 
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-}
-img {
-    vertical-align: middle;
-    border-style: none;
-}
-.align-items-center {
-    justify-content: space-between;
-}
-.rounded {
-    border-radius: 0.10rem !important;
-}
-.border {
-     border: 1px solid  #454545 !important;
-}
+
 .wallet_visit_seller{
     background-color: #454545;
     color: #ffffff !important;
@@ -55,12 +39,6 @@ img {
     border-radius: 25px 25px;
 }
 
-.card{
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
- .card:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
 #outer-div {
     width: 100%;
     text-align: center;
@@ -96,7 +74,7 @@ img {
         <!--banner-->
         <div id="outer-div">
             <div id="inner-div">
-                <div class="card mr-auto ml-auto">
+                <div class="card mr-auto ml-auto card_shadow">
                     <div class="row no-gutters">
                         <div class="col-md-3 col-5">
                             <img src="{{asset('public/img/gimg.png')}}" height="124" width="124" alt="...">
@@ -126,7 +104,7 @@ img {
                                     $productdata=\App\Models\Product_Image::where('p_id',$product_id)->first();
                                     $product_img=$productdata->image ?? '';
                                 @endphp
-                                    <div class="card mt-4">
+                                    <div class="card card_shadow mt-4">
                                         <div class="card-body" style="padding:4px">
                                             <a href="{{route('product_detail',['pid'=>$product->id])}}">
                                                 <img

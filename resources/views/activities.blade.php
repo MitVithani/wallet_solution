@@ -6,6 +6,9 @@
             font-size: 18px;
             font-weight: 500;
         }
+        h2,h4{
+            color: #546A86;
+        }
     </style>
 
     <div class="container">
